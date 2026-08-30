@@ -1,0 +1,1141 @@
+<title>FleetPro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+:root {
+  --s0:#f1f4f9;--s1:#ffffff;--s2:#e8ecf3;--sc:#ffffff;
+  --bd:#dce1ea;--bl:#e8ecf3;
+  --tp:#0f1a2e;--ts:#4a5578;--tm:#8892a8;--ti:#fff;
+  --b6:#1e40af;--b5:#2563eb;--b1:#dbeafe;--b0:#eff6ff;
+  --t6:#0d7377;--t5:#0d9488;--t1:#ccfbf1;
+  --a6:#b45309;--a5:#d97706;--a1:#fef3c7;
+  --r6:#b91c1c;--r5:#dc2626;--r1:#fee2e2;
+  --g6:#15803d;--g5:#16a34a;--g1:#dcfce7;
+  --c1:#2a78d6;--c2:#eb6834;--c3:#1baf7a;--c4:#eda100;
+  --sw:250px;--hh:56px;--rad:10px;--rs:6px;
+  --shc:0 1px 3px rgba(15,26,46,.06);--she:0 4px 16px rgba(15,26,46,.08);
+  --tr:200ms ease;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --s0:#0c1220;--s1:#131b2e;--s2:#1a2540;--sc:#161f35;
+  --bd:#243049;--bl:#1e2a44;
+  --tp:#e8ecf3;--ts:#94a1be;--tm:#5e6d8a;--ti:#0f1a2e;
+  --b6:#3b82f6;--b5:#60a5fa;--b1:#1e3a5f;--b0:#172554;
+  --t6:#2dd4bf;--t5:#5eead4;--t1:#0f2d2a;
+  --a6:#fbbf24;--a5:#fcd34d;--a1:#2d2305;
+  --r6:#f87171;--r5:#fca5a5;--r1:#2d0e0e;
+  --g6:#4ade80;--g5:#86efac;--g1:#0d2818;
+  --c1:#3987e5;--c2:#d95926;--c3:#199e70;--c4:#c98500;
+  --shc:0 1px 3px rgba(0,0,0,.3);--she:0 4px 16px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --s0:#0c1220;--s1:#131b2e;--s2:#1a2540;--sc:#161f35;
+  --bd:#243049;--bl:#1e2a44;
+  --tp:#e8ecf3;--ts:#94a1be;--tm:#5e6d8a;--ti:#0f1a2e;
+  --b6:#3b82f6;--b5:#60a5fa;--b1:#1e3a5f;--b0:#172554;
+  --t6:#2dd4bf;--t5:#5eead4;--t1:#0f2d2a;
+  --a6:#fbbf24;--a5:#fcd34d;--a1:#2d2305;
+  --r6:#f87171;--r5:#fca5a5;--r1:#2d0e0e;
+  --g6:#4ade80;--g5:#86efac;--g1:#0d2818;
+  --c1:#3987e5;--c2:#d95926;--c3:#199e70;--c4:#c98500;
+  --shc:0 1px 3px rgba(0,0,0,.3);--she:0 4px 16px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--s0);color:var(--tp);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'DM Sans',system-ui,sans-serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.app{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:var(--sw);background:var(--s1);border-right:1px solid var(--bd);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:40;transition:transform var(--tr)}
+.sb-hd{padding:16px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bl)}
+.sb-logo{width:32px;height:32px;background:var(--b5);border-radius:7px;display:grid;place-items:center;flex-shrink:0}
+.sb-logo svg{width:18px;height:18px;color:#fff}
+.sb-brand{font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:700;color:var(--tp)}.sb-brand span{color:var(--b5)}
+.sb-nav{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:1px}
+.nav-s{font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--tm);padding:14px 12px 4px}
+.nav-i{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:var(--rs);color:var(--ts);font-size:.8rem;font-weight:500;cursor:pointer;transition:all var(--tr);border:none;background:none;width:100%;text-align:left}
+.nav-i:hover{background:var(--s2);color:var(--tp)}.nav-i.active{background:var(--b0);color:var(--b6)}
+.nav-i svg{width:18px;height:18px;flex-shrink:0;opacity:.7}.nav-i.active svg{opacity:1}
+.sb-ft{padding:12px 14px;border-top:1px solid var(--bl);display:flex;align-items:center;gap:8px}
+.av{width:30px;height:30px;border-radius:50%;background:var(--b1);color:var(--b6);display:grid;place-items:center;font-size:.7rem;font-weight:600;flex-shrink:0}
+.u-n{font-size:.75rem;font-weight:600;color:var(--tp)}.u-r{font-size:.65rem;color:var(--tm)}
+/* Main */
+.main{flex:1;margin-left:var(--sw);min-height:100vh}
+.header{height:var(--hh);background:var(--s1);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:30}
+.h-left{display:flex;align-items:center;gap:10px}
+.h-left h1{font-size:1.05rem}
+.bc{font-size:.75rem;color:var(--tm)}.bc span{color:var(--ts)}
+.h-right{display:flex;align-items:center;gap:12px}
+.h-btn{width:34px;height:34px;border-radius:var(--rs);border:1px solid var(--bd);background:var(--s1);color:var(--ts);display:grid;place-items:center;cursor:pointer;transition:all var(--tr);position:relative}
+.h-btn:hover{background:var(--s2)}.h-btn svg{width:16px;height:16px}
+.nd{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--r5);border-radius:50%;border:2px solid var(--s1)}
+.mt{display:none}
+.content{padding:20px 24px}
+/* Cards */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.sg3{grid-template-columns:repeat(3,1fr)}.sg5{grid-template-columns:repeat(5,1fr)}
+.sc{background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad);padding:16px;box-shadow:var(--shc);display:flex;align-items:flex-start;justify-content:space-between;transition:box-shadow var(--tr)}
+.sc:hover{box-shadow:var(--she)}
+.sv{font-family:'DM Sans',sans-serif;font-size:1.5rem;font-weight:700;color:var(--tp);line-height:1.1}
+.sl{font-size:.75rem;color:var(--tm);margin-top:3px}
+.st{font-size:.7rem;font-weight:500;margin-top:4px;display:flex;align-items:center;gap:3px}
+.st.up{color:var(--g6)}.st.dn{color:var(--r6)}
+.si{width:40px;height:40px;border-radius:var(--rs);display:grid;place-items:center;flex-shrink:0}
+.si svg{width:20px;height:20px}
+.si.bl{background:var(--b1);color:var(--b6)}.si.tl{background:var(--t1);color:var(--t6)}.si.am{background:var(--a1);color:var(--a6)}.si.rd{background:var(--r1);color:var(--r6)}.si.gn{background:var(--g1);color:var(--g6)}
+/* Chart containers */
+.cr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.cc{background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad);padding:16px;box-shadow:var(--shc)}
+.cc h3{font-size:.875rem;margin-bottom:2px}.cc .sub{font-size:.7rem;color:var(--tm);margin-bottom:12px}
+.cw{position:relative;width:100%}
+canvas.ch{width:100%!important;height:auto!important}
+/* Tables */
+.tc{background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad);box-shadow:var(--shc);overflow:hidden;margin-bottom:20px}
+.th{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bl);flex-wrap:wrap;gap:8px}
+.th h3{font-size:.875rem}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:.7rem;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:8px 12px;background:var(--s0);border-bottom:1px solid var(--bd);white-space:nowrap}
+td{font-size:.78rem;padding:10px 12px;border-bottom:1px solid var(--bl);color:var(--ts);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--s0)}
+td:first-child{color:var(--tp);font-weight:500}
+/* Badges */
+.bg{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:.65rem;font-weight:600}
+.bg-g{background:var(--g1);color:var(--g6)}.bg-b{background:var(--b1);color:var(--b6)}.bg-a{background:var(--a1);color:var(--a6)}.bg-r{background:var(--r1);color:var(--r6)}.bg-t{background:var(--t1);color:var(--t6)}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rs);font-size:.78rem;font-weight:500;cursor:pointer;transition:all var(--tr);border:none;font-family:inherit}
+.btn-p{background:var(--b5);color:#fff}.btn-p:hover{background:var(--b6)}
+.btn-o{background:var(--s1);color:var(--ts);border:1px solid var(--bd)}.btn-o:hover{background:var(--s2)}
+.btn-g{background:var(--g5);color:#fff}.btn-g:hover{background:var(--g6)}
+.btn-r{background:var(--r5);color:#fff}.btn-r:hover{background:var(--r6)}
+.btn-a{background:var(--a5);color:#fff}.btn-a:hover{background:var(--a6)}
+.btn-sm{padding:4px 10px;font-size:.7rem}
+.btn svg{width:14px;height:14px}
+/* Pages */
+.page{display:none}.page.active{display:block;animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+/* Filter bar */
+.fb{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.fc{padding:5px 12px;border-radius:999px;font-size:.75rem;font-weight:500;border:1px solid var(--bd);background:var(--s1);color:var(--ts);cursor:pointer;transition:all var(--tr)}
+.fc:hover{background:var(--s2)}.fc.act{background:var(--b5);color:#fff;border-color:var(--b5)}
+/* Alerts */
+.al{display:flex;flex-direction:column;gap:6px}
+.ai{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--sc);border:1px solid var(--bd);border-radius:var(--rs);transition:all var(--tr)}
+.ai:hover{box-shadow:var(--shc)}
+.ak{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.ak svg{width:16px;height:16px}
+.ak.wr{background:var(--a1);color:var(--a6)}.ak.dg{background:var(--r1);color:var(--r6)}.ak.in{background:var(--b1);color:var(--b6)}.ak.ok{background:var(--g1);color:var(--g6)}
+.at{font-size:.78rem;font-weight:500;color:var(--tp)}.ad{font-size:.7rem;color:var(--tm);margin-top:1px}
+.atm{font-size:.65rem;color:var(--tm);margin-left:auto;flex-shrink:0}
+/* Tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bd);margin-bottom:16px}
+.tab{padding:8px 16px;font-size:.78rem;font-weight:500;color:var(--tm);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all var(--tr);font-family:inherit}
+.tab:hover{color:var(--tp)}.tab.act{color:var(--b6);border-bottom-color:var(--b5)}
+.tpane{display:none}.tpane.act{display:block}
+/* Progress bar */
+.pb{height:5px;background:var(--s2);border-radius:3px;overflow:hidden;margin-top:4px}
+.pf{height:100%;border-radius:3px;transition:width .5s ease}
+/* Legend */
+.lg{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--ts)}
+.ld{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+/* Tooltip */
+.tip{position:absolute;background:var(--sc);border:1px solid var(--bd);border-radius:var(--rs);padding:8px 12px;box-shadow:var(--she);pointer-events:none;font-size:.7rem;z-index:50;opacity:0;transition:opacity 120ms;min-width:110px}
+.tip.vis{opacity:1}
+.tip-t{font-weight:600;color:var(--tp);margin-bottom:3px}
+.tip-r{display:flex;align-items:center;gap:5px;color:var(--ts)}
+.tip-r .d{width:5px;height:5px;border-radius:2px;flex-shrink:0}
+.tip-v{font-weight:600;color:var(--tp);margin-left:auto;font-variant-numeric:tabular-nums}
+/* Planner grid */
+.plan-g{display:grid;grid-template-columns:160px repeat(7,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden;margin-bottom:20px}
+.plan-h{background:var(--s0);padding:8px;font-size:.7rem;font-weight:600;color:var(--tm);text-align:center;text-transform:uppercase}
+.plan-n{background:var(--sc);padding:8px 10px;font-size:.75rem;font-weight:500;display:flex;align-items:center;gap:6px}
+.plan-c{background:var(--sc);padding:4px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.plan-tag{font-size:.58rem;font-weight:600;padding:2px 6px;border-radius:3px;white-space:nowrap}
+.plan-hrs{font-size:.55rem;color:var(--tm);font-variant-numeric:tabular-nums}
+.pt-mis{background:var(--b1);color:var(--b6)}.pt-rep{background:var(--s2);color:var(--tm)}.pt-mnt{background:var(--a1);color:var(--a6)}.pt-dis{background:var(--g1);color:var(--g6)}.pt-frm{background:var(--t1);color:var(--t6)}.pt-trp{background:#ede9fe;color:#6d28d9}
+/* Selection */
+.sel-box{background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad);padding:20px;box-shadow:var(--shc);margin-bottom:20px}
+.sel-box h3{margin-bottom:14px;font-size:.9rem}
+.sel-form{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.sel-grp label{display:block;font-size:.7rem;font-weight:600;color:var(--tm);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.sel-grp select,.sel-grp input{width:100%;padding:7px 10px;border:1px solid var(--bd);border-radius:var(--rs);background:var(--s1);color:var(--tp);font-size:.78rem;font-family:inherit}
+.sel-grp select:focus,.sel-grp input:focus{outline:none;border-color:var(--b5)}
+.sel-results{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sel-card{border:1px solid var(--bd);border-radius:var(--rs);padding:14px;background:var(--s0)}
+.sel-card h4{font-size:.8rem;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sel-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bl);font-size:.78rem;gap:8px}
+.sel-row:last-child{border-bottom:none}
+.sel-score{font-weight:600;font-size:.75rem;padding:2px 8px;border-radius:999px;flex-shrink:0}
+.score-hi{background:var(--g1);color:var(--g6)}.score-md{background:var(--a1);color:var(--a6)}.score-lo{background:var(--r1);color:var(--r6)}
+/* Mission cards */
+.mc{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad);box-shadow:var(--shc);margin-bottom:8px;transition:all var(--tr);flex-wrap:wrap}
+.mc:hover{box-shadow:var(--she)}
+.mm{display:flex;gap:14px;flex-shrink:0;flex-wrap:wrap;align-items:center}
+.mml{font-size:.65rem;color:var(--tm)}.mmv{font-size:.78rem;font-weight:500;font-variant-numeric:tabular-nums}
+/* Config panel */
+.cfg-panel{background:var(--s0);border:1px solid var(--bd);border-radius:var(--rs);padding:14px;margin-bottom:16px}
+.cfg-row{display:flex;align-items:center;gap:10px;padding:4px 0}
+.cfg-row label{font-size:.75rem;color:var(--ts);flex:1}
+.cfg-row input[type="range"]{width:100px;accent-color:var(--b5)}
+.cfg-row input[type="checkbox"]{accent-color:var(--b5)}
+.cfg-val{font-size:.75rem;font-weight:600;color:var(--b6);width:30px;text-align:right;font-variant-numeric:tabular-nums}
+/* Modal */
+.modal-ov{position:fixed;inset:0;background:rgba(15,26,46,.5);z-index:100;display:none;place-items:center;animation:mfi .15s ease}
+.modal-ov.vis{display:grid}
+@keyframes mfi{from{opacity:0}to{opacity:1}}
+.modal{background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad);box-shadow:var(--she);width:90%;max-width:640px;max-height:85vh;overflow-y:auto;animation:msl .2s ease}
+@keyframes msl{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bl)}
+.modal-hd h3{font-size:.95rem}
+.modal-cl{width:28px;height:28px;border:none;background:var(--s2);color:var(--ts);border-radius:50%;cursor:pointer;display:grid;place-items:center;font-size:1rem}
+.modal-bd{padding:20px}
+.form-g{margin-bottom:14px}
+.form-g label{display:block;font-size:.72rem;font-weight:600;color:var(--tm);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.form-g input,.form-g select,.form-g textarea{width:100%;padding:8px 12px;border:1px solid var(--bd);border-radius:var(--rs);background:var(--s1);color:var(--tp);font-size:.8rem;font-family:inherit}
+.form-g input:focus,.form-g select:focus{outline:none;border-color:var(--b5)}
+.form-r{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-r3{grid-template-columns:1fr 1fr 1fr}
+.modal-ft{display:flex;justify-content:flex-end;gap:8px;padding:16px 20px;border-top:1px solid var(--bl)}
+/* Eval card */
+.eval-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.eval-item{background:var(--s0);border:1px solid var(--bd);border-radius:var(--rs);padding:12px}
+.eval-item .ev-label{font-size:.68rem;color:var(--tm);text-transform:uppercase;font-weight:600;letter-spacing:.03em}
+.eval-item .ev-val{font-size:1.1rem;font-weight:700;color:var(--tp);margin-top:2px;font-family:'DM Sans',sans-serif}
+.eval-item .ev-sub{font-size:.68rem;color:var(--ts);margin-top:1px}
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--g6);color:#fff;padding:12px 20px;border-radius:var(--rs);font-size:.8rem;font-weight:500;z-index:200;opacity:0;transform:translateY(10px);transition:all .3s ease;pointer-events:none}
+.toast.vis{opacity:1;transform:translateY(0)}
+/* Responsive */
+@media(max-width:1024px){.sg{grid-template-columns:repeat(2,1fr)}.cr{grid-template-columns:1fr}.sel-form{grid-template-columns:repeat(2,1fr)}.sel-results{grid-template-columns:1fr}.form-r{grid-template-columns:1fr}.eval-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.mt{display:grid}.sg{grid-template-columns:1fr}.content{padding:14px}.header{padding:0 14px}.plan-g{grid-template-columns:100px repeat(7,1fr);font-size:.65rem}}
+.sbo{position:fixed;inset:0;background:rgba(15,26,46,.4);z-index:35;display:none}.sbo.vis{display:block}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
+</style>
+
+<div class="app">
+<div class="sbo" id="ov" onclick="tgSb()"></div>
+<aside class="sidebar" id="sb">
+  <div class="sb-hd">
+    <div class="sb-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+    <div class="sb-brand">Fleet<span>Pro</span></div>
+  </div>
+  <nav class="sb-nav" id="nav">
+    <div class="nav-s">Principal</div>
+    <button class="nav-i active" data-p="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="4" rx="1"/><rect x="14" y="10" width="7" height="11" rx="1"/><rect x="3" y="13" width="7" height="8" rx="1"/></svg>Tableau de Bord</button>
+    <button class="nav-i" data-p="flotte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Flotte</button>
+    <button class="nav-i" data-p="chauffeurs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Chauffeurs</button>
+    <button class="nav-i" data-p="missions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>Missions</button>
+    <div class="nav-s">Opérations</div>
+    <button class="nav-i" data-p="planification"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Planification</button>
+    <button class="nav-i" data-p="maintenance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Maintenance</button>
+    <button class="nav-i" data-p="carburant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V5a2 2 0 012-2h8a2 2 0 012 2v17"/><path d="M15 22V10l4-2v14"/><path d="M3 22h18"/></svg>Carburant</button>
+    <div class="nav-s">Suivi</div>
+    <button class="nav-i" data-p="alertes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Alertes</button>
+    <button class="nav-i" data-p="rapports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Rapports</button>
+  </nav>
+  <div class="sb-ft"><div class="av">KA</div><div><div class="u-n">Kamal Azouaou</div><div class="u-r">Administrateur</div></div></div>
+</aside>
+
+<div class="main">
+<header class="header">
+  <div class="h-left">
+    <button class="h-btn mt" onclick="tgSb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <div><h1 id="pT">Tableau de Bord</h1><div class="bc">FleetPro <span>/ <span id="pB">Tableau de Bord</span></span></div></div>
+  </div>
+  <div class="h-right">
+    <button class="h-btn" onclick="nav('alertes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="nd"></span></button>
+  </div>
+</header>
+
+<div class="content">
+<!-- ═══ DASHBOARD ═══ -->
+<div class="page active" id="p-dashboard">
+  <div class="sg" id="dashKPI"></div>
+  <div class="cr">
+    <div class="cc"><h3>Coûts Opérationnels</h3><div class="sub">6 mois — Maintenance + Carburant (K DA)</div><div class="cw"><canvas id="chDash" height="210"></canvas><div class="tip" id="tipD"></div></div><div class="lg"><div class="li"><span class="ld" style="background:var(--c1)"></span>Maintenance</div><div class="li"><span class="ld" style="background:var(--c2)"></span>Carburant</div></div></div>
+    <div class="cc"><h3>Répartition Flotte</h3><div class="sub">Par type — statut de disponibilité</div><div class="cw" style="display:flex;align-items:center;gap:20px"><canvas id="chPie" width="180" height="180" style="width:180px!important;height:180px!important;flex-shrink:0"></canvas><div id="pieL" style="display:flex;flex-direction:column;gap:6px"></div></div></div>
+  </div>
+  <div class="cr">
+    <div class="cc"><h3>Consommation Flotte</h3><div class="sub">L/100km moyen mensuel vs norme</div><div class="cw"><canvas id="chCons" height="210"></canvas><div class="tip" id="tipC"></div></div><div class="lg"><div class="li"><span class="ld" style="background:var(--c1)"></span>Réel</div><div class="li"><span class="ld" style="background:var(--c3)"></span>Norme Corrigée</div></div></div>
+    <div class="cc"><h3>Alertes Récentes</h3><div class="sub">Dernières 24h</div><div class="al" id="dashAlerts"></div></div>
+  </div>
+</div>
+
+<!-- ═══ FLOTTE ═══ -->
+<div class="page" id="p-flotte">
+  <div class="fb" id="flFilter"></div>
+  <div class="tabs" id="flTabs">
+    <button class="tab act" onclick="flTab(this,0)">Liste Véhicules</button>
+    <button class="tab" onclick="flTab(this,1)">Documents & Assurances</button>
+    <button class="tab" onclick="flTab(this,2)">Normes Constructeur</button>
+    <button class="tab" onclick="flTab(this,3)">Fiche Véhicule</button>
+  </div>
+  <div class="tpane act" id="flP0">
+    <div class="tc"><div class="th"><h3>Parc Véhicules</h3><div><button class="btn btn-p" onclick="openModal('addVh')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter Véhicule</button></div></div><div class="tw"><table><thead><tr><th>Code</th><th>Marque / Modèle</th><th>Type</th><th>Immat.</th><th>Statut</th><th>Propriété</th><th>Fin Location</th><th>Km</th><th>Carburant</th><th>Norme L/100</th><th>Actions</th></tr></thead><tbody id="flTB"></tbody></table></div></div>
+  </div>
+  <div class="tpane" id="flP1">
+    <div class="tc"><div class="th"><h3>Suivi Documents & Assurances</h3><div><span class="bg bg-r" style="margin-right:6px">3 expirés</span><span class="bg bg-a">5 à renouveler</span></div></div><div class="tw"><table><thead><tr><th>Véhicule</th><th>CT</th><th>Exp. CT</th><th>Assurance</th><th>Exp. Assurance</th><th>N° Police</th><th>Carte Grise</th><th>Vignette</th></tr></thead><tbody id="docTB"></tbody></table></div></div>
+  </div>
+  <div class="tpane" id="flP2">
+    <div class="tc"><div class="th"><h3>Normes Constructeur Carburant</h3><div style="font-size:.75rem;color:var(--tm)">Norme officielle + facteur correction terrain/charge</div></div><div class="tw"><table><thead><tr><th>Marque</th><th>Modèle</th><th>Type</th><th>Carburant</th><th>Norme Officielle</th><th>Facteur Correction</th><th>Norme Corrigée</th><th>Marge Tolérance</th><th>Seuil Alerte</th></tr></thead><tbody id="normTB"></tbody></table></div></div>
+  </div>
+  <div class="tpane" id="flP3">
+    <div style="margin-bottom:12px">
+      <div class="form-g" style="max-width:280px;margin-bottom:0">
+        <label>Sélectionner un véhicule</label>
+        <select id="evalVhSel" onchange="rEval()"></select>
+      </div>
+    </div>
+    <div id="evalCard"></div>
+  </div>
+</div>
+
+<!-- ═══ CHAUFFEURS ═══ -->
+<div class="page" id="p-chauffeurs">
+  <div class="tabs">
+    <button class="tab act" onclick="chTab(this,0)">Liste Chauffeurs</button>
+    <button class="tab" onclick="chTab(this,1)">Planning Hebdomadaire</button>
+  </div>
+  <div class="tpane act" id="chP0">
+    <div class="tc"><div class="th"><h3 id="drCount">Chauffeurs (8)</h3><div><button class="btn btn-p" onclick="openModal('addDr')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter Chauffeur</button></div></div><div class="tw"><table><thead><tr><th>N°</th><th>Nom Complet</th><th>Permis</th><th>Exp. Permis</th><th>Qualifications</th><th>Statut</th><th>H/Sem</th><th>H/Mois</th><th>Fatigue</th><th>Véhicule Affecté</th><th>Permanent</th></tr></thead><tbody id="drTB"></tbody></table></div></div>
+  </div>
+  <div class="tpane" id="chP1">
+    <div style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <h3 style="font-size:.9rem">Semaine du 25 au 31 Août 2026</h3>
+      <div class="lg"><div class="li"><span class="ld" style="background:var(--b1)"></span>Mission</div><div class="li"><span class="ld" style="background:var(--s2)"></span>Repos</div><div class="li"><span class="ld" style="background:var(--a1)"></span>Maintenance</div><div class="li"><span class="ld" style="background:var(--g1)"></span>Disponible</div><div class="li"><span class="ld" style="background:var(--t1)"></span>Formation</div><div class="li"><span class="ld" style="background:#ede9fe"></span>Transp. Personnel</div></div>
+    </div>
+    <div class="plan-g" id="planDr"></div>
+  </div>
+</div>
+
+<!-- ═══ MISSIONS ═══ -->
+<div class="page" id="p-missions">
+  <div class="fb" id="miFilter"></div>
+  <div id="miList"></div>
+</div>
+
+<!-- ═══ PLANIFICATION ═══ -->
+<div class="page" id="p-planification">
+  <div class="tabs">
+    <button class="tab act" onclick="plTab(this,0)">Planning Véhicules</button>
+    <button class="tab" onclick="plTab(this,1)">Sélection Automatique</button>
+  </div>
+  <div class="tpane act" id="plP0">
+    <div style="margin-bottom:12px"><h3 style="font-size:.9rem">Disponibilité Véhicules — Semaine 35</h3></div>
+    <div class="plan-g" id="planVh"></div>
+  </div>
+  <div class="tpane" id="plP1">
+    <div class="sel-box">
+      <h3>Sélection Automatique Chauffeur & Véhicule</h3>
+      <p style="font-size:.78rem;color:var(--ts);margin-bottom:14px">L'algorithme évalue les critères sélectionnés pour recommander les meilleures affectations. Configurez les poids de chaque variable.</p>
+      <div class="cfg-panel">
+        <div style="font-size:.78rem;font-weight:600;margin-bottom:8px;color:var(--tp)">Configuration de l'Algorithme</div>
+        <div class="cfg-row"><input type="checkbox" id="cfgFat" checked><label for="cfgFat">Indice de Fatigue</label><input type="range" id="wFat" min="0" max="50" value="35" oninput="this.nextElementSibling.textContent=this.value"><span class="cfg-val">35</span></div>
+        <div class="cfg-row"><input type="checkbox" id="cfgHrs" checked><label for="cfgHrs">Heures / Semaine</label><input type="range" id="wHrs" min="0" max="50" value="20" oninput="this.nextElementSibling.textContent=this.value"><span class="cfg-val">20</span></div>
+        <div class="cfg-row"><input type="checkbox" id="cfgQual" checked><label for="cfgQual">Qualification / Cargo</label><input type="range" id="wQual" min="0" max="50" value="20" oninput="this.nextElementSibling.textContent=this.value"><span class="cfg-val">20</span></div>
+        <div class="cfg-row"><input type="checkbox" id="cfgKm" checked><label for="cfgKm">Kilométrage Véhicule</label><input type="range" id="wKm" min="0" max="50" value="15" oninput="this.nextElementSibling.textContent=this.value"><span class="cfg-val">15</span></div>
+        <div class="cfg-row"><input type="checkbox" id="cfgDoc" checked><label for="cfgDoc">Validité Documents</label><input type="range" id="wDoc" min="0" max="50" value="10" oninput="this.nextElementSibling.textContent=this.value"><span class="cfg-val">10</span></div>
+        <div class="cfg-row"><input type="checkbox" id="cfgConso"><label for="cfgConso">Efficacité Carburant</label><input type="range" id="wConso" min="0" max="50" value="10" oninput="this.nextElementSibling.textContent=this.value"><span class="cfg-val">10</span></div>
+      </div>
+      <div class="sel-form">
+        <div class="sel-grp"><label>Zone Mission</label><select id="selZone"><option>Locale (&lt;100km)</option><option>Régionale (100-300km)</option><option selected>Nationale (300-800km)</option><option>Sud (&gt;800km)</option></select></div>
+        <div class="sel-grp"><label>Type Véhicule</label><select id="selType"><option>LEGER</option><option selected>LOURD</option><option>ENGIN</option></select></div>
+        <div class="sel-grp"><label>Durée Estimée</label><select id="selDur"><option>1 jour</option><option selected>2-3 jours</option><option>4-7 jours</option><option>&gt;7 jours</option></select></div>
+        <div class="sel-grp"><label>Cargo Sensible</label><select id="selCargo"><option>Non</option><option>ADR (mat. dangereuses)</option><option>Frigorifique</option><option>Citerne</option></select></div>
+      </div>
+      <button class="btn btn-p" onclick="runSelection()" style="margin-bottom:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Lancer la Sélection</button>
+      <div class="sel-results" id="selRes"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAINTENANCE ═══ -->
+<div class="page" id="p-maintenance">
+  <div class="sg sg3">
+    <div class="sc"><div><div class="sv">12</div><div class="sl">Interventions ce mois</div><div class="st">6 périodiques · 4 curatives · 2 urgences</div></div><div class="si bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div></div>
+    <div class="sc"><div><div class="sv">1,284M</div><div class="sl">Coût Réel Août (DA)</div><div class="st dn">+15% vs budget 1,12M</div></div><div class="si am"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div></div>
+    <div class="sc"><div><div class="sv">127h</div><div class="sl">Heures de Panne Août</div><div class="st dn">3 véhicules en panne</div></div><div class="si rd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
+  </div>
+  <div class="tc"><div class="th"><h3>Ordres de Travail</h3><div><button class="btn btn-p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvel OT</button></div></div><div class="tw"><table><thead><tr><th>N° OT</th><th>Véhicule</th><th>Type</th><th>Titre</th><th>Priorité</th><th>Statut</th><th>Pièces (DA)</th><th>M. Oeuvre (DA)</th><th>Coût Total</th><th>Date</th></tr></thead><tbody id="mtTB"></tbody></table></div></div>
+</div>
+
+<!-- ═══ CARBURANT ═══ -->
+<div class="page" id="p-carburant">
+  <div class="sg">
+    <div class="sc"><div><div class="sv">18 420</div><div class="sl">Litres ce mois (véhicules)</div><div class="st up">-4% vs mois dernier</div></div><div class="si bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V5a2 2 0 012-2h8a2 2 0 012 2v17"/><path d="M15 22V10l4-2v14"/><path d="M3 22h18"/></svg></div></div>
+    <div class="sc"><div><div class="sv">3 280</div><div class="sl">Litres Engins (heures)</div><div class="st">4 engins actifs</div></div><div class="si tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
+    <div class="sc"><div><div class="sv">4</div><div class="sl">Anomalies Détectées</div><div class="st dn">Surconsommations à vérifier</div></div><div class="si rd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div></div>
+    <div class="sc"><div><div class="sv">9,2</div><div class="sl">Moy. L/100km Flotte</div><div class="st dn">Norme: 8,5</div></div><div class="si am"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div>
+  </div>
+  <div class="tabs">
+    <button class="tab act" onclick="caTab(this,0)">Pleins Véhicules</button>
+    <button class="tab" onclick="caTab(this,1)">Pleins Engins (Heures)</button>
+    <button class="tab" onclick="caTab(this,2)">Vérification Période</button>
+    <button class="tab" onclick="caTab(this,3)">Analyse Anomalies</button>
+  </div>
+  <div class="tpane act" id="caP0">
+    <div class="tc"><div class="th"><h3>Registre des Pleins — Véhicules</h3><div><button class="btn btn-p" onclick="openModal('addFuel')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Saisir Plein</button></div></div><div class="tw"><table><thead><tr><th>Date</th><th>Véhicule</th><th>Chauffeur</th><th>Type</th><th>Qté (L)</th><th>Prix Unit.</th><th>Total (DA)</th><th>Km Compt.</th><th>Km Préc.</th><th>Dist.</th><th>Rés. Avant</th><th>Conso L/100</th><th>Norme</th><th>Écart</th></tr></thead><tbody id="fuTB"></tbody></table></div></div>
+  </div>
+  <div class="tpane" id="caP1">
+    <div class="tc"><div class="th"><h3>Registre des Pleins — Engins (suivi par heures)</h3><div><button class="btn btn-p" onclick="openModal('addFuelEng')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Saisir Plein Engin</button></div></div><div class="tw"><table><thead><tr><th>Date</th><th>Engin</th><th>Opérateur</th><th>Qté (L)</th><th>Prix Unit.</th><th>Total (DA)</th><th>Heures Compt.</th><th>Heures Préc.</th><th>H Travaillées</th><th>Conso L/h</th><th>Norme L/h</th><th>Écart</th></tr></thead><tbody id="fuEngTB"></tbody></table></div></div>
+  </div>
+  <div class="tpane" id="caP2">
+    <div class="tc"><div class="th"><h3>Vérification Mensuelle — Août 2026</h3><div style="font-size:.75rem;color:var(--tm)">Litres consommés justifiés par km parcourus (missions) ?</div></div><div class="tw"><table><thead><tr><th>Véhicule</th><th>Km Missions</th><th>Litres Consommés</th><th>Conso Réelle L/100</th><th>Norme Corrigée</th><th>Écart %</th><th>Litres Attendus</th><th>Différence</th><th>Verdict</th></tr></thead><tbody id="verTB"></tbody></table></div></div>
+  </div>
+  <div class="tpane" id="caP3">
+    <div class="cr" style="margin-bottom:0">
+      <div class="cc"><h3>Véhicules / Engins à Problème</h3><div class="sub">Écart de consommation supérieur au seuil — Août 2026</div><div id="anomVh"></div></div>
+      <div class="cc"><h3>Chauffeurs à Surveiller</h3><div class="sub">Consommation élevée sur leurs missions</div><div id="anomDr"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ALERTES ═══ -->
+<div class="page" id="p-alertes">
+  <div class="fb" id="alFilter"></div>
+  <div class="al" id="alList"></div>
+</div>
+
+<!-- ═══ RAPPORTS ═══ -->
+<div class="page" id="p-rapports">
+  <div class="sg" id="rapKPI"></div>
+  <div class="cr">
+    <div class="cc"><h3>Coûts Mensuels par Catégorie</h3><div class="sub">6 derniers mois — K DA</div><div class="cw"><canvas id="chRap1" height="220"></canvas><div class="tip" id="tipR1"></div></div><div class="lg"><div class="li"><span class="ld" style="background:var(--c1)"></span>Carburant</div><div class="li"><span class="ld" style="background:var(--c2)"></span>Maintenance</div><div class="li"><span class="ld" style="background:var(--c3)"></span>Location</div></div></div>
+    <div class="cc"><h3>Productivité Chauffeurs</h3><div class="sub">Top 8 — Missions terminées ce mois</div><div class="cw"><canvas id="chRap2" height="220"></canvas><div class="tip" id="tipR2"></div></div></div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+<div class="modal-ov" id="modalOv" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalBox"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════ DATA ══════════
+const V=[
+  {c:'FL-001',b:'Toyota',m:'Hilux 2.4D',t:'LOURD',pl:'01234-116-16',s:'DISPONIBLE',km:87420,fu:'GASOIL',ow:'PROPRE',locEnd:null,locAlertDays:30,res:80,no:8.5,nc:8.9,ct:'2026-11-15',cts:'VALIDE',ass:'2026-08-31',assn:'ASS-2024-1847',asss:'URGENT',cg:'2028-03-20',vi:'2027-01-31',dr:'EMP-102',panneH:0},
+  {c:'FL-002',b:'Hyundai',m:'Accent 1.6',t:'LEGER',pl:'02891-117-16',s:'EN_MISSION',km:42180,fu:'ESSENCE',ow:'PROPRE',locEnd:null,locAlertDays:30,res:45,no:5.8,nc:6.1,ct:'2027-05-20',cts:'VALIDE',ass:'2027-04-15',assn:'ASS-2024-1902',asss:'VALIDE',cg:'2028-06-10',vi:'2027-01-31',dr:'EMP-118',panneH:0},
+  {c:'FL-003',b:'Mercedes',m:'Actros 1845',t:'LOURD',pl:'00312-118-09',s:'EN_MISSION',km:312600,fu:'GASOIL',ow:'PROPRE',locEnd:null,locAlertDays:30,res:400,no:28.0,nc:29.4,ct:'2026-12-01',cts:'VALIDE',ass:'2027-02-28',assn:'ASS-2025-0103',asss:'VALIDE',cg:'2028-09-15',vi:'2027-01-31',dr:'EMP-101',panneH:0},
+  {c:'FL-005',b:'Mercedes',m:'Actros 2545',t:'LOURD',pl:'00587-119-09',s:'DISPONIBLE',km:248300,fu:'GASOIL',ow:'PROPRE',locEnd:null,locAlertDays:30,res:400,no:30.0,nc:31.5,ct:'2027-01-20',cts:'VALIDE',ass:'2026-10-15',assn:'ASS-2024-1755',asss:'VALIDE',cg:'2029-01-10',vi:'2027-01-31',dr:'EMP-108',panneH:0},
+  {c:'FL-010',b:'Renault',m:'Kangoo 1.5 dCi',t:'LEGER',pl:'03102-116-16',s:'DISPONIBLE',km:56300,fu:'GASOIL',ow:'LOCATION',locEnd:'2027-03-31',locAlertDays:60,res:60,no:5.5,nc:5.8,ct:'2026-09-30',cts:'VALIDE',ass:'2026-12-31',assn:'ASS-2024-2010',asss:'VALIDE',cg:'2027-11-20',vi:'2027-01-31',dr:'EMP-115',panneH:0},
+  {c:'FL-018',b:'Isuzu',m:'NPR 75',t:'LOURD',pl:'00891-120-31',s:'EN_PANNE',km:145200,fu:'GASOIL',ow:'PROPRE',locEnd:null,locAlertDays:30,res:100,no:14.0,nc:14.7,ct:'2027-03-15',cts:'VALIDE',ass:'2027-01-20',assn:'ASS-2025-0088',asss:'VALIDE',cg:'2028-04-10',vi:'2027-01-31',dr:null,panneH:72},
+  {c:'FL-025',b:'Toyota',m:'Corolla 1.8',t:'LEGER',pl:'04521-116-16',s:'DISPONIBLE',km:23100,fu:'ESSENCE',ow:'PROPRE',locEnd:null,locAlertDays:30,res:55,no:5.6,nc:5.9,ct:'2028-02-10',cts:'VALIDE',ass:'2027-08-30',assn:'ASS-2025-0210',asss:'VALIDE',cg:'2029-05-15',vi:'2027-01-31',dr:'EMP-105',panneH:0},
+  {c:'FL-042',b:'Renault',m:'Kangoo ZE',t:'LEGER',pl:'05102-121-16',s:'HORS_SERVICE',km:68400,fu:'ESSENCE',ow:'LOCATION',locEnd:'2026-09-15',locAlertDays:15,res:50,no:5.2,nc:5.5,ct:'2026-08-10',cts:'EXPIRE',ass:'2026-07-31',assn:'ASS-2024-1990',asss:'EXPIRE',cg:'2027-09-01',vi:'2026-12-31',dr:null,panneH:55},
+  {c:'FL-055',b:'Caterpillar',m:'320 GC',t:'ENGIN',pl:'—',s:'EN_MISSION',km:4820,fu:'GASOIL',ow:'LOCATION',locEnd:'2026-10-10',locAlertDays:30,res:300,no:18.0,nc:20.7,noH:12.5,ncH:14.4,ct:'—',cts:'N/A',ass:'2026-11-30',assn:'ASS-2025-0320',asss:'VALIDE',cg:'—',vi:'—',dr:null,panneH:0,hm:4820},
+  {c:'FL-060',b:'Komatsu',m:'PC200-8',t:'ENGIN',pl:'—',s:'DISPONIBLE',km:6310,fu:'GASOIL',ow:'LOCATION',locEnd:'2027-06-30',locAlertDays:60,res:350,no:16.0,nc:18.4,noH:11.0,ncH:12.7,ct:'—',cts:'N/A',ass:'2027-03-15',assn:'ASS-2025-0415',asss:'VALIDE',cg:'—',vi:'—',dr:null,panneH:0,hm:6310},
+  {c:'FL-065',b:'Volvo',m:'EC220E',t:'ENGIN',pl:'—',s:'EN_MISSION',km:3100,fu:'GASOIL',ow:'PROPRE',locEnd:null,locAlertDays:30,res:280,no:15.0,nc:17.3,noH:10.5,ncH:12.1,ct:'—',cts:'N/A',ass:'2027-02-28',assn:'ASS-2025-0390',asss:'VALIDE',cg:'—',vi:'—',dr:null,panneH:0,hm:3100},
+  {c:'FL-071',b:'Schmitz',m:'Cargobull S.CS',t:'REMORQUE',pl:'00201-122-09',s:'DISPONIBLE',km:189500,fu:'—',ow:'PROPRE',locEnd:null,locAlertDays:30,res:0,no:0,nc:0,ct:'2027-06-30',cts:'VALIDE',ass:'2027-05-15',assn:'ASS-2025-0500',asss:'VALIDE',cg:'2029-02-20',vi:'2027-01-31',dr:null,panneH:0}
+];
+
+const D=[
+  {n:'EMP-101',nm:'Benmoussa Youcef',lic:'C+E',lx:'2027-03-15',qual:['ADR','Frigo'],s:'EN_MISSION',hw:38,hm:156,fat:.79,vh:'FL-003',perm:true,tel:'0555 12 34 56',
+   plan:[{t:'MIS',h1:'06:00',h2:'18:00'},{t:'REP',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'MIS',h1:'07:00',h2:'19:00'},{t:'MIS',h1:'06:00',h2:'17:00'},{t:'REP',h1:'',h2:''}]},
+  {n:'EMP-102',nm:'Hadj Ali Rachid',lic:'C',lx:'2026-11-20',qual:['ADR'],s:'DISPONIBLE',hw:24,hm:98,fat:.50,vh:'FL-001',perm:true,tel:'0661 22 33 44',
+   plan:[{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'MIS',h1:'08:00',h2:'16:00'},{t:'MIS',h1:'08:00',h2:'16:00'},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'REP',h1:'',h2:''}]},
+  {n:'EMP-105',nm:'Slimani Karim',lic:'B',lx:'2028-06-10',qual:[],s:'DISPONIBLE',hw:32,hm:128,fat:.67,vh:'FL-025',perm:false,tel:'0770 44 55 66',
+   plan:[{t:'MIS',h1:'07:30',h2:'16:30'},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'FRM',h1:'09:00',h2:'16:00'},{t:'FRM',h1:'09:00',h2:'16:00'},{t:'DIS',h1:'',h2:''},{t:'REP',h1:'',h2:''}]},
+  {n:'EMP-108',nm:'Boudiaf Mohamed',lic:'C+E',lx:'2027-01-05',qual:['ADR','Matières Dangereuses'],s:'EN_MISSION',hw:42,hm:168,fat:.88,vh:'FL-005',perm:true,tel:'0555 77 88 99',
+   plan:[{t:'MIS',h1:'05:00',h2:'20:00'},{t:'MIS',h1:'06:00',h2:'18:00'},{t:'MIS',h1:'06:00',h2:'14:00'},{t:'REP',h1:'',h2:''},{t:'REP',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''}]},
+  {n:'EMP-112',nm:'Mebarki Sofiane',lic:'D',lx:'2026-09-30',qual:['Transport Personnes'],s:'EN_REPOS',hw:48,hm:192,fat:.99,vh:null,perm:false,tel:'0661 11 22 33',
+   plan:[{t:'REP',h1:'',h2:''},{t:'REP',h1:'',h2:''},{t:'REP',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'TRP',h1:'07:00',h2:'08:30'},{t:'TRP',h1:'07:00',h2:'08:30'}]},
+  {n:'EMP-115',nm:'Khelifi Amine',lic:'C',lx:'2028-02-28',qual:[],s:'DISPONIBLE',hw:18,hm:72,fat:.38,vh:'FL-010',perm:false,tel:'0770 99 88 77',
+   plan:[{t:'DIS',h1:'',h2:''},{t:'MIS',h1:'08:00',h2:'17:00'},{t:'MIS',h1:'08:00',h2:'17:00'},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'MIS',h1:'07:00',h2:'15:00'},{t:'REP',h1:'',h2:''}]},
+  {n:'EMP-118',nm:'Benali Farid',lic:'B',lx:'2027-08-15',qual:['Frigo'],s:'EN_MISSION',hw:36,hm:144,fat:.75,vh:'FL-002',perm:true,tel:'0555 66 55 44',
+   plan:[{t:'MIS',h1:'07:00',h2:'16:00'},{t:'MIS',h1:'07:00',h2:'16:00'},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'MNT',h1:'08:00',h2:'12:00'},{t:'DIS',h1:'',h2:''},{t:'REP',h1:'',h2:''}]},
+  {n:'EMP-122',nm:'Tounsi Abdelkader',lic:'C+E',lx:'2026-12-01',qual:['ADR'],s:'DISPONIBLE',hw:28,hm:112,fat:.58,vh:null,perm:false,tel:'0661 44 33 22',
+   plan:[{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'MIS',h1:'06:00',h2:'20:00'},{t:'MIS',h1:'06:00',h2:'20:00'},{t:'MIS',h1:'06:00',h2:'14:00'},{t:'REP',h1:'',h2:''},{t:'REP',h1:'',h2:''}]}
+];
+
+let MI=[
+  {n:'M-2026-0847',dr:'EMP-101',vh:'FL-003',fr:'Alger Port',to:'Oran — Zone Ind.',s:'EN_COURS',dateD:'2026-08-26',heureD:'06:00',dateF:'2026-08-27',heureF:'18:00',d:432,z:'Nationale',co:68400},
+  {n:'M-2026-0846',dr:'EMP-108',vh:'FL-005',fr:'Hassi Messaoud',to:'Alger — Rouiba',s:'EN_COURS',dateD:'2026-08-25',heureD:'05:00',dateF:'2026-08-27',heureF:'20:00',d:810,z:'Sud',co:142800},
+  {n:'M-2026-0845',dr:'EMP-118',vh:'FL-002',fr:'Alger Centre',to:'Blida — Zone Ind.',s:'EN_COURS',dateD:'2026-08-26',heureD:'07:00',dateF:'2026-08-26',heureF:'16:00',d:52,z:'Locale',co:5200},
+  {n:'M-2026-0844',dr:'EMP-105',vh:'FL-025',fr:'Bab Ezzouar',to:'Tizi Ouzou',s:'PLANIFIEE',dateD:'2026-08-27',heureD:'07:30',dateF:'2026-08-27',heureF:'16:30',d:105,z:'Régionale',co:12600},
+  {n:'M-2026-0843',dr:'EMP-115',vh:'FL-010',fr:'Alger — Chéraga',to:'Médéa Centre',s:'PLANIFIEE',dateD:'2026-08-28',heureD:'08:00',dateF:'2026-08-28',heureF:'17:00',d:88,z:'Locale',co:8800},
+  {n:'M-2026-0840',dr:'EMP-102',vh:'FL-001',fr:'Sétif',to:'Constantine',s:'TERMINEE',dateD:'2026-08-24',heureD:'06:00',dateF:'2026-08-24',heureF:'18:00',d:128,z:'Régionale',co:18200},
+  {n:'M-2026-0838',dr:'EMP-122',vh:'FL-071',fr:'Oran Port',to:'Alger — Rouiba',s:'TERMINEE',dateD:'2026-08-23',heureD:'05:30',dateF:'2026-08-24',heureF:'14:00',d:420,z:'Nationale',co:52500},
+  {n:'M-2026-0835',dr:'EMP-101',vh:'FL-003',fr:'Alger',to:'Ghardaïa',s:'CLOTUREE',dateD:'2026-08-21',heureD:'04:00',dateF:'2026-08-22',heureF:'20:00',d:600,z:'Sud',co:108000}
+];
+
+const MT=[
+  {n:'OT-0412',vh:'FL-018',t:'CURATIVE',ti:'Réparation boîte de vitesses (panne)',pr:'CRITIQUE',s:'EN_COURS',pi:85000,mo:45000,co:130000,dt:'24/08/2026'},
+  {n:'OT-0411',vh:'FL-003',t:'CURATIVE',ti:'Remplacement plaquettes frein AV+AR',pr:'HAUTE',s:'PLANIFIE',pi:54000,mo:28000,co:82000,dt:'28/08/2026'},
+  {n:'OT-0410',vh:'FL-042',t:'CURATIVE',ti:'Réparation système injection common rail',pr:'CRITIQUE',s:'EN_COURS',pi:112000,mo:44000,co:156000,dt:'24/08/2026'},
+  {n:'OT-0409',vh:'FL-060',t:'PERIODIQUE',ti:'Graissage complet + contrôle hydraulique',pr:'MOYENNE',s:'PLANIFIE',pi:18000,mo:17000,co:35000,dt:'30/08/2026'},
+  {n:'OT-0407',vh:'FL-005',t:'PERIODIQUE',ti:'Révision complète 250 000 km',pr:'HAUTE',s:'TERMINE',pi:138000,mo:72000,co:210000,dt:'20/08/2026'},
+  {n:'OT-0405',vh:'FL-001',t:'CURATIVE',ti:'Remplacement amortisseurs AV',pr:'MOYENNE',s:'TERMINE',pi:22000,mo:15000,co:37000,dt:'18/08/2026'},
+  {n:'OT-0403',vh:'FL-010',t:'PERIODIQUE',ti:'Révision 50 000 km',pr:'BASSE',s:'TERMINE',pi:15000,mo:12000,co:27000,dt:'15/08/2026'},
+  {n:'OT-0401',vh:'FL-025',t:'PERIODIQUE',ti:'Vidange + contrôle freins',pr:'BASSE',s:'TERMINE',pi:8000,mo:10000,co:18000,dt:'12/08/2026'}
+];
+
+const FU=[
+  {dt:'26/08',vh:'FL-003',dr:'EMP-101',ty:'GASOIL',q:180,px:52.50,km2:312600,km1:312200,rb:45,no:29.4},
+  {dt:'25/08',vh:'FL-005',dr:'EMP-108',ty:'GASOIL',q:220,px:52.50,km2:248300,km1:247680,rb:60,no:31.5},
+  {dt:'25/08',vh:'FL-002',dr:'EMP-118',ty:'ESSENCE',q:42,px:56.20,km2:42180,km1:41480,rb:8,no:6.1},
+  {dt:'24/08',vh:'FL-001',dr:'EMP-102',ty:'GASOIL',q:85,px:52.50,km2:87420,km1:86520,rb:12,no:8.9},
+  {dt:'24/08',vh:'FL-010',dr:'EMP-115',ty:'GASOIL',q:38,px:52.50,km2:56300,km1:55620,rb:15,no:5.8},
+  {dt:'23/08',vh:'FL-055',dr:null,ty:'GASOIL',q:150,px:52.50,km2:4820,km1:4120,rb:40,no:20.7},
+  {dt:'22/08',vh:'FL-003',dr:'EMP-101',ty:'GASOIL',q:200,px:52.50,km2:312200,km1:311580,rb:30,no:29.4},
+  {dt:'22/08',vh:'FL-001',dr:'EMP-102',ty:'GASOIL',q:65,px:52.50,km2:86520,km1:85800,rb:18,no:8.9},
+  {dt:'21/08',vh:'FL-005',dr:'EMP-108',ty:'GASOIL',q:240,px:52.50,km2:247680,km1:246960,rb:35,no:31.5},
+  {dt:'20/08',vh:'FL-025',dr:'EMP-105',ty:'ESSENCE',q:35,px:56.20,km2:23100,km1:22480,rb:10,no:5.9}
+];
+
+// Engins fuel — tracked by hours, not km
+const FUE=[
+  {dt:'26/08',vh:'FL-055',op:'Hamdi Ali',ty:'GASOIL',q:120,px:52.50,h2:4820,h1:4810,noH:14.4},
+  {dt:'25/08',vh:'FL-060',op:'Saadi Kamel',ty:'GASOIL',q:95,px:52.50,h2:6310,h1:6302,noH:12.7},
+  {dt:'25/08',vh:'FL-065',op:'Benziane Omar',ty:'GASOIL',q:110,px:52.50,h2:3100,h1:3091,noH:12.1},
+  {dt:'24/08',vh:'FL-055',op:'Hamdi Ali',ty:'GASOIL',q:135,px:52.50,h2:4810,h1:4800,noH:14.4},
+  {dt:'23/08',vh:'FL-060',op:'Saadi Kamel',ty:'GASOIL',q:80,px:52.50,h2:6302,h1:6296,noH:12.7},
+  {dt:'22/08',vh:'FL-065',op:'Benziane Omar',ty:'GASOIL',q:100,px:52.50,h2:3091,h1:3082,noH:12.1}
+];
+
+const VER=[
+  {vh:'FL-003',b:'Mercedes Actros 1845',kmMis:2200,l:580,no:29.4},
+  {vh:'FL-005',b:'Mercedes Actros 2545',kmMis:2100,l:720,no:31.5},
+  {vh:'FL-001',b:'Toyota Hilux',kmMis:2220,l:210,no:8.9},
+  {vh:'FL-002',b:'Hyundai Accent',kmMis:980,l:62,no:6.1},
+  {vh:'FL-010',b:'Renault Kangoo',kmMis:1500,l:95,no:5.8},
+  {vh:'FL-025',b:'Toyota Corolla',kmMis:1000,l:58,no:5.9}
+];
+
+const AL=[
+  {ty:'dg',ti:'CT expiré — Renault Kangoo ZE (FL-042)',ds:'Contrôle technique dépassé depuis 16 jours. Véhicule immobilisé.',tm:'2h',cat:'doc',pr:'CRITIQUE'},
+  {ty:'dg',ti:'Assurance expirée — Renault Kangoo ZE (FL-042)',ds:'Police ASS-2024-1990 expirée le 31/07/2026.',tm:'2h',cat:'ass',pr:'CRITIQUE'},
+  {ty:'dg',ti:'Assurance expire dans 5 jours — Toyota Hilux (FL-001)',ds:'Police ASS-2024-1847 expire le 31/08/2026.',tm:'4h',cat:'ass',pr:'HAUTE'},
+  {ty:'wr',ti:'Permis expire dans 35 jours — Mebarki Sofiane (EMP-112)',ds:'Permis catégorie D expire le 30/09/2026.',tm:'6h',cat:'doc',pr:'HAUTE'},
+  {ty:'dg',ti:'EN PANNE — Isuzu NPR 75 (FL-018)',ds:'En panne depuis 72h. OT-0412 en cours. Boîte de vitesses.',tm:'3j',cat:'mnt',pr:'CRITIQUE'},
+  {ty:'dg',ti:'Surconsommation +17% — Actros 2545 (FL-005)',ds:'35,5 L/100 vs 31,5 norme corrigée. Vérifier conduite et état mécanique.',tm:'1j',cat:'carb',pr:'HAUTE'},
+  {ty:'wr',ti:'Surconsommation engin +11% — CAT 320 GC (FL-055)',ds:'16,0 L/h vs 14,4 L/h norme corrigée.',tm:'1j',cat:'carb',pr:'MOYENNE'},
+  {ty:'wr',ti:'Écart carburant — Toyota Hilux (FL-001)',ds:'210L pour 2220km missions. +7% norme. 13L non justifiés.',tm:'1j',cat:'carb',pr:'MOYENNE'},
+  {ty:'in',ti:'Fin location dans 45j — CAT 320 GC (FL-055)',ds:'Contrat location expire le 10/10/2026. Alerte paramétrée à 30j.',tm:'2j',cat:'loc',pr:'MOYENNE'},
+  {ty:'in',ti:'Fin location dans 20j — Kangoo ZE (FL-042)',ds:'Contrat location expire le 15/09/2026. Alerte paramétrée à 15j.',tm:'1j',cat:'loc',pr:'HAUTE'},
+  {ty:'dg',ti:'Heures dépassées — Mebarki Sofiane (EMP-112)',ds:'48h/semaine atteintes. Repos obligatoire.',tm:'2j',cat:'chauf',pr:'CRITIQUE'},
+  {ty:'wr',ti:'Fatigue élevée — Boudiaf Mohamed (EMP-108)',ds:'Indice fatigue 88%. 42h/sem. Planifier repos.',tm:'2j',cat:'chauf',pr:'HAUTE'},
+  {ty:'in',ti:'Fin location dans 10 mois — Kangoo 1.5 (FL-010)',ds:'Contrat location expire le 31/03/2027. Alerte paramétrée à 60j.',tm:'5j',cat:'loc',pr:'BASSE'}
+];
+
+// ══════════ HELPERS ══════════
+const sb=(s)=>{const m={DISPONIBLE:['Disponible','bg-g'],EN_MISSION:['En Mission','bg-b'],EN_MAINTENANCE:['Maintenance','bg-a'],EN_PANNE:['En Panne','bg-r'],HORS_SERVICE:['Hors Service','bg-r'],PLANIFIEE:['Planifiée','bg-t'],EN_COURS:['En Cours','bg-b'],TERMINEE:['Terminée','bg-g'],CLOTUREE:['Clôturée','bg-t'],PLANIFIE:['Planifié','bg-t'],TERMINE:['Terminé','bg-g'],HAUTE:['Haute','bg-r'],MOYENNE:['Moyenne','bg-a'],CRITIQUE:['Critique','bg-r'],BASSE:['Basse','bg-g'],EN_REPOS:['Repos','bg-a'],VALIDE:['Valide','bg-g'],URGENT:['Urgent','bg-a'],EXPIRE:['Expiré','bg-r'],'N/A':['N/A','bg-t']};const[l,c]=m[s]||[s,'bg-b'];return`<span class="bg ${c}">${l}</span>`};
+const fk=n=>typeof n==='number'?n.toLocaleString('fr-FR'):n;
+const drName=id=>{const d=D.find(x=>x.n===id);return d?d.nm:'—'};
+const vhLabel=c=>{const v=V.find(x=>x.c===c);return v?v.c+' — '+v.b+' '+v.m:'—'};
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('vis');setTimeout(()=>t.classList.remove('vis'),2500)}
+
+// ══════════ MODAL SYSTEM ══════════
+function openModal(type,data){
+  const box=document.getElementById('modalBox');
+  let html='';
+  if(type==='addVh'){
+    html=`<div class="modal-hd"><h3>Ajouter un Véhicule</h3><button class="modal-cl" onclick="closeModal()">✕</button></div>
+    <div class="modal-bd">
+      <div class="form-r"><div class="form-g"><label>Code</label><input id="fVhCode" value="FL-${String(V.length+80).padStart(3,'0')}" readonly></div><div class="form-g"><label>Marque</label><input id="fVhBrand" placeholder="Ex: Toyota"></div></div>
+      <div class="form-r"><div class="form-g"><label>Modèle</label><input id="fVhModel" placeholder="Ex: Hilux 2.4D"></div><div class="form-g"><label>Type</label><select id="fVhType"><option>LEGER</option><option>LOURD</option><option>ENGIN</option><option>REMORQUE</option></select></div></div>
+      <div class="form-r"><div class="form-g"><label>Immatriculation</label><input id="fVhPlate" placeholder="00000-000-00"></div><div class="form-g"><label>Carburant</label><select id="fVhFuel"><option>GASOIL</option><option>ESSENCE</option><option>—</option></select></div></div>
+      <div class="form-r"><div class="form-g"><label>Propriété</label><select id="fVhOw" onchange="document.getElementById('fVhLocRow').style.display=this.value==='LOCATION'?'grid':'none'"><option value="PROPRE">Propriété</option><option value="LOCATION">Location</option></select></div><div class="form-g"><label>Kilométrage</label><input id="fVhKm" type="number" value="0"></div></div>
+      <div class="form-r" id="fVhLocRow" style="display:none"><div class="form-g"><label>Date Fin Location</label><input id="fVhLocEnd" type="date"></div><div class="form-g"><label>Alerte (jours avant)</label><input id="fVhLocAlert" type="number" value="30"></div></div>
+      <div class="form-r"><div class="form-g"><label>Réservoir (L)</label><input id="fVhRes" type="number" value="80"></div><div class="form-g"><label>Norme Constructeur (L/100km)</label><input id="fVhNo" type="number" step="0.1" value="8.5"></div></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-o" onclick="closeModal()">Annuler</button><button class="btn btn-p" onclick="saveVh()">Enregistrer</button></div>`;
+  }else if(type==='addDr'){
+    html=`<div class="modal-hd"><h3>Ajouter un Chauffeur</h3><button class="modal-cl" onclick="closeModal()">✕</button></div>
+    <div class="modal-bd">
+      <div class="form-r"><div class="form-g"><label>N° Employé</label><input id="fDrN" value="EMP-${130+D.length}" readonly></div><div class="form-g"><label>Nom Complet</label><input id="fDrNm" placeholder="Nom Prénom"></div></div>
+      <div class="form-r"><div class="form-g"><label>Permis</label><select id="fDrLic"><option>B</option><option>C</option><option>C+E</option><option>D</option></select></div><div class="form-g"><label>Expiration Permis</label><input id="fDrLx" type="date"></div></div>
+      <div class="form-g"><label>Qualifications (Ctrl+clic pour multi)</label><select id="fDrQual" multiple style="height:80px"><option>ADR</option><option>Frigo</option><option>Matières Dangereuses</option><option>Citerne</option><option>Transport Personnes</option></select></div>
+      <div class="form-r"><div class="form-g"><label>Téléphone</label><input id="fDrTel" placeholder="0555 00 00 00"></div><div class="form-g"><label>Véhicule Affecté</label><select id="fDrVh"><option value="">— Aucun —</option>${V.filter(v=>v.t!=='ENGIN'&&v.t!=='REMORQUE').map(v=>`<option value="${v.c}">${v.c} — ${v.b} ${v.m}</option>`).join('')}</select></div></div>
+      <div class="form-g"><label><input type="checkbox" id="fDrPerm"> Affectation permanente</label></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-o" onclick="closeModal()">Annuler</button><button class="btn btn-p" onclick="saveDr()">Enregistrer</button></div>`;
+  }else if(type==='addMission'){
+    const avDr=D.filter(d=>d.s==='DISPONIBLE');
+    const avVh=V.filter(v=>v.s==='DISPONIBLE'&&v.t!=='ENGIN'&&v.t!=='REMORQUE');
+    html=`<div class="modal-hd"><h3>Nouvelle Mission</h3><button class="modal-cl" onclick="closeModal()">✕</button></div>
+    <div class="modal-bd">
+      <div class="form-r"><div class="form-g"><label>Date Départ</label><input id="fMiDD" type="date" value="2026-08-28"></div><div class="form-g"><label>Heure Départ</label><input id="fMiHD" type="time" value="07:00"></div></div>
+      <div class="form-r"><div class="form-g"><label>Date Fin</label><input id="fMiDF" type="date" value="2026-08-28"></div><div class="form-g"><label>Heure Fin</label><input id="fMiHF" type="time" value="17:00"></div></div>
+      <div class="form-r"><div class="form-g"><label>Lieu Départ</label><input id="fMiFrom" placeholder="Ex: Alger Port"></div><div class="form-g"><label>Lieu Arrivée</label><input id="fMiTo" placeholder="Ex: Oran Centre"></div></div>
+      <div class="form-r"><div class="form-g"><label>Distance (km)</label><input id="fMiDist" type="number" placeholder="0"></div><div class="form-g"><label>Zone</label><select id="fMiZone"><option>Locale</option><option>Régionale</option><option>Nationale</option><option>Sud</option></select></div></div>
+      <div class="form-r">
+        <div class="form-g"><label>Chauffeur</label><select id="fMiDr"><option value="">— Choisir —</option>${avDr.map(d=>`<option value="${d.n}">${d.nm} (${d.lic}) — Fatigue ${Math.round(d.fat*100)}%${d.vh?' — VH: '+d.vh:''}</option>`).join('')}</select></div>
+        <div class="form-g"><label>Véhicule</label><select id="fMiVh"><option value="">— Choisir —</option>${avVh.map(v=>`<option value="${v.c}">${v.c} — ${v.b} ${v.m} (${fk(v.km)}km)</option>`).join('')}</select></div>
+      </div>
+      <div style="margin:8px 0"><button class="btn btn-o btn-sm" onclick="autoFillMission()">Proposition automatique</button> <span style="font-size:.7rem;color:var(--tm)">Le système propose le meilleur chauffeur/véhicule disponible</span></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-o" onclick="closeModal()">Annuler</button><button class="btn btn-p" onclick="saveMission()">Créer Mission</button></div>`;
+  }else if(type==='addFuel'){
+    html=`<div class="modal-hd"><h3>Saisir un Plein — Véhicule</h3><button class="modal-cl" onclick="closeModal()">✕</button></div>
+    <div class="modal-bd">
+      <div class="form-r"><div class="form-g"><label>Date</label><input id="fFuDt" type="date" value="2026-08-26"></div><div class="form-g"><label>Véhicule</label><select id="fFuVh">${V.filter(v=>v.t!=='ENGIN'&&v.t!=='REMORQUE'&&v.fu!=='—').map(v=>`<option value="${v.c}">${v.c} — ${v.b} ${v.m}</option>`).join('')}</select></div></div>
+      <div class="form-r"><div class="form-g"><label>Chauffeur (qui a fait le plein)</label><select id="fFuDr">${D.map(d=>`<option value="${d.n}">${d.nm}</option>`).join('')}</select></div><div class="form-g"><label>Type Carburant</label><select id="fFuTy"><option>GASOIL</option><option>ESSENCE</option></select></div></div>
+      <div class="form-r3"><div class="form-g"><label>Quantité (L)</label><input id="fFuQ" type="number" value="80"></div><div class="form-g"><label>Prix Unitaire (DA)</label><input id="fFuPx" type="number" step="0.01" value="52.50"></div><div class="form-g"><label>Réservoir Avant (L)</label><input id="fFuRb" type="number" value="10"></div></div>
+      <div class="form-r"><div class="form-g"><label>Km Compteur Actuel</label><input id="fFuKm2" type="number"></div><div class="form-g"><label>Km Compteur Précédent</label><input id="fFuKm1" type="number"></div></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-o" onclick="closeModal()">Annuler</button><button class="btn btn-p" onclick="saveFuel()">Enregistrer</button></div>`;
+  }else if(type==='addFuelEng'){
+    html=`<div class="modal-hd"><h3>Saisir un Plein — Engin (par heures)</h3><button class="modal-cl" onclick="closeModal()">✕</button></div>
+    <div class="modal-bd">
+      <div class="form-r"><div class="form-g"><label>Date</label><input id="fFeD" type="date" value="2026-08-26"></div><div class="form-g"><label>Engin</label><select id="fFeVh">${V.filter(v=>v.t==='ENGIN').map(v=>`<option value="${v.c}">${v.c} — ${v.b} ${v.m}</option>`).join('')}</select></div></div>
+      <div class="form-r"><div class="form-g"><label>Opérateur</label><input id="fFeOp" placeholder="Nom de l'opérateur"></div><div class="form-g"><label>Quantité (L)</label><input id="fFeQ" type="number" value="100"></div></div>
+      <div class="form-r"><div class="form-g"><label>Heures Compteur Actuel</label><input id="fFeH2" type="number"></div><div class="form-g"><label>Heures Compteur Précédent</label><input id="fFeH1" type="number"></div></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-o" onclick="closeModal()">Annuler</button><button class="btn btn-p" onclick="saveFuelEng()">Enregistrer</button></div>`;
+  }else if(type==='missionDetail'){
+    const m=data;
+    const nextS={PLANIFIEE:'EN_COURS',EN_COURS:'TERMINEE',TERMINEE:'CLOTUREE'};
+    const nextL={PLANIFIEE:'Démarrer',EN_COURS:'Terminer',TERMINEE:'Clôturer'};
+    html=`<div class="modal-hd"><h3>Mission ${m.n}</h3><button class="modal-cl" onclick="closeModal()">✕</button></div>
+    <div class="modal-bd">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+        <div class="eval-item"><div class="ev-label">Statut</div><div style="margin-top:4px">${sb(m.s)}</div></div>
+        <div class="eval-item"><div class="ev-label">Zone</div><div class="ev-val" style="font-size:.9rem">${m.z}</div></div>
+        <div class="eval-item"><div class="ev-label">Départ</div><div class="ev-val" style="font-size:.85rem">${m.fr}</div><div class="ev-sub">${m.dateD} à ${m.heureD}</div></div>
+        <div class="eval-item"><div class="ev-label">Arrivée</div><div class="ev-val" style="font-size:.85rem">${m.to}</div><div class="ev-sub">${m.dateF} à ${m.heureF}</div></div>
+        <div class="eval-item"><div class="ev-label">Chauffeur</div><div class="ev-val" style="font-size:.85rem">${drName(m.dr)}</div></div>
+        <div class="eval-item"><div class="ev-label">Véhicule</div><div class="ev-val" style="font-size:.85rem">${m.vh}</div></div>
+        <div class="eval-item"><div class="ev-label">Distance</div><div class="ev-val">${fk(m.d)} km</div></div>
+        <div class="eval-item"><div class="ev-label">Coût</div><div class="ev-val">${fk(m.co)} DA</div></div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      ${nextS[m.s]?`<button class="btn ${m.s==='EN_COURS'?'btn-g':'btn-p'}" onclick="changeMissionStatus('${m.n}','${nextS[m.s]}')">${nextL[m.s]} la Mission</button>`:'<span style="font-size:.78rem;color:var(--tm)">Mission clôturée</span>'}
+      <button class="btn btn-o" onclick="closeModal()">Fermer</button>
+    </div>`;
+  }
+  box.innerHTML=html;
+  document.getElementById('modalOv').classList.add('vis');
+}
+function closeModal(){document.getElementById('modalOv').classList.remove('vis')}
+
+// ══════════ SAVE FUNCTIONS ══════════
+function saveVh(){
+  const c=document.getElementById('fVhCode').value;
+  const ow=document.getElementById('fVhOw').value;
+  V.push({c,b:document.getElementById('fVhBrand').value||'Marque',m:document.getElementById('fVhModel').value||'Modèle',t:document.getElementById('fVhType').value,pl:document.getElementById('fVhPlate').value||'—',s:'DISPONIBLE',km:parseInt(document.getElementById('fVhKm').value)||0,fu:document.getElementById('fVhFuel').value,ow,locEnd:ow==='LOCATION'?document.getElementById('fVhLocEnd').value||null:null,locAlertDays:parseInt(document.getElementById('fVhLocAlert').value)||30,res:parseInt(document.getElementById('fVhRes').value)||0,no:parseFloat(document.getElementById('fVhNo').value)||0,nc:parseFloat(document.getElementById('fVhNo').value)*1.05||0,ct:'2028-01-01',cts:'VALIDE',ass:'2027-12-31',assn:'ASS-NEW',asss:'VALIDE',cg:'2029-01-01',vi:'2027-12-31',dr:null,panneH:0});
+  closeModal();rFleet();rFlFilter();toast('Véhicule '+c+' ajouté');
+}
+function saveDr(){
+  const n=document.getElementById('fDrN').value;
+  const qualSel=document.getElementById('fDrQual');
+  const qual=Array.from(qualSel.selectedOptions).map(o=>o.value);
+  D.push({n,nm:document.getElementById('fDrNm').value||'Nouveau Chauffeur',lic:document.getElementById('fDrLic').value,lx:document.getElementById('fDrLx').value||'2028-01-01',qual,s:'DISPONIBLE',hw:0,hm:0,fat:0,vh:document.getElementById('fDrVh').value||null,perm:document.getElementById('fDrPerm').checked,tel:document.getElementById('fDrTel').value||'—',
+  plan:[{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'DIS',h1:'',h2:''},{t:'REP',h1:'',h2:''}]});
+  closeModal();rDrivers();rPlanDr();toast('Chauffeur '+n+' ajouté');
+}
+function saveMission(){
+  const dr=document.getElementById('fMiDr').value;
+  const vh=document.getElementById('fMiVh').value;
+  if(!dr||!vh){toast('Sélectionnez chauffeur et véhicule');return}
+  const num='M-2026-'+String(parseInt(MI[0].n.split('-')[2])+1).padStart(4,'0');
+  MI.unshift({n:num,dr,vh,fr:document.getElementById('fMiFrom').value||'—',to:document.getElementById('fMiTo').value||'—',s:'PLANIFIEE',dateD:document.getElementById('fMiDD').value,heureD:document.getElementById('fMiHD').value,dateF:document.getElementById('fMiDF').value,heureF:document.getElementById('fMiHF').value,d:parseInt(document.getElementById('fMiDist').value)||0,z:document.getElementById('fMiZone').value,co:0});
+  closeModal();rMissions();toast('Mission '+num+' créée');
+}
+function autoFillMission(){
+  const avDr=D.filter(d=>d.s==='DISPONIBLE').sort((a,b)=>a.fat-b.fat);
+  const avVh=V.filter(v=>v.s==='DISPONIBLE'&&v.t!=='ENGIN'&&v.t!=='REMORQUE'&&v.cts!=='EXPIRE'&&v.asss!=='EXPIRE').sort((a,b)=>a.km-b.km);
+  if(avDr.length)document.getElementById('fMiDr').value=avDr[0].n;
+  if(avVh.length)document.getElementById('fMiVh').value=avVh[0].c;
+  toast('Proposition: '+((avDr[0]||{}).nm||'—')+' + '+((avVh[0]||{}).c||'—'));
+}
+function changeMissionStatus(num,newS){
+  const m=MI.find(x=>x.n===num);
+  if(m){m.s=newS;const d=D.find(x=>x.n===m.dr);if(d&&newS==='TERMINEE')d.s='DISPONIBLE';closeModal();rMissions();toast('Mission '+num+' → '+newS)}
+}
+function saveFuel(){
+  const vh=document.getElementById('fFuVh').value;
+  const v=V.find(x=>x.c===vh);
+  FU.unshift({dt:document.getElementById('fFuDt').value.slice(5).replace('-','/'),vh,dr:document.getElementById('fFuDr').value,ty:document.getElementById('fFuTy').value,q:parseFloat(document.getElementById('fFuQ').value)||0,px:parseFloat(document.getElementById('fFuPx').value)||52.50,km2:parseInt(document.getElementById('fFuKm2').value)||0,km1:parseInt(document.getElementById('fFuKm1').value)||0,rb:parseInt(document.getElementById('fFuRb').value)||0,no:v?v.nc:0});
+  closeModal();rFuel();toast('Plein enregistré pour '+vh);
+}
+function saveFuelEng(){
+  const vh=document.getElementById('fFeVh').value;
+  const v=V.find(x=>x.c===vh);
+  FUE.unshift({dt:document.getElementById('fFeD').value.slice(5).replace('-','/'),vh,op:document.getElementById('fFeOp').value||'—',ty:'GASOIL',q:parseFloat(document.getElementById('fFeQ').value)||0,px:52.50,h2:parseFloat(document.getElementById('fFeH2').value)||0,h1:parseFloat(document.getElementById('fFeH1').value)||0,noH:v&&v.ncH?v.ncH:12});
+  closeModal();rFuelEng();toast('Plein engin enregistré pour '+vh);
+}
+
+// ══════════ RENDER FUNCTIONS ══════════
+function rDashKPI(){
+  const nVh=V.length,nDis=V.filter(v=>v.s==='DISPONIBLE').length,nPanne=V.filter(v=>v.s==='EN_PANNE').length;
+  const nDr=D.length,nDrDis=D.filter(d=>d.s==='DISPONIBLE').length;
+  const nMiEC=MI.filter(m=>m.s==='EN_COURS').length;
+  const nAl=AL.filter(a=>a.pr==='CRITIQUE'||a.pr==='HAUTE').length;
+  document.getElementById('dashKPI').innerHTML=`
+    <div class="sc"><div><div class="sv">${nVh}</div><div class="sl">Véhicules Total</div><div class="st up">${nDis} disponibles · ${nPanne} en panne</div></div><div class="si bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div></div>
+    <div class="sc"><div><div class="sv">${nDr}</div><div class="sl">Chauffeurs</div><div class="st up">${nDrDis} disponibles</div></div><div class="si tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div>
+    <div class="sc"><div><div class="sv">${nMiEC}</div><div class="sl">Missions en Cours</div><div class="st">${MI.filter(m=>m.s==='PLANIFIEE').length} planifiées</div></div><div class="si am"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg></div></div>
+    <div class="sc"><div><div class="sv">${nAl}</div><div class="sl">Alertes Critiques/Hautes</div><div class="st dn">${AL.filter(a=>a.pr==='CRITIQUE').length} critiques</div></div><div class="si rd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div></div>`;
+}
+
+function rFlFilter(){
+  const counts={all:V.length,LEGER:V.filter(v=>v.t==='LEGER').length,LOURD:V.filter(v=>v.t==='LOURD').length,ENGIN:V.filter(v=>v.t==='ENGIN').length,REMORQUE:V.filter(v=>v.t==='REMORQUE').length};
+  document.getElementById('flFilter').innerHTML=`
+    <button class="fc act" onclick="fFl(this,'all')">Tous (${counts.all})</button>
+    <button class="fc" onclick="fFl(this,'LEGER')">Léger (${counts.LEGER})</button>
+    <button class="fc" onclick="fFl(this,'LOURD')">Lourd (${counts.LOURD})</button>
+    <button class="fc" onclick="fFl(this,'ENGIN')">Engin (${counts.ENGIN})</button>
+    <button class="fc" onclick="fFl(this,'REMORQUE')">Remorque (${counts.REMORQUE})</button>
+    <div style="flex:1"></div>
+    <button class="btn btn-p" onclick="openModal('addVh')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter</button>`;
+}
+function rFleet(f){
+  const d=f&&f!=='all'?V.filter(v=>v.t===f):V;
+  document.getElementById('flTB').innerHTML=d.map(v=>`<tr>
+    <td>${v.c}</td><td>${v.b} ${v.m}</td><td><span class="bg bg-t">${v.t}</span></td><td>${v.pl}</td>
+    <td>${sb(v.s)}${v.s==='EN_PANNE'?`<div style="font-size:.6rem;color:var(--r6);margin-top:2px">${v.panneH}h de panne</div>`:''}</td>
+    <td><span class="bg ${v.ow==='PROPRE'?'bg-g':'bg-b'}">${v.ow==='PROPRE'?'Propriété':'Location'}</span></td>
+    <td>${v.locEnd||'—'}</td>
+    <td>${fk(v.km)}</td><td>${v.fu}</td><td>${v.no?v.no:'—'}</td>
+    <td><button class="btn btn-o btn-sm" onclick="showEval('${v.c}')">Fiche</button></td>
+  </tr>`).join('');
+}
+function fFl(el,f){el.parentNode.querySelectorAll('.fc').forEach(c=>c.classList.remove('act'));el.classList.add('act');rFleet(f)}
+function flTab(el,i){el.parentNode.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));el.classList.add('act');document.querySelectorAll('#p-flotte .tpane').forEach((p,j)=>p.classList.toggle('act',j===i));if(i===3)rEval()}
+
+function showEval(code){
+  document.getElementById('evalVhSel').value=code;
+  document.querySelectorAll('#flTabs .tab').forEach(t=>t.classList.remove('act'));
+  document.querySelectorAll('#flTabs .tab')[3].classList.add('act');
+  document.querySelectorAll('#p-flotte .tpane').forEach((p,j)=>p.classList.toggle('act',j===3));
+  rEval();
+}
+
+function rEval(){
+  const sel=document.getElementById('evalVhSel');
+  if(!sel.options.length){sel.innerHTML=V.map(v=>`<option value="${v.c}">${v.c} — ${v.b} ${v.m}</option>`).join('')}
+  const v=V.find(x=>x.c===sel.value);
+  if(!v){document.getElementById('evalCard').innerHTML='<p style="color:var(--tm)">Sélectionnez un véhicule</p>';return}
+  // Calculate eval data
+  const vFu=FU.filter(f=>f.vh===v.c);
+  const totalL=vFu.reduce((s,f)=>s+f.q,0);
+  const totalKm=vFu.reduce((s,f)=>s+(f.km2-f.km1),0);
+  const avgConso=totalKm>0?((totalL/totalKm)*100).toFixed(1):'—';
+  const vMi=MI.filter(m=>m.vh===v.c);
+  const vMt=MT.filter(m=>m.vh===v.c);
+  const mtCost=vMt.reduce((s,m)=>s+m.co,0);
+  const fuelCost=vFu.reduce((s,f)=>s+f.q*f.px,0);
+  const normOk=avgConso!=='—'&&v.nc>0?(parseFloat(avgConso)<=v.nc*1.15?'CONFORME':'HORS NORME'):'—';
+  const normCls=normOk==='CONFORME'?'bg-g':normOk==='HORS NORME'?'bg-r':'bg-t';
+  const dr=v.dr?D.find(d=>d.n===v.dr):null;
+
+  document.getElementById('evalCard').innerHTML=`
+    <div style="display:flex;gap:16px;align-items:center;margin-bottom:16px;padding:16px;background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad)">
+      <div style="width:56px;height:56px;background:var(--b1);color:var(--b6);border-radius:var(--rad);display:grid;place-items:center;flex-shrink:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:28px;height:28px"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+      <div style="flex:1">
+        <div style="font-size:1.1rem;font-weight:700;font-family:'DM Sans',sans-serif">${v.c} — ${v.b} ${v.m}</div>
+        <div style="font-size:.78rem;color:var(--tm)">${v.t} · ${v.pl} · ${v.fu} · ${v.ow==='PROPRE'?'Propriété':'Location'+(v.locEnd?' (fin: '+v.locEnd+')':'')}</div>
+      </div>
+      <div>${sb(v.s)}</div>
+    </div>
+    <div class="eval-grid">
+      <div class="eval-item"><div class="ev-label">Kilométrage</div><div class="ev-val">${fk(v.km)} km</div></div>
+      <div class="eval-item"><div class="ev-label">Km ce mois (août)</div><div class="ev-val">${fk(totalKm)} km</div></div>
+      <div class="eval-item"><div class="ev-label">Conso Réelle</div><div class="ev-val">${avgConso} L/100km</div><div class="ev-sub">Norme: ${v.nc} L/100km</div></div>
+      <div class="eval-item"><div class="ev-label">Conformité Norme</div><div style="margin-top:4px"><span class="bg ${normCls}">${normOk}</span></div></div>
+      <div class="eval-item"><div class="ev-label">Litres Consommés (mois)</div><div class="ev-val">${fk(totalL)} L</div></div>
+      <div class="eval-item"><div class="ev-label">Coût Carburant (mois)</div><div class="ev-val">${fk(Math.round(fuelCost))} DA</div></div>
+      <div class="eval-item"><div class="ev-label">Coût Maintenance (mois)</div><div class="ev-val">${fk(mtCost)} DA</div></div>
+      <div class="eval-item"><div class="ev-label">Missions (total)</div><div class="ev-val">${vMi.length}</div><div class="ev-sub">${vMi.filter(m=>m.s==='EN_COURS').length} en cours</div></div>
+      <div class="eval-item"><div class="ev-label">Pannes</div><div class="ev-val">${v.panneH}h</div><div class="ev-sub">${v.s==='EN_PANNE'?'Actuellement en panne':'Opérationnel'}</div></div>
+      <div class="eval-item"><div class="ev-label">Chauffeur Affecté</div><div class="ev-val" style="font-size:.85rem">${dr?dr.nm:'— Aucun —'}</div></div>
+      <div class="eval-item"><div class="ev-label">CT</div><div style="margin-top:4px">${sb(v.cts)}</div><div class="ev-sub">${v.ct}</div></div>
+      <div class="eval-item"><div class="ev-label">Assurance</div><div style="margin-top:4px">${sb(v.asss)}</div><div class="ev-sub">${v.ass} · ${v.assn}</div></div>
+    </div>`;
+}
+
+function rDocs(){
+  document.getElementById('docTB').innerHTML=V.filter(v=>v.cts!=='N/A'||v.asss!=='N/A').map(v=>{
+    return`<tr><td>${v.c} — ${v.b} ${v.m}</td><td>${sb(v.cts)}</td><td>${v.ct}</td><td>${sb(v.asss)}</td><td>${v.ass}</td><td>${v.assn}</td><td>${v.cg!=='—'?sb('VALIDE'):'—'}</td><td>${v.vi!=='—'?sb('VALIDE'):'—'}</td></tr>`;
+  }).join('');
+}
+
+function rNorms(){
+  document.getElementById('normTB').innerHTML=V.filter(v=>v.no>0).map(v=>{
+    const corr=((v.nc/v.no-1)*100).toFixed(0);
+    const seuil=(v.nc*1.15).toFixed(1);
+    const unit=v.t==='ENGIN'?'L/h':'L/100km';
+    return`<tr><td>${v.b}</td><td>${v.m}</td><td>${v.t}</td><td>${v.fu}</td><td>${v.no} ${unit}</td><td>+${corr}%</td><td>${v.nc} ${unit}</td><td>±15%</td><td>${seuil} ${unit}</td></tr>`;
+  }).join('');
+}
+
+function rDrivers(){
+  document.getElementById('drCount').textContent='Chauffeurs ('+D.length+')';
+  document.getElementById('drTB').innerHTML=D.map(d=>{
+    const fc=d.fat>=.9?'color:var(--r6);font-weight:600':d.fat>=.7?'color:var(--a6)':'color:var(--g6)';
+    const hc=d.hw>=45?'color:var(--r6);font-weight:600':d.hw>=35?'color:var(--a6)':'';
+    const fp=Math.round(d.fat*100);
+    const qs=d.qual.length?d.qual.map(q=>`<span class="bg bg-t" style="margin-right:3px">${q}</span>`).join(''):'—';
+    return`<tr><td>${d.n}</td><td>${d.nm}</td><td>${d.lic}</td><td>${d.lx}</td><td>${qs}</td><td>${sb(d.s)}</td><td style="${hc}">${d.hw}h</td><td>${d.hm}h</td><td><div style="display:flex;align-items:center;gap:6px"><div class="pb" style="width:50px"><div class="pf" style="width:${fp}%;background:${d.fat>=.9?'var(--r5)':d.fat>=.7?'var(--a5)':'var(--g5)'}"></div></div><span style="${fc};font-size:.7rem">${fp}%</span></div></td><td>${d.vh?vhLabel(d.vh):'—'}</td><td>${d.perm?'<span class="bg bg-g">Oui</span>':'<span class="bg bg-a">Non</span>'}</td></tr>`;
+  }).join('');
+}
+function chTab(el,i){el.parentNode.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));el.classList.add('act');document.querySelectorAll('#p-chauffeurs .tpane').forEach((p,j)=>p.classList.toggle('act',j===i))}
+
+function rPlanDr(){
+  const days=['Lun 25','Mar 26','Mer 27','Jeu 28','Ven 29','Sam 30','Dim 31'];
+  const pm={'MIS':['Mission','pt-mis'],'REP':['Repos','pt-rep'],'DIS':['Dispo','pt-dis'],'MNT':['Maint.','pt-mnt'],'FRM':['Formation','pt-frm'],'TRP':['Transp.P','pt-trp']};
+  let h='<div class="plan-h"></div>'+days.map(d=>`<div class="plan-h">${d}</div>`).join('');
+  D.forEach(d=>{
+    const fc=d.fat>=.9?'var(--r6)':d.fat>=.7?'var(--a6)':'var(--g6)';
+    h+=`<div class="plan-n"><span style="width:6px;height:6px;border-radius:50%;background:${fc};flex-shrink:0"></span><div style="line-height:1.2"><div>${d.nm.split(' ')[0]}</div><div style="font-size:.6rem;color:var(--tm)">${d.vh||'—'}</div></div></div>`;
+    d.plan.forEach(p=>{
+      const[l,c]=pm[p.t]||['?','pt-dis'];
+      const hrs=p.h1&&p.h2?`<div class="plan-hrs">${p.h1}–${p.h2}</div>`:'';
+      h+=`<div class="plan-c"><span class="plan-tag ${c}">${l}</span>${hrs}</div>`;
+    });
+  });
+  document.getElementById('planDr').innerHTML=h;
+}
+
+function rMissions(){
+  // Filter bar
+  const counts={all:MI.length,EC:MI.filter(m=>m.s==='EN_COURS').length,PL:MI.filter(m=>m.s==='PLANIFIEE').length,TE:MI.filter(m=>m.s==='TERMINEE'||m.s==='CLOTUREE').length};
+  document.getElementById('miFilter').innerHTML=`
+    <button class="fc act" onclick="fMi(this,'all')">Toutes (${counts.all})</button>
+    <button class="fc" onclick="fMi(this,'EN_COURS')">En Cours (${counts.EC})</button>
+    <button class="fc" onclick="fMi(this,'PLANIFIEE')">Planifiées (${counts.PL})</button>
+    <button class="fc" onclick="fMi(this,'done')">Terminées (${counts.TE})</button>
+    <div style="flex:1"></div>
+    <button class="btn btn-p" onclick="openModal('addMission')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvelle Mission</button>`;
+  rMiList(MI);
+}
+function fMi(el,f){
+  el.parentNode.querySelectorAll('.fc').forEach(c=>c.classList.remove('act'));el.classList.add('act');
+  const d=f==='all'?MI:f==='done'?MI.filter(m=>m.s==='TERMINEE'||m.s==='CLOTUREE'):MI.filter(m=>m.s===f);
+  rMiList(d);
+}
+function rMiList(list){
+  document.getElementById('miList').innerHTML=list.map(m=>`<div class="mc" onclick="openModal('missionDetail',MI.find(x=>x.n==='${m.n}'))" style="cursor:pointer">
+    <div style="min-width:100px"><div style="font-weight:600;font-size:.78rem">${m.n}</div><div style="font-size:.68rem;color:var(--tm)">${m.dateD} ${m.heureD}</div><div style="font-size:.68rem;color:var(--tm)">→ ${m.dateF} ${m.heureF}</div></div>
+    <div style="flex:1;min-width:0"><div style="font-size:.78rem;font-weight:500;color:var(--tp)">${m.fr}</div><div style="font-size:.7rem;color:var(--tm)">→ ${m.to}</div></div>
+    <div class="mm">
+      <div><div class="mml">Chauffeur</div><div class="mmv">${drName(m.dr)}</div></div>
+      <div><div class="mml">Véhicule</div><div class="mmv">${m.vh}</div></div>
+      <div><div class="mml">Distance</div><div class="mmv">${fk(m.d)} km</div></div>
+      <div><div class="mml">Zone</div><div class="mmv">${m.z}</div></div>
+      <div>${sb(m.s)}</div>
+      ${m.s!=='CLOTUREE'?`<button class="btn btn-sm ${m.s==='PLANIFIEE'?'btn-p':m.s==='EN_COURS'?'btn-g':'btn-o'}" onclick="event.stopPropagation();changeMissionStatus('${m.n}','${m.s==='PLANIFIEE'?'EN_COURS':m.s==='EN_COURS'?'TERMINEE':'CLOTUREE'}')">${m.s==='PLANIFIEE'?'Démarrer':m.s==='EN_COURS'?'Terminer':'Clôturer'}</button>`:''}
+    </div>
+  </div>`).join('');
+}
+
+function rPlanVh(){
+  const days=['Lun 25','Mar 26','Mer 27','Jeu 28','Ven 29','Sam 30','Dim 31'];
+  const vPlan=[
+    {c:'FL-001',p:['DIS','DIS','MIS','MIS','DIS','DIS','DIS']},
+    {c:'FL-002',p:['MIS','MIS','DIS','DIS','MNT','DIS','DIS']},
+    {c:'FL-003',p:['MIS','MIS','DIS','DIS','MIS','MIS','DIS']},
+    {c:'FL-005',p:['MIS','MIS','MIS','DIS','DIS','DIS','DIS']},
+    {c:'FL-010',p:['DIS','MIS','MIS','DIS','DIS','MIS','DIS']},
+    {c:'FL-018',p:['PAN','PAN','PAN','MNT','MNT','DIS','DIS']},
+    {c:'FL-025',p:['MIS','DIS','DIS','DIS','DIS','MIS','DIS']},
+    {c:'FL-055',p:['MIS','MIS','MIS','MIS','DIS','DIS','DIS']}
+  ];
+  const pm={'MIS':['Mission','pt-mis'],'DIS':['Dispo','pt-dis'],'MNT':['Maint.','pt-mnt'],'PAN':['Panne','background:var(--r1);color:var(--r6)']};
+  let h='<div class="plan-h"></div>'+days.map(d=>`<div class="plan-h">${d}</div>`).join('');
+  vPlan.forEach(v=>{
+    const vd=V.find(x=>x.c===v.c);
+    h+=`<div class="plan-n">${v.c}<br><span style="font-size:.6rem;color:var(--tm)">${vd?vd.b:'?'}</span></div>`;
+    v.p.forEach(p=>{const[l,c]=pm[p]||['?','pt-dis'];
+      const st=c.startsWith('background')?c:undefined;
+      h+=`<div class="plan-c"><span class="plan-tag ${st?'':c}" ${st?`style="${st}"`:''} >${l}</span></div>`});
+  });
+  document.getElementById('planVh').innerHTML=h;
+}
+function plTab(el,i){el.parentNode.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));el.classList.add('act');document.querySelectorAll('#p-planification .tpane').forEach((p,j)=>p.classList.toggle('act',j===i))}
+
+function runSelection(){
+  const type=document.getElementById('selType').value;
+  const cargo=document.getElementById('selCargo').value;
+  // Get weights from config
+  const wF=document.getElementById('cfgFat').checked?parseInt(document.getElementById('wFat').value):0;
+  const wH=document.getElementById('cfgHrs').checked?parseInt(document.getElementById('wHrs').value):0;
+  const wQ=document.getElementById('cfgQual').checked?parseInt(document.getElementById('wQual').value):0;
+  const wK=document.getElementById('cfgKm').checked?parseInt(document.getElementById('wKm').value):0;
+  const wD=document.getElementById('cfgDoc').checked?parseInt(document.getElementById('wDoc').value):0;
+  const wC=document.getElementById('cfgConso').checked?parseInt(document.getElementById('wConso').value):0;
+  const totalW=wF+wH+wQ+wK+wD+wC||1;
+
+  const reqLic=type==='LOURD'?['C','C+E']:type==='ENGIN'?['C','C+E']:['B','C','C+E','D'];
+  const drS=D.filter(d=>(d.s==='DISPONIBLE'||d.s==='EN_REPOS')&&reqLic.includes(d.lic)).map(d=>{
+    let sc=100;
+    if(wF)sc-=(d.fat*(wF/totalW)*100);
+    if(wH)sc-=((d.hw/48)*(wH/totalW)*100);
+    if(wQ){
+      if(cargo==='ADR (mat. dangereuses)'&&d.qual.includes('ADR'))sc+=(wQ/totalW)*50;
+      else if(cargo==='Frigorifique'&&d.qual.includes('Frigo'))sc+=(wQ/totalW)*50;
+      else if(cargo==='Citerne'&&d.qual.includes('Citerne'))sc+=(wQ/totalW)*50;
+      else if(cargo!=='Non')sc-=(wQ/totalW)*80;
+    }
+    if(d.hw>=45)sc-=20;
+    return{d,sc:Math.max(0,Math.min(100,Math.round(sc)))};
+  }).sort((a,b)=>b.sc-a.sc);
+
+  const vhS=V.filter(v=>v.s==='DISPONIBLE'&&v.t===type).map(v=>{
+    let sc=100;
+    if(wK)sc-=(v.km/500000)*(wK/totalW)*100;
+    if(wC&&v.nc>0){const vFu=FU.filter(f=>f.vh===v.c);if(vFu.length){const tkm=vFu.reduce((s,f)=>s+(f.km2-f.km1),0);const tl=vFu.reduce((s,f)=>s+f.q,0);if(tkm>0){const rc=(tl/tkm)*100;sc-=Math.max(0,(rc-v.nc)/v.nc)*(wC/totalW)*100}}}
+    if(wD){if(v.cts==='EXPIRE'||v.asss==='EXPIRE')sc-=(wD/totalW)*100}
+    if(v.ow==='PROPRE')sc+=3;
+    return{v,sc:Math.max(0,Math.min(100,Math.round(sc)))};
+  }).sort((a,b)=>b.sc-a.sc);
+
+  const scCls=s=>s>=70?'score-hi':s>=40?'score-md':'score-lo';
+  const cfgLabel=`Poids: Fatigue(${wF}) Heures(${wH}) Qualif(${wQ}) Km(${wK}) Docs(${wD}) Conso(${wC})`;
+  document.getElementById('selRes').innerHTML=`
+    <div class="sel-card"><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Chauffeurs Recommandés</h4>
+    <div style="font-size:.65rem;color:var(--tm);margin-bottom:8px">${cfgLabel}</div>
+    ${drS.length?drS.map((x,i)=>`<div class="sel-row"><div style="min-width:0"><span style="font-weight:600;color:var(--tp)">${i+1}. ${x.d.nm}</span><div style="font-size:.7rem;color:var(--tm)">Permis ${x.d.lic} · ${x.d.hw}h/sem · Fatigue ${Math.round(x.d.fat*100)}%${x.d.qual.length?' · '+x.d.qual.join(', '):''}${x.d.vh?' · VH: '+x.d.vh+' '+(x.d.perm?'(perm)':'(temp)'):''}</div></div><span class="sel-score ${scCls(x.sc)}">${x.sc}/100</span></div>`).join(''):'<div style="padding:12px;font-size:.8rem;color:var(--tm)">Aucun chauffeur disponible</div>'}
+    </div>
+    <div class="sel-card"><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg> Véhicules Recommandés</h4>
+    <div style="font-size:.65rem;color:var(--tm);margin-bottom:8px">${cfgLabel}</div>
+    ${vhS.length?vhS.map((x,i)=>`<div class="sel-row"><div style="min-width:0"><span style="font-weight:600;color:var(--tp)">${i+1}. ${x.v.c} — ${x.v.b} ${x.v.m}</span><div style="font-size:.7rem;color:var(--tm)">${fk(x.v.km)} km · ${x.v.no} L/100 · ${x.v.ow}</div></div><span class="sel-score ${scCls(x.sc)}">${x.sc}/100</span></div>`).join(''):'<div style="padding:12px;font-size:.8rem;color:var(--tm)">Aucun véhicule disponible</div>'}
+    </div>`;
+}
+
+function rMaint(){
+  document.getElementById('mtTB').innerHTML=MT.map(o=>`<tr>
+    <td>${o.n}</td><td>${o.vh}</td><td><span class="bg ${o.t==='PERIODIQUE'?'bg-b':'bg-r'}">${o.t}</span></td>
+    <td>${o.ti}</td><td>${sb(o.pr)}</td><td>${sb(o.s)}</td>
+    <td>${fk(o.pi)}</td><td>${fk(o.mo)}</td>
+    <td style="font-weight:600">${fk(o.co)} DA</td><td>${o.dt}</td>
+  </tr>`).join('');
+}
+
+function rFuel(){
+  document.getElementById('fuTB').innerHTML=FU.map(f=>{
+    const dist=f.km2-f.km1;
+    const conso=dist>0?((f.q/dist)*100).toFixed(1):'-';
+    const ecart=dist>0&&f.no>0?((parseFloat(conso)-f.no)/f.no*100).toFixed(0):'-';
+    const ec=parseFloat(ecart);
+    const ecCls=ec>15?'color:var(--r6);font-weight:600':ec>0?'color:var(--a6)':'color:var(--g6)';
+    return`<tr>
+      <td>${f.dt}</td><td>${f.vh}</td><td>${drName(f.dr)}</td>
+      <td><span class="bg ${f.ty==='GASOIL'?'bg-b':'bg-a'}">${f.ty}</span></td>
+      <td>${f.q} L</td><td>${f.px.toFixed(2)}</td><td style="font-weight:500">${fk(Math.round(f.q*f.px))}</td>
+      <td>${fk(f.km2)}</td><td>${fk(f.km1)}</td><td>${fk(dist)}</td>
+      <td>${f.rb} L</td><td style="font-weight:600">${conso}</td><td>${f.no}</td>
+      <td style="${ecCls}">${ecart!=='-'?(ec>0?'+':'')+ecart+'%':'-'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function rFuelEng(){
+  document.getElementById('fuEngTB').innerHTML=FUE.map(f=>{
+    const hrs=f.h2-f.h1;
+    const consoH=hrs>0?(f.q/hrs).toFixed(1):'-';
+    const ecart=hrs>0&&f.noH>0?((parseFloat(consoH)-f.noH)/f.noH*100).toFixed(0):'-';
+    const ec=parseFloat(ecart);
+    const ecCls=ec>15?'color:var(--r6);font-weight:600':ec>0?'color:var(--a6)':'color:var(--g6)';
+    return`<tr>
+      <td>${f.dt}</td><td>${f.vh}</td><td>${f.op}</td>
+      <td>${f.q} L</td><td>${f.px.toFixed(2)}</td><td style="font-weight:500">${fk(Math.round(f.q*f.px))}</td>
+      <td>${fk(f.h2)}</td><td>${fk(f.h1)}</td><td>${hrs}h</td>
+      <td style="font-weight:600">${consoH} L/h</td><td>${f.noH} L/h</td>
+      <td style="${ecCls}">${ecart!=='-'?(ec>0?'+':'')+ecart+'%':'-'}</td>
+    </tr>`;
+  }).join('');
+}
+function caTab(el,i){el.parentNode.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));el.classList.add('act');document.querySelectorAll('#p-carburant .tpane').forEach((p,j)=>p.classList.toggle('act',j===i))}
+
+function rVerif(){
+  document.getElementById('verTB').innerHTML=VER.map(v=>{
+    const cr=v.kmMis>0?((v.l/v.kmMis)*100).toFixed(1):'—';
+    const ec=v.kmMis>0&&v.no>0?((parseFloat(cr)-v.no)/v.no*100).toFixed(0):'—';
+    const la=v.kmMis>0?((v.no/100)*v.kmMis).toFixed(0):'—';
+    const diff=v.l-parseFloat(la);
+    const ecN=parseFloat(ec);
+    const verd=ecN>15?'bg-r':ecN>5?'bg-a':'bg-g';
+    const verdT=ecN>15?'ANOMALIE':ecN>5?'À SURVEILLER':'CONFORME';
+    return`<tr>
+      <td>${v.vh} — ${v.b}</td>
+      <td style="font-weight:600">${fk(v.kmMis)}</td>
+      <td style="font-weight:600">${v.l} L</td>
+      <td style="font-weight:600">${cr}</td><td>${v.no}</td>
+      <td style="${ecN>15?'color:var(--r6);font-weight:600':ecN>5?'color:var(--a6)':'color:var(--g6)'}">${ec!=='—'?(ecN>0?'+':'')+ec+'%':'—'}</td>
+      <td>${la} L</td>
+      <td style="${diff>0?'color:var(--r6);font-weight:600':'color:var(--g6)'}">${diff>0?'+':''}${diff.toFixed(0)} L</td>
+      <td><span class="bg ${verd}">${verdT}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function rAnomalies(){
+  // Vehicles/equipment with consumption issues
+  const anomV=[];
+  V.filter(v=>v.no>0).forEach(v=>{
+    const vFu=FU.filter(f=>f.vh===v.c);
+    if(vFu.length){
+      const tkm=vFu.reduce((s,f)=>s+(f.km2-f.km1),0);const tl=vFu.reduce((s,f)=>s+f.q,0);
+      if(tkm>0){const rc=(tl/tkm)*100;const ec=((rc-v.nc)/v.nc*100);if(ec>5)anomV.push({vh:v.c+' — '+v.b+' '+v.m,rc:rc.toFixed(1),nc:v.nc,ec:ec.toFixed(0),type:'véhicule'})}
+    }
+  });
+  // Equipment by hours
+  V.filter(v=>v.t==='ENGIN'&&v.ncH).forEach(v=>{
+    const eFu=FUE.filter(f=>f.vh===v.c);
+    if(eFu.length){
+      const th=eFu.reduce((s,f)=>s+(f.h2-f.h1),0);const tl=eFu.reduce((s,f)=>s+f.q,0);
+      if(th>0){const rc=tl/th;const ec=((rc-v.ncH)/v.ncH*100);if(ec>5)anomV.push({vh:v.c+' — '+v.b+' '+v.m,rc:rc.toFixed(1),nc:v.ncH,ec:ec.toFixed(0),type:'engin (L/h)'})}
+    }
+  });
+  document.getElementById('anomVh').innerHTML=anomV.length?anomV.sort((a,b)=>parseFloat(b.ec)-parseFloat(a.ec)).map(a=>`<div class="ai" style="margin-bottom:4px">
+    <div class="ak dg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
+    <div style="flex:1"><div class="at">${a.vh}</div><div class="ad">Réel: ${a.rc} vs Norme: ${a.nc} · Écart: <strong style="color:var(--r6)">+${a.ec}%</strong> · Type: ${a.type}</div></div>
+  </div>`).join(''):'<p style="font-size:.8rem;color:var(--tm);padding:12px">Aucune anomalie détectée</p>';
+
+  // Drivers with high consumption on their missions
+  const anomD=[];
+  D.forEach(d=>{
+    const dFu=FU.filter(f=>f.dr===d.n);
+    if(dFu.length>=2){
+      const avgEc=dFu.map(f=>{const dist=f.km2-f.km1;if(dist<=0||f.no<=0)return 0;return(((f.q/dist)*100)-f.no)/f.no*100}).filter(x=>x>0);
+      if(avgEc.length){const moy=avgEc.reduce((s,x)=>s+x,0)/avgEc.length;if(moy>5)anomD.push({nm:d.nm,n:d.n,ec:moy.toFixed(0),count:dFu.length})}
+    }
+  });
+  document.getElementById('anomDr').innerHTML=anomD.length?anomD.sort((a,b)=>parseFloat(b.ec)-parseFloat(a.ec)).map(a=>`<div class="ai" style="margin-bottom:4px">
+    <div class="ak wr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+    <div style="flex:1"><div class="at">${a.nm} (${a.n})</div><div class="ad">Écart moyen: <strong style="color:var(--a6)">+${a.ec}%</strong> sur ${a.count} pleins</div></div>
+  </div>`).join(''):'<p style="font-size:.8rem;color:var(--tm);padding:12px">Aucun chauffeur à surveiller</p>';
+}
+
+function rAlerts(cat){
+  const d=cat&&cat!=='all'?AL.filter(a=>a.cat===cat):AL;
+  document.getElementById('alFilter').innerHTML=`
+    <button class="fc ${!cat||cat==='all'?'act':''}" onclick="fAl(this,'all')">Toutes (${AL.length})</button>
+    <button class="fc ${cat==='doc'?'act':''}" onclick="fAl(this,'doc')">Documents</button>
+    <button class="fc ${cat==='ass'?'act':''}" onclick="fAl(this,'ass')">Assurances</button>
+    <button class="fc ${cat==='loc'?'act':''}" onclick="fAl(this,'loc')">Location</button>
+    <button class="fc ${cat==='mnt'?'act':''}" onclick="fAl(this,'mnt')">Maintenance</button>
+    <button class="fc ${cat==='carb'?'act':''}" onclick="fAl(this,'carb')">Carburant</button>
+    <button class="fc ${cat==='chauf'?'act':''}" onclick="fAl(this,'chauf')">Chauffeurs</button>`;
+  document.getElementById('alList').innerHTML=d.map(a=>`<div class="ai">
+    <div class="ak ${a.ty}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${
+      a.ty==='dg'?'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
+      :a.ty==='wr'?'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+      :'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>'
+    }</svg></div>
+    <div style="flex:1"><div class="at">${a.ti}</div><div class="ad">${a.ds}</div></div>
+    <span class="atm">${a.tm}</span>
+    <div style="display:flex;flex-direction:column;gap:3px;flex-shrink:0;align-items:flex-end">
+      <span class="bg bg-t" style="font-size:.6rem">${a.cat.toUpperCase()}</span>
+      ${sb(a.pr)}
+    </div>
+  </div>`).join('');
+}
+function fAl(el,c){rAlerts(c)}
+
+function rDashAlerts(){
+  document.getElementById('dashAlerts').innerHTML=AL.filter(a=>a.pr==='CRITIQUE'||a.pr==='HAUTE').slice(0,5).map(a=>`<div class="ai" style="padding:10px 12px">
+    <div class="ak ${a.ty}" style="width:26px;height:26px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px">${a.ty==='dg'?'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>':a.ty==='wr'?'<circle cx="12" cy="12" r="10"/>':'<circle cx="12" cy="12" r="10"/>'}</svg></div>
+    <div style="flex:1"><div class="at" style="font-size:.75rem">${a.ti}</div></div>
+    <span class="atm">${a.tm}</span>
+    ${sb(a.pr)}
+  </div>`).join('');
+}
+
+function rRapKPI(){
+  document.getElementById('rapKPI').innerHTML=`
+    <div class="sc"><div><div class="sv">87%</div><div class="sl">Taux Utilisation Flotte</div><div class="st up">+3% vs mois dernier</div></div><div class="si gn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div>
+    <div class="sc"><div><div class="sv">4,12M</div><div class="sl">Coût Total Opérations (DA)</div><div class="st dn">Maintenance 31% · Carburant 69%</div></div><div class="si am"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div></div>
+    <div class="sc"><div><div class="sv">38,2</div><div class="sl">H/Sem Moyenne Chauffeurs</div><div class="st up">Sous seuil fatigue (48h)</div></div><div class="si tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div>
+    <div class="sc"><div><div class="sv">${MI.filter(m=>m.s==='TERMINEE'||m.s==='CLOTUREE').length}</div><div class="sl">Missions Terminées</div><div class="st up">98,2% taux réussite</div></div><div class="si bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg></div></div>`;
+}
+
+// ══════════ NAV ══════════
+function nav(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));
+  document.getElementById('p-'+p).classList.add('active');
+  const b=document.querySelector(`.nav-i[data-p="${p}"]`);if(b)b.classList.add('active');
+  const t={dashboard:'Tableau de Bord',flotte:'Flotte',chauffeurs:'Chauffeurs',missions:'Missions',planification:'Planification',maintenance:'Maintenance',carburant:'Carburant',alertes:'Alertes',rapports:'Rapports'};
+  document.getElementById('pT').textContent=t[p]||p;
+  document.getElementById('pB').textContent=t[p]||p;
+  document.getElementById('sb').classList.remove('open');
+  document.getElementById('ov').classList.remove('vis');
+}
+function tgSb(){document.getElementById('sb').classList.toggle('open');document.getElementById('ov').classList.toggle('vis')}
+document.querySelectorAll('.nav-i').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.p)));
+
+// ══════════ CHARTS ══════════
+function gc(p){return getComputedStyle(document.documentElement).getPropertyValue(p).trim()}
+function drawBar(cid,tid,labels,datasets,unit){
+  const cv=document.getElementById(cid);if(!cv)return;const ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
+  const rect=cv.parentElement.getBoundingClientRect();
+  const W=rect.width,H=parseInt(cv.getAttribute('height'));
+  cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';ctx.scale(dpr,dpr);
+  const pad={top:14,right:14,bottom:32,left:52},cW=W-pad.left-pad.right,cH=H-pad.top-pad.bottom;
+  const allV=datasets.flatMap(d=>d.v);const mx=Math.ceil(Math.max(...allV)*1.1/10)*10||100;
+  const tm=gc('--tm'),bl=gc('--bl');
+  for(let i=0;i<=4;i++){const y=pad.top+cH-(i/4)*cH;const v=Math.round((i/4)*mx);
+    ctx.strokeStyle=bl;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(W-pad.right,y);ctx.stroke();
+    ctx.fillStyle=tm;ctx.font='10px Inter,sans-serif';ctx.textAlign='right';ctx.fillText(v.toLocaleString('fr-FR'),pad.left-6,y+3)}
+  const gW=cW/labels.length,bW=Math.min(20,(gW-10)/datasets.length),gap=2,bp=[];
+  datasets.forEach((ds,di)=>{const col=gc(ds.c);labels.forEach((l,li)=>{
+    const x=pad.left+li*gW+(gW-bW*datasets.length-gap*(datasets.length-1))/2+di*(bW+gap);
+    const h=(ds.v[li]/mx)*cH,y=pad.top+cH-h;
+    ctx.fillStyle=col;ctx.beginPath();ctx.roundRect(x,y,bW,h,[4,4,0,0]);ctx.fill();
+    bp.push({x,y,w:bW,h,label:l,value:ds.v[li],series:ds.l,color:col})})});
+  ctx.fillStyle=tm;ctx.font='10px Inter,sans-serif';ctx.textAlign='center';
+  labels.forEach((l,i)=>ctx.fillText(l,pad.left+i*gW+gW/2,H-pad.bottom+16));
+  const tip=document.getElementById(tid);if(!tip)return;
+  cv.onmousemove=e=>{const r=cv.getBoundingClientRect(),mx2=e.clientX-r.left,my=e.clientY-r.top;
+    const hit=bp.find(b=>mx2>=b.x&&mx2<=b.x+b.w&&my>=b.y&&my<=b.y+b.h);
+    if(hit){tip.innerHTML=`<div class="tip-t">${hit.label}</div><div class="tip-r"><span class="d" style="background:${hit.color}"></span>${hit.series}<span class="tip-v">${hit.value.toLocaleString('fr-FR')}${unit?' '+unit:''}</span></div>`;
+      tip.classList.add('vis');tip.style.left=(hit.x+hit.w/2-50)+'px';tip.style.top=(hit.y-55)+'px'}else tip.classList.remove('vis')};
+  cv.onmouseleave=()=>tip.classList.remove('vis');
+}
+function drawLine(cid,tid,labels,datasets,unit){
+  const cv=document.getElementById(cid);if(!cv)return;const ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
+  const rect=cv.parentElement.getBoundingClientRect();
+  const W=rect.width,H=parseInt(cv.getAttribute('height'));
+  cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';ctx.scale(dpr,dpr);
+  const pad={top:14,right:40,bottom:32,left:48},cW=W-pad.left-pad.right,cH=H-pad.top-pad.bottom;
+  const allV=datasets.flatMap(d=>d.v);const mx=Math.ceil(Math.max(...allV)*1.15);
+  const tm=gc('--tm'),bl=gc('--bl'),sf=gc('--sc');
+  for(let i=0;i<=4;i++){const y=pad.top+cH-(i/4)*cH;const v=((i/4)*mx).toFixed(1);
+    ctx.strokeStyle=bl;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(W-pad.right,y);ctx.stroke();
+    ctx.fillStyle=tm;ctx.font='10px Inter,sans-serif';ctx.textAlign='right';ctx.fillText(v,pad.left-6,y+3)}
+  ctx.fillStyle=tm;ctx.textAlign='center';labels.forEach((l,i)=>{const x=pad.left+(i/(labels.length-1))*cW;ctx.fillText(l,x,H-pad.bottom+16)});
+  datasets.forEach(ds=>{const col=gc(ds.c);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.lineJoin='round';ctx.lineCap='round';
+    ctx.beginPath();labels.forEach((_,i)=>{const x=pad.left+(i/(labels.length-1))*cW,y=pad.top+cH-(ds.v[i]/mx)*cH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+    ctx.lineTo(pad.left+cW,pad.top+cH);ctx.lineTo(pad.left,pad.top+cH);ctx.closePath();
+    ctx.fillStyle=col.replace(')',', 0.08)').replace('rgb','rgba');ctx.fill();
+    ctx.beginPath();labels.forEach((_,i)=>{const x=pad.left+(i/(labels.length-1))*cW,y=pad.top+cH-(ds.v[i]/mx)*cH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});ctx.strokeStyle=col;ctx.stroke();
+    const li=labels.length-1,ex=pad.left+cW,ey=pad.top+cH-(ds.v[li]/mx)*cH;
+    ctx.beginPath();ctx.arc(ex,ey,5,0,Math.PI*2);ctx.fillStyle=sf;ctx.fill();ctx.beginPath();ctx.arc(ex,ey,3,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+    ctx.fillStyle=gc('--tp');ctx.font='600 10px DM Sans,sans-serif';ctx.textAlign='left';ctx.fillText(ds.v[li].toFixed(1),ex+8,ey+3)});
+}
+function drawPie(){
+  const cv=document.getElementById('chPie');if(!cv)return;const ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
+  cv.width=180*dpr;cv.height=180*dpr;ctx.scale(dpr,dpr);
+  const tc={LEGER:0,LOURD:0,ENGIN:0,REMORQUE:0};V.forEach(v=>tc[v.t]=(tc[v.t]||0)+1);
+  const data=[{l:'Léger',v:tc.LEGER,c:gc('--c1')},{l:'Lourd',v:tc.LOURD,c:gc('--c2')},{l:'Engin',v:tc.ENGIN,c:gc('--c3')},{l:'Remorque',v:tc.REMORQUE,c:gc('--c4')}];
+  const total=data.reduce((s,d)=>s+d.v,0),cx=90,cy=90,r=72,ir=44,sf=gc('--sc');
+  let angle=-Math.PI/2;
+  data.forEach(d=>{const sl=(d.v/total)*Math.PI*2,ga=.02;ctx.beginPath();ctx.arc(cx,cy,r,angle+ga,angle+sl-ga);ctx.arc(cx,cy,ir,angle+sl-ga,angle+ga,true);ctx.closePath();ctx.fillStyle=d.c;ctx.fill();angle+=sl});
+  ctx.beginPath();ctx.arc(cx,cy,ir-1,0,Math.PI*2);ctx.fillStyle=sf;ctx.fill();
+  ctx.fillStyle=gc('--tp');ctx.font='700 22px DM Sans,sans-serif';ctx.textAlign='center';ctx.fillText(total,cx,cy+2);
+  ctx.fillStyle=gc('--tm');ctx.font='10px Inter,sans-serif';ctx.fillText('véhicules',cx,cy+16);
+  document.getElementById('pieL').innerHTML=data.map(d=>{const p=Math.round(d.v/total*100);
+    return`<div class="li"><span class="ld" style="background:${d.c}"></span><span style="min-width:60px">${d.l}</span><span style="font-variant-numeric:tabular-nums;font-weight:600;color:var(--tp)">${d.v}</span><span style="color:var(--tm);margin-left:3px">(${p}%)</span></div>`}).join('');
+}
+function initCharts(){
+  const mo=['Mars','Avr','Mai','Juin','Juil','Août'];
+  drawBar('chDash','tipD',mo,[{l:'Maintenance',v:[620,480,750,580,890,1284],c:'--c1'},{l:'Carburant',v:[2400,2680,2520,2750,2900,2840],c:'--c2'}],'K DA');
+  drawPie();
+  drawLine('chCons','tipC',mo,[{l:'Réel Flotte',v:[9.8,10.1,9.5,9.7,9.4,9.2],c:'--c1'},{l:'Norme Corrigée',v:[8.5,8.5,8.5,8.5,8.5,8.5],c:'--c3'}],'L/100km');
+  drawBar('chRap1','tipR1',mo,[{l:'Carburant',v:[2400,2680,2520,2750,2900,2840],c:'--c1'},{l:'Maintenance',v:[620,480,750,580,890,1284],c:'--c2'},{l:'Location',v:[380,380,380,420,420,420],c:'--c3'}],'K DA');
+  drawBar('chRap2','tipR2',['Benmoussa','Boudiaf','Tounsi','Hadj Ali','Benali','Slimani','Khelifi','Mebarki'],[{l:'Missions',v:[8,7,6,6,5,5,4,3],c:'--c1'}],'');
+}
+
+// ══════════ INIT ══════════
+rDashKPI();rFlFilter();rFleet();rDocs();rNorms();rDrivers();rPlanDr();rMissions();rPlanVh();rMaint();rFuel();rFuelEng();rVerif();rAnomalies();rAlerts();rDashAlerts();rRapKPI();
+initCharts();runSelection();
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(initCharts,200)});
+</script>

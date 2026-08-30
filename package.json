@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  },
+  "dependencies": {
+    "acorn": "^8.18.0",
+    "leaflet": "^1.9.4"
+  }
+}

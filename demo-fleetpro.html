@@ -1,0 +1,1289 @@
+<title>FleetPro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600&display=swap">
+
+<style>
+/* ── Tokens ── */
+:root {
+  --surface-0: #f1f4f9;
+  --surface-1: #ffffff;
+  --surface-2: #e8ecf3;
+  --surface-card: #ffffff;
+  --border: #dce1ea;
+  --border-light: #e8ecf3;
+
+  --text-primary: #0f1a2e;
+  --text-secondary: #4a5578;
+  --text-muted: #8892a8;
+  --text-inverse: #ffffff;
+
+  --brand-600: #1e40af;
+  --brand-500: #2563eb;
+  --brand-100: #dbeafe;
+  --brand-50: #eff6ff;
+
+  --teal-600: #0d7377;
+  --teal-500: #0d9488;
+  --teal-100: #ccfbf1;
+
+  --amber-600: #b45309;
+  --amber-500: #d97706;
+  --amber-100: #fef3c7;
+
+  --red-600: #b91c1c;
+  --red-500: #dc2626;
+  --red-100: #fee2e2;
+
+  --green-600: #15803d;
+  --green-500: #16a34a;
+  --green-100: #dcfce7;
+
+  /* dataviz categorical — validated */
+  --cat-1: #2a78d6;
+  --cat-2: #eb6834;
+  --cat-3: #1baf7a;
+  --cat-4: #eda100;
+
+  --sidebar-w: 260px;
+  --header-h: 64px;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow-card: 0 1px 3px rgba(15,26,46,.06), 0 1px 2px rgba(15,26,46,.04);
+  --shadow-elevated: 0 4px 16px rgba(15,26,46,.08), 0 1px 3px rgba(15,26,46,.05);
+  --transition: 220ms cubic-bezier(.4,0,.2,1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-0: #0c1220;
+    --surface-1: #131b2e;
+    --surface-2: #1a2540;
+    --surface-card: #161f35;
+    --border: #243049;
+    --border-light: #1e2a44;
+    --text-primary: #e8ecf3;
+    --text-secondary: #94a1be;
+    --text-muted: #5e6d8a;
+    --text-inverse: #0f1a2e;
+    --brand-600: #3b82f6;
+    --brand-500: #60a5fa;
+    --brand-100: #1e3a5f;
+    --brand-50: #172554;
+    --teal-600: #2dd4bf;
+    --teal-500: #5eead4;
+    --teal-100: #0f2d2a;
+    --amber-600: #fbbf24;
+    --amber-500: #fcd34d;
+    --amber-100: #2d2305;
+    --red-600: #f87171;
+    --red-500: #fca5a5;
+    --red-100: #2d0e0e;
+    --green-600: #4ade80;
+    --green-500: #86efac;
+    --green-100: #0d2818;
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+    --cat-4: #c98500;
+    --shadow-card: 0 1px 3px rgba(0,0,0,.25);
+    --shadow-elevated: 0 4px 16px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --surface-0: #0c1220;
+  --surface-1: #131b2e;
+  --surface-2: #1e2a44;
+  --surface-card: #161f35;
+  --border: #243049;
+  --border-light: #1e2a44;
+  --text-primary: #e8ecf3;
+  --text-secondary: #94a1be;
+  --text-muted: #5e6d8a;
+  --text-inverse: #0f1a2e;
+  --brand-600: #3b82f6;
+  --brand-500: #60a5fa;
+  --brand-100: #1e3a5f;
+  --brand-50: #172554;
+  --teal-600: #2dd4bf;
+  --teal-500: #5eead4;
+  --teal-100: #0f2d2a;
+  --amber-600: #fbbf24;
+  --amber-500: #fcd34d;
+  --amber-100: #2d2305;
+  --red-600: #f87171;
+  --red-500: #fca5a5;
+  --red-100: #2d0e0e;
+  --green-600: #4ade80;
+  --green-500: #86efac;
+  --green-100: #0d2818;
+  --cat-1: #3987e5;
+  --cat-2: #d95926;
+  --cat-3: #199e70;
+  --cat-4: #c98500;
+  --shadow-card: 0 1px 3px rgba(0,0,0,.25);
+  --shadow-elevated: 0 4px 16px rgba(0,0,0,.35);
+}
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 { font-family: 'DM Sans', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.1rem; }
+
+/* ── Layout Shell ── */
+.app { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--surface-1);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 40;
+  transition: transform var(--transition);
+}
+.sidebar-header {
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+.sidebar-logo {
+  width: 36px; height: 36px;
+  background: var(--brand-500);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.sidebar-logo svg { width: 20px; height: 20px; color: #fff; }
+.sidebar-brand { font-family: 'DM Sans', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text-primary); }
+.sidebar-brand span { color: var(--brand-500); }
+
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: .875rem; font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: none; background: none; width: 100%; text-align: left;
+}
+.nav-item:hover { background: var(--surface-2); color: var(--text-primary); }
+.nav-item.active { background: var(--brand-50); color: var(--brand-600); }
+.nav-item svg { width: 20px; height: 20px; flex-shrink: 0; opacity: .7; }
+.nav-item.active svg { opacity: 1; }
+
+.nav-section { font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); padding: 18px 14px 6px; }
+
+.sidebar-footer {
+  padding: 16px 18px;
+  border-top: 1px solid var(--border-light);
+  display: flex; align-items: center; gap: 10px;
+}
+.avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--brand-100);
+  color: var(--brand-600);
+  display: grid; place-items: center;
+  font-size: .75rem; font-weight: 600;
+  flex-shrink: 0;
+}
+.user-info { min-width: 0; }
+.user-name { font-size: .8125rem; font-weight: 600; color: var(--text-primary); }
+.user-role { font-size: .7rem; color: var(--text-muted); }
+
+/* Main */
+.main { flex: 1; margin-left: var(--sidebar-w); min-height: 100vh; }
+
+/* Header */
+.header {
+  height: var(--header-h);
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  position: sticky; top: 0; z-index: 30;
+}
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-left h1 { font-size: 1.15rem; }
+.breadcrumb { font-size: .8rem; color: var(--text-muted); }
+.breadcrumb span { color: var(--text-secondary); }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-btn {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+}
+.header-btn:hover { background: var(--surface-2); }
+.header-btn svg { width: 18px; height: 18px; }
+.notif-dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; background: var(--red-500); border-radius: 50%; border: 2px solid var(--surface-1); }
+.menu-toggle { display: none; }
+
+/* Content */
+.content { padding: 24px 28px; }
+
+/* ── Stat Cards ── */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  display: flex; align-items: flex-start; justify-content: space-between;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.stat-card:hover { box-shadow: var(--shadow-elevated); transform: translateY(-1px); }
+.stat-value { font-family: 'DM Sans', sans-serif; font-size: 1.75rem; font-weight: 700; color: var(--text-primary); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat-label { font-size: .8125rem; color: var(--text-muted); margin-top: 4px; }
+.stat-trend { font-size: .75rem; font-weight: 500; margin-top: 6px; display: flex; align-items: center; gap: 3px; }
+.stat-trend.up { color: var(--green-600); }
+.stat-trend.down { color: var(--red-600); }
+.stat-icon {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.stat-icon svg { width: 22px; height: 22px; }
+.stat-icon.blue { background: var(--brand-100); color: var(--brand-600); }
+.stat-icon.teal { background: var(--teal-100); color: var(--teal-600); }
+.stat-icon.amber { background: var(--amber-100); color: var(--amber-600); }
+.stat-icon.red { background: var(--red-100); color: var(--red-600); }
+
+/* ── Charts grid ── */
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.chart-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 20px 16px;
+  box-shadow: var(--shadow-card);
+}
+.chart-card h3 { font-size: .9375rem; margin-bottom: 4px; }
+.chart-subtitle { font-size: .75rem; color: var(--text-muted); margin-bottom: 16px; }
+.chart-canvas-wrap { position: relative; width: 100%; }
+canvas.chart { width: 100% !important; height: auto !important; }
+
+/* ── Data Table ── */
+.table-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.table-header {
+  padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+}
+.table-header h3 { font-size: .9375rem; }
+.table-actions { display: flex; gap: 8px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th { font-size: .75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; text-align: left; padding: 10px 16px; background: var(--surface-0); border-bottom: 1px solid var(--border); white-space: nowrap; }
+td { font-size: .8125rem; padding: 12px 16px; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--surface-0); }
+td:first-child { color: var(--text-primary); font-weight: 500; }
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: .7rem; font-weight: 600;
+  letter-spacing: .01em;
+}
+.badge-green { background: var(--green-100); color: var(--green-600); }
+.badge-blue { background: var(--brand-100); color: var(--brand-600); }
+.badge-amber { background: var(--amber-100); color: var(--amber-600); }
+.badge-red { background: var(--red-100); color: var(--red-600); }
+.badge-teal { background: var(--teal-100); color: var(--teal-600); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: .8125rem; font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: none;
+  font-family: inherit;
+}
+.btn-primary { background: var(--brand-500); color: #fff; }
+.btn-primary:hover { background: var(--brand-600); }
+.btn-outline { background: var(--surface-1); color: var(--text-secondary); border: 1px solid var(--border); }
+.btn-outline:hover { background: var(--surface-2); }
+.btn svg { width: 16px; height: 16px; }
+
+/* ── Pages ── */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Vehicle detail ── */
+.detail-header {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex; gap: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+}
+.detail-thumb {
+  width: 160px; height: 110px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.detail-thumb svg { width: 48px; height: 48px; color: var(--text-muted); }
+.detail-meta { flex: 1; }
+.detail-meta h2 { margin-bottom: 8px; }
+.detail-tags { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.detail-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.detail-stat-label { font-size: .7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
+.detail-stat-value { font-family: 'DM Sans', sans-serif; font-size: 1.15rem; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+/* Tabs */
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.tab-btn {
+  padding: 10px 20px;
+  font-size: .8125rem; font-weight: 500;
+  color: var(--text-muted);
+  border: none; background: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition);
+  font-family: inherit;
+}
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active { color: var(--brand-600); border-bottom-color: var(--brand-500); }
+
+/* Alert cards */
+.alert-list { display: flex; flex-direction: column; gap: 8px; }
+.alert-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+}
+.alert-item:hover { box-shadow: var(--shadow-card); }
+.alert-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.alert-icon svg { width: 18px; height: 18px; }
+.alert-icon.warn { background: var(--amber-100); color: var(--amber-600); }
+.alert-icon.danger { background: var(--red-100); color: var(--red-600); }
+.alert-icon.info { background: var(--brand-100); color: var(--brand-600); }
+.alert-title { font-size: .8125rem; font-weight: 500; color: var(--text-primary); }
+.alert-desc { font-size: .75rem; color: var(--text-muted); margin-top: 2px; }
+.alert-time { font-size: .7rem; color: var(--text-muted); margin-left: auto; flex-shrink: 0; }
+
+/* Filter bar */
+.filter-bar {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.filter-chip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: .8rem; font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.filter-chip:hover { background: var(--surface-2); }
+.filter-chip.active { background: var(--brand-500); color: #fff; border-color: var(--brand-500); }
+
+/* Mission card */
+.mission-timeline { display: flex; flex-direction: column; gap: 12px; }
+.mission-card {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition);
+}
+.mission-card:hover { box-shadow: var(--shadow-elevated); transform: translateY(-1px); }
+.route-line { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+.route-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--brand-500); background: var(--surface-1); flex-shrink: 0; }
+.route-dash { flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--border) 0, var(--border) 6px, transparent 6px, transparent 10px); }
+.route-dot.end { background: var(--brand-500); }
+.route-label { font-size: .8rem; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mission-meta { display: flex; gap: 20px; flex-shrink: 0; }
+.mission-meta-item { text-align: right; }
+.mission-meta-label { font-size: .7rem; color: var(--text-muted); }
+.mission-meta-value { font-size: .8125rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* Progress */
+.progress-bar { height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width .6s ease; }
+
+/* Legend */
+.chart-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--text-secondary); }
+.legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+/* Tooltip */
+.chart-tooltip {
+  position: absolute;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-elevated);
+  pointer-events: none;
+  font-size: .75rem;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 150ms;
+  min-width: 120px;
+}
+.chart-tooltip.visible { opacity: 1; }
+.tooltip-title { font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.tooltip-row { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); }
+.tooltip-row .dot { width: 6px; height: 6px; border-radius: 2px; flex-shrink: 0; }
+.tooltip-value { font-weight: 600; color: var(--text-primary); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .charts-row { grid-template-columns: 1fr; }
+  .detail-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .menu-toggle { display: grid; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .detail-header { flex-direction: column; }
+  .detail-thumb { width: 100%; height: 80px; }
+  .content { padding: 16px; }
+  .header { padding: 0 16px; }
+  .filter-bar { gap: 6px; }
+  .mission-card { flex-direction: column; align-items: stretch; }
+  .mission-meta { justify-content: space-between; }
+}
+
+/* Overlay */
+.sidebar-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15,26,46,.4);
+  z-index: 35; display: none;
+}
+.sidebar-overlay.visible { display: block; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+
+<div class="app">
+  <!-- Sidebar -->
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="sidebar-brand">Fleet<span>Pro</span></div>
+    </div>
+    <nav class="sidebar-nav" id="nav">
+      <div class="nav-section">Principal</div>
+      <button class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="4" rx="1"/><rect x="14" y="10" width="7" height="11" rx="1"/><rect x="3" y="13" width="7" height="8" rx="1"/></svg>
+        Tableau de Bord
+      </button>
+      <button class="nav-item" data-page="flotte">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Flotte
+      </button>
+      <button class="nav-item" data-page="chauffeurs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Chauffeurs
+      </button>
+      <button class="nav-item" data-page="missions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+        Missions
+      </button>
+
+      <div class="nav-section">Gestion</div>
+      <button class="nav-item" data-page="maintenance">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Maintenance
+      </button>
+      <button class="nav-item" data-page="carburant">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V5a2 2 0 012-2h8a2 2 0 012 2v17"/><path d="M15 22V10l4-2v14"/><path d="M3 22h18"/><path d="M7 7h4"/></svg>
+        Carburant
+      </button>
+      <button class="nav-item" data-page="alertes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Alertes
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">KA</div>
+      <div class="user-info">
+        <div class="user-name">Kamal Azouaou</div>
+        <div class="user-role">Administrateur</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="header">
+      <div class="header-left">
+        <button class="header-btn menu-toggle" onclick="toggleSidebar()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div>
+          <h1 id="pageTitle">Tableau de Bord</h1>
+          <div class="breadcrumb">FleetPro <span>/ <span id="pageBreadcrumb">Tableau de Bord</span></span></div>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="header-btn" title="Recherche">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="header-btn" title="Alertes" onclick="navigateTo('alertes')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- ═══ DASHBOARD ═══ -->
+      <div class="page active" id="page-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-value">147</div>
+              <div class="stat-label">Véhicules Total</div>
+              <div class="stat-trend up">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                +3 ce mois
+              </div>
+            </div>
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-value">84</div>
+              <div class="stat-label">Chauffeurs Actifs</div>
+              <div class="stat-trend up">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                92% disponibles
+              </div>
+            </div>
+            <div class="stat-icon teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-value">23</div>
+              <div class="stat-label">Missions en Cours</div>
+              <div class="stat-trend down">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg>
+                -2 vs. hier
+              </div>
+            </div>
+            <div class="stat-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-value">7</div>
+              <div class="stat-label">Alertes Critiques</div>
+              <div class="stat-trend down">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg>
+                Nécessitent attention
+              </div>
+            </div>
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <h3>Coûts de Maintenance</h3>
+            <div class="chart-subtitle">6 derniers mois · en milliers DA</div>
+            <div class="chart-canvas-wrap">
+              <canvas id="chartMaint" height="220"></canvas>
+              <div class="chart-tooltip" id="tipMaint"></div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <h3>Répartition de la Flotte</h3>
+            <div class="chart-subtitle">Par type de véhicule</div>
+            <div class="chart-canvas-wrap" style="display:flex;align-items:center;gap:24px;">
+              <canvas id="chartPie" width="200" height="200" style="width:200px!important;height:200px!important;flex-shrink:0;"></canvas>
+              <div id="pieLegend" style="display:flex;flex-direction:column;gap:8px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <h3>Consommation Carburant</h3>
+            <div class="chart-subtitle">Évolution mensuelle · litres</div>
+            <div class="chart-canvas-wrap">
+              <canvas id="chartFuel" height="220"></canvas>
+              <div class="chart-tooltip" id="tipFuel"></div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item"><span class="legend-dot" style="background:var(--cat-1)"></span> Gasoil</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--cat-2)"></span> Essence</div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <h3>Dernières Alertes</h3>
+            <div class="chart-subtitle">Activité récente</div>
+            <div class="alert-list">
+              <div class="alert-item"><div class="alert-icon danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div><div class="alert-title">CT expiré — Renault Kangoo (FL-042)</div><div class="alert-desc">Contrôle technique à renouveler immédiatement</div></div><span class="alert-time">2h</span></div>
+              <div class="alert-item"><div class="alert-icon warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="alert-title">Maintenance périodique — Isuzu NPR (FL-018)</div><div class="alert-desc">Vidange prévue dans 500 km</div></div><span class="alert-time">5h</span></div>
+              <div class="alert-item"><div class="alert-icon warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="alert-title">Surconsommation — Mercedes Actros (FL-005)</div><div class="alert-desc">+18% au-dessus de la norme constructeur</div></div><span class="alert-time">1j</span></div>
+              <div class="alert-item"><div class="alert-icon info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div><div><div class="alert-title">Location arrive à échéance — CAT 320 (FL-090)</div><div class="alert-desc">Contrat expire dans 45 jours</div></div><span class="alert-time">1j</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ FLOTTE ═══ -->
+      <div class="page" id="page-flotte">
+        <div class="filter-bar">
+          <button class="filter-chip active" onclick="filterFleet(this,'all')">Tous</button>
+          <button class="filter-chip" onclick="filterFleet(this,'LEGER')">Léger</button>
+          <button class="filter-chip" onclick="filterFleet(this,'LOURD')">Lourd</button>
+          <button class="filter-chip" onclick="filterFleet(this,'ENGIN')">Engin</button>
+          <button class="filter-chip" onclick="filterFleet(this,'REMORQUE')">Remorque</button>
+          <div style="flex:1"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter</button>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Parc Véhicules <span style="font-weight:400;color:var(--text-muted);font-size:.8rem;">(147)</span></h3>
+            <div class="table-actions">
+              <button class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Exporter</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Code</th><th>Marque / Modèle</th><th>Type</th><th>Immatriculation</th><th>Statut</th><th>Kilométrage</th><th>Carburant</th><th>Propriété</th></tr></thead>
+              <tbody id="fleetTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ CHAUFFEURS ═══ -->
+      <div class="page" id="page-chauffeurs">
+        <div class="filter-bar">
+          <button class="filter-chip active">Tous</button>
+          <button class="filter-chip">Disponible</button>
+          <button class="filter-chip">En Mission</button>
+          <button class="filter-chip">En Repos</button>
+          <div style="flex:1"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter</button>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><h3>Chauffeurs <span style="font-weight:400;color:var(--text-muted);font-size:.8rem;">(84)</span></h3></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>N° Employé</th><th>Nom Complet</th><th>Permis</th><th>Expiration</th><th>Statut</th><th>Heures Semaine</th><th>Véhicule Affecté</th><th>Téléphone</th></tr></thead>
+              <tbody id="driverTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ MISSIONS ═══ -->
+      <div class="page" id="page-missions">
+        <div class="filter-bar">
+          <button class="filter-chip active">Toutes</button>
+          <button class="filter-chip">En Cours</button>
+          <button class="filter-chip">Planifiées</button>
+          <button class="filter-chip">Terminées</button>
+          <div style="flex:1"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvelle Mission</button>
+        </div>
+        <div class="mission-timeline" id="missionList"></div>
+      </div>
+
+      <!-- ═══ MAINTENANCE ═══ -->
+      <div class="page" id="page-maintenance">
+        <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card"><div><div class="stat-value">12</div><div class="stat-label">Interventions ce mois</div></div><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-value">847K</div><div class="stat-label">Coût Total (DA)</div><div class="stat-trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg> +12% vs mois dernier</div></div><div class="stat-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-value">5</div><div class="stat-label">En attente pièces</div></div><div class="stat-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><h3>Ordres de Travail</h3><div class="table-actions"><button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvel Ordre</button></div></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>N° OT</th><th>Véhicule</th><th>Type</th><th>Titre</th><th>Priorité</th><th>Statut</th><th>Coût Est.</th><th>Date Prévue</th></tr></thead>
+              <tbody id="maintTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ CARBURANT ═══ -->
+      <div class="page" id="page-carburant">
+        <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card"><div><div class="stat-value">18 420</div><div class="stat-label">Litres ce mois</div><div class="stat-trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> -4% vs mois dernier</div></div><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V5a2 2 0 012-2h8a2 2 0 012 2v17"/><path d="M15 22V10l4-2v14"/><path d="M3 22h18"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-value">2,84M</div><div class="stat-label">Coût Total (DA)</div></div><div class="stat-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-value">9,2</div><div class="stat-label">Moyenne L/100km</div><div class="stat-trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg> Norme: 8,5</div></div><div class="stat-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div>
+        </div>
+        <div class="charts-row">
+          <div class="chart-card" style="grid-column:1/-1;">
+            <h3>Consommation vs Norme Constructeur</h3>
+            <div class="chart-subtitle">Top 8 véhicules — L/100km réel vs norme corrigée</div>
+            <div class="chart-canvas-wrap">
+              <canvas id="chartNorm" height="240"></canvas>
+              <div class="chart-tooltip" id="tipNorm"></div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item"><span class="legend-dot" style="background:var(--cat-1)"></span> Réel</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--cat-2)"></span> Norme Corrigée</div>
+            </div>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><h3>Derniers Pleins</h3><div class="table-actions"><button class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Importer CSV</button><button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Saisir</button></div></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Véhicule</th><th>Chauffeur</th><th>Type</th><th>Quantité (L)</th><th>Prix Unit.</th><th>Coût Total</th><th>Compteur km</th></tr></thead>
+              <tbody id="fuelTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ ALERTES ═══ -->
+      <div class="page" id="page-alertes">
+        <div class="filter-bar">
+          <button class="filter-chip active">Toutes</button>
+          <button class="filter-chip">Documents</button>
+          <button class="filter-chip">Maintenance</button>
+          <button class="filter-chip">Carburant</button>
+          <button class="filter-chip">Location</button>
+        </div>
+        <div class="alert-list" id="alertList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const vehicles = [
+  { code:'FL-001', brand:'Toyota', model:'Hilux', type:'LOURD', plate:'01234-116-16', status:'DISPONIBLE', km:87420, fuel:'GASOIL', own:'PROPRE' },
+  { code:'FL-002', brand:'Hyundai', model:'Accent', type:'LEGER', plate:'02891-117-16', status:'EN_MISSION', km:42180, fuel:'ESSENCE', own:'PROPRE' },
+  { code:'FL-003', brand:'Mercedes', model:'Actros 1845', type:'LOURD', plate:'00312-118-09', status:'EN_MISSION', km:312600, fuel:'GASOIL', own:'PROPRE' },
+  { code:'FL-005', brand:'Mercedes', model:'Actros 2545', type:'LOURD', plate:'00587-119-09', status:'DISPONIBLE', km:248300, fuel:'GASOIL', own:'PROPRE' },
+  { code:'FL-010', brand:'Renault', model:'Kangoo', type:'LEGER', plate:'03102-116-16', status:'DISPONIBLE', km:56300, fuel:'GASOIL', own:'LOCATION' },
+  { code:'FL-018', brand:'Isuzu', model:'NPR 75', type:'LOURD', plate:'00891-120-31', status:'EN_MAINTENANCE', km:145200, fuel:'GASOIL', own:'PROPRE' },
+  { code:'FL-025', brand:'Toyota', model:'Corolla', type:'LEGER', plate:'04521-116-16', status:'DISPONIBLE', km:23100, fuel:'ESSENCE', own:'PROPRE' },
+  { code:'FL-042', brand:'Renault', model:'Kangoo ZE', type:'LEGER', plate:'05102-121-16', status:'HORS_SERVICE', km:68400, fuel:'ESSENCE', own:'LOCATION' },
+  { code:'FL-055', brand:'Caterpillar', model:'320 GC', type:'ENGIN', plate:'—', status:'EN_MISSION', km:4820, fuel:'GASOIL', own:'LOCATION' },
+  { code:'FL-060', brand:'Komatsu', model:'PC200-8', type:'ENGIN', plate:'—', status:'DISPONIBLE', km:6310, fuel:'GASOIL', own:'LOCATION' },
+  { code:'FL-071', brand:'Schmitz', model:'Cargobull S.CS', type:'REMORQUE', plate:'00201-122-09', status:'DISPONIBLE', km:189500, fuel:'—', own:'PROPRE' },
+  { code:'FL-072', brand:'Fruehauf', model:'Benne TP', type:'REMORQUE', plate:'00202-122-31', status:'EN_MISSION', km:112000, fuel:'—', own:'PROPRE' },
+];
+
+const drivers = [
+  { num:'EMP-101', name:'Benmoussa Youcef', license:'C+E', exp:'2027-03-15', status:'EN_MISSION', hours:38, vehicle:'FL-003', phone:'0555 12 34 56' },
+  { num:'EMP-102', name:'Hadj Ali Rachid', license:'C', exp:'2026-11-20', status:'DISPONIBLE', hours:24, vehicle:'FL-001', phone:'0661 22 33 44' },
+  { num:'EMP-105', name:'Slimani Karim', license:'B', exp:'2028-06-10', status:'DISPONIBLE', hours:32, vehicle:'FL-025', phone:'0770 44 55 66' },
+  { num:'EMP-108', name:'Boudiaf Mohamed', license:'C+E', exp:'2027-01-05', status:'EN_MISSION', hours:42, vehicle:'FL-005', phone:'0555 77 88 99' },
+  { num:'EMP-112', name:'Mebarki Sofiane', license:'D', exp:'2026-09-30', status:'EN_REPOS', hours:48, vehicle:'—', phone:'0661 11 22 33' },
+  { num:'EMP-115', name:'Khelifi Amine', license:'C', exp:'2028-02-28', status:'DISPONIBLE', hours:18, vehicle:'FL-010', phone:'0770 99 88 77' },
+  { num:'EMP-118', name:'Benali Farid', license:'B', exp:'2027-08-15', status:'EN_MISSION', hours:36, vehicle:'FL-002', phone:'0555 66 55 44' },
+  { num:'EMP-122', name:'Tounsi Abdelkader', license:'C+E', exp:'2026-12-01', status:'DISPONIBLE', hours:28, vehicle:'FL-071', phone:'0661 44 33 22' },
+];
+
+const missions = [
+  { num:'M-2026-0847', driver:'Benmoussa Y.', vehicle:'FL-003', from:'Alger Port', to:'Oran — Zone Industrielle', status:'EN_COURS', dist:432, date:'26/08/2026', zone:'Nationale' },
+  { num:'M-2026-0846', driver:'Boudiaf M.', vehicle:'FL-005', from:'Hassi Messaoud', to:'Alger — Rouiba', status:'EN_COURS', dist:810, date:'25/08/2026', zone:'Sud' },
+  { num:'M-2026-0845', driver:'Benali F.', vehicle:'FL-002', from:'Alger Centre', to:'Blida — Zone Ind.', status:'EN_COURS', dist:52, date:'26/08/2026', zone:'Locale' },
+  { num:'M-2026-0844', driver:'Slimani K.', vehicle:'FL-025', from:'Alger — Bab Ezzouar', to:'Tizi Ouzou', status:'PLANIFIEE', dist:105, date:'27/08/2026', zone:'Régionale' },
+  { num:'M-2026-0840', driver:'Hadj Ali R.', vehicle:'FL-001', from:'Sétif', to:'Constantine', status:'TERMINEE', dist:128, date:'24/08/2026', zone:'Régionale' },
+  { num:'M-2026-0838', driver:'Tounsi A.', vehicle:'FL-071', from:'Oran Port', to:'Alger — Rouiba', status:'TERMINEE', dist:420, date:'23/08/2026', zone:'Nationale' },
+];
+
+const maintOrders = [
+  { num:'OT-0412', vehicle:'FL-018', type:'PERIODIQUE', title:'Vidange moteur + filtres', priority:'HAUTE', status:'EN_COURS', cost:'45 000', date:'26/08/2026' },
+  { num:'OT-0411', vehicle:'FL-003', type:'CURATIVE', title:'Remplacement plaquettes frein', priority:'HAUTE', status:'PLANIFIE', cost:'82 000', date:'28/08/2026' },
+  { num:'OT-0410', vehicle:'FL-042', type:'CURATIVE', title:'Réparation système injection', priority:'CRITIQUE', status:'EN_COURS', cost:'156 000', date:'24/08/2026' },
+  { num:'OT-0409', vehicle:'FL-060', type:'PERIODIQUE', title:'Graissage complet + contrôle', priority:'MOYENNE', status:'PLANIFIE', cost:'35 000', date:'30/08/2026' },
+  { num:'OT-0407', vehicle:'FL-005', type:'PERIODIQUE', title:'Révision 250 000 km', priority:'HAUTE', status:'TERMINE', cost:'210 000', date:'20/08/2026' },
+];
+
+const fuelEntries = [
+  { date:'26/08/2026', vehicle:'FL-003', driver:'Benmoussa Y.', type:'GASOIL', qty:180, price:52.50, total:'9 450', odo:312600 },
+  { date:'25/08/2026', vehicle:'FL-005', driver:'Boudiaf M.', type:'GASOIL', qty:220, price:52.50, total:'11 550', odo:248300 },
+  { date:'25/08/2026', vehicle:'FL-002', driver:'Benali F.', type:'ESSENCE', qty:42, price:56.20, total:'2 360', odo:42180 },
+  { date:'24/08/2026', vehicle:'FL-001', driver:'Hadj Ali R.', type:'GASOIL', qty:85, price:52.50, total:'4 463', odo:87420 },
+  { date:'24/08/2026', vehicle:'FL-010', driver:'Khelifi A.', type:'GASOIL', qty:38, price:52.50, total:'1 995', odo:56300 },
+  { date:'23/08/2026', vehicle:'FL-055', driver:'—', type:'GASOIL', qty:150, price:52.50, total:'7 875', odo:4820 },
+];
+
+const alerts = [
+  { type:'danger', title:'CT expiré — Renault Kangoo (FL-042)', desc:'Contrôle technique dépassé depuis 15 jours. Véhicule immobilisé.', time:'2h', cat:'Documents' },
+  { type:'danger', title:'Assurance expire dans 5 jours — Toyota Hilux (FL-001)', desc:'Renouveler le contrat n° ASS-2024-1847 avant le 31/08.', time:'4h', cat:'Documents' },
+  { type:'warn', title:'Maintenance périodique — Isuzu NPR (FL-018)', desc:'Vidange moteur prévue dans 500 km. Intervention planifiée.', time:'5h', cat:'Maintenance' },
+  { type:'warn', title:'Surconsommation détectée — Mercedes Actros (FL-005)', desc:'+18% au-dessus de la norme constructeur corrigée (28 L/100km vs 23,7 attendu).', time:'1j', cat:'Carburant' },
+  { type:'info', title:'Location arrive à échéance — CAT 320 GC (FL-055)', desc:'Contrat de location expire dans 45 jours. Renouvellement à prévoir.', time:'1j', cat:'Location' },
+  { type:'warn', title:'Permis expire dans 90 jours — Mebarki Sofiane (EMP-112)', desc:'Permis catégorie D expire le 30/09/2026.', time:'2j', cat:'Documents' },
+  { type:'danger', title:'Heures de conduite dépassées — Mebarki Sofiane (EMP-112)', desc:'48h/semaine atteintes. Repos obligatoire.', time:'2j', cat:'Chauffeurs' },
+  { type:'info', title:'Révision 250 000 km terminée — Mercedes Actros (FL-005)', desc:'Ordre de travail OT-0407 clôturé. Coût réel : 198 500 DA.', time:'3j', cat:'Maintenance' },
+  { type:'warn', title:'Anomalie itinéraire — Mission M-2026-0840', desc:'Écart GPS de 23 km entre trajet planifié et réel. À auditer.', time:'3j', cat:'Missions' },
+];
+
+// ── STATUS HELPERS ──
+const statusBadge = (s) => {
+  const m = { DISPONIBLE:['Disponible','badge-green'], EN_MISSION:['En Mission','badge-blue'], EN_MAINTENANCE:['En Maintenance','badge-amber'], HORS_SERVICE:['Hors Service','badge-red'], PLANIFIEE:['Planifiée','badge-teal'], EN_COURS:['En Cours','badge-blue'], MODIFIEE:['Modifiée','badge-amber'], TERMINEE:['Terminée','badge-green'], ANNULEE:['Annulée','badge-red'], EN_REPOS:['En Repos','badge-amber'], INDISPONIBLE:['Indisponible','badge-red'], PLANIFIE:['Planifié','badge-teal'], TERMINE:['Terminé','badge-green'], ANNULE:['Annulé','badge-red'], HAUTE:['Haute','badge-red'], MOYENNE:['Moyenne','badge-amber'], CRITIQUE:['Critique','badge-red'], BASSE:['Basse','badge-green'] };
+  const [l,c] = m[s] || [s,'badge-blue'];
+  return `<span class="badge ${c}">${l}</span>`;
+};
+const fmtKm = n => n.toLocaleString('fr-FR');
+
+// ── RENDER TABLES ──
+function renderFleet(filter) {
+  const data = filter && filter !== 'all' ? vehicles.filter(v => v.type === filter) : vehicles;
+  document.getElementById('fleetTableBody').innerHTML = data.map(v => `<tr>
+    <td>${v.code}</td><td>${v.brand} ${v.model}</td><td><span class="badge badge-blue">${v.type}</span></td>
+    <td>${v.plate}</td><td>${statusBadge(v.status)}</td><td>${fmtKm(v.km)} km</td>
+    <td>${v.fuel}</td><td>${v.own === 'PROPRE' ? 'Propre' : 'Location'}</td>
+  </tr>`).join('');
+}
+function filterFleet(el, f) {
+  el.parentNode.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderFleet(f);
+}
+
+function renderDrivers() {
+  document.getElementById('driverTableBody').innerHTML = drivers.map(d => {
+    const hoursColor = d.hours >= 45 ? 'color:var(--red-600);font-weight:600' : d.hours >= 35 ? 'color:var(--amber-600)' : '';
+    return `<tr>
+      <td>${d.num}</td><td>${d.name}</td><td>${d.license}</td><td>${d.exp}</td>
+      <td>${statusBadge(d.status)}</td><td style="${hoursColor}">${d.hours}h / 48h</td>
+      <td>${d.vehicle}</td><td>${d.phone}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderMissions() {
+  document.getElementById('missionList').innerHTML = missions.map(m => `<div class="mission-card">
+    <div style="min-width:100px"><div style="font-weight:600;font-size:.8125rem">${m.num}</div><div style="font-size:.75rem;color:var(--text-muted)">${m.date}</div></div>
+    <div class="route-line">
+      <div class="route-dot"></div><div class="route-label">${m.from}</div>
+      <div class="route-dash"></div>
+      <div class="route-dot end"></div><div class="route-label">${m.to}</div>
+    </div>
+    <div class="mission-meta">
+      <div class="mission-meta-item"><div class="mission-meta-label">Chauffeur</div><div class="mission-meta-value">${m.driver}</div></div>
+      <div class="mission-meta-item"><div class="mission-meta-label">Véhicule</div><div class="mission-meta-value">${m.vehicle}</div></div>
+      <div class="mission-meta-item"><div class="mission-meta-label">Distance</div><div class="mission-meta-value">${m.dist} km</div></div>
+      <div class="mission-meta-item"><div class="mission-meta-label">Zone</div><div class="mission-meta-value">${m.zone}</div></div>
+      <div>${statusBadge(m.status)}</div>
+    </div>
+  </div>`).join('');
+}
+
+function renderMaint() {
+  document.getElementById('maintTableBody').innerHTML = maintOrders.map(o => `<tr>
+    <td>${o.num}</td><td>${o.vehicle}</td><td><span class="badge ${o.type==='PERIODIQUE'?'badge-blue':'badge-amber'}">${o.type === 'PERIODIQUE' ? 'Périodique' : 'Curative'}</span></td>
+    <td>${o.title}</td><td>${statusBadge(o.priority)}</td><td>${statusBadge(o.status)}</td>
+    <td>${o.cost} DA</td><td>${o.date}</td>
+  </tr>`).join('');
+}
+
+function renderFuel() {
+  document.getElementById('fuelTableBody').innerHTML = fuelEntries.map(f => `<tr>
+    <td>${f.date}</td><td>${f.vehicle}</td><td>${f.driver}</td>
+    <td><span class="badge ${f.type==='GASOIL'?'badge-blue':'badge-amber'}">${f.type}</span></td>
+    <td>${f.qty} L</td><td>${f.price.toFixed(2)} DA</td><td>${f.total} DA</td><td>${fmtKm(f.odo)}</td>
+  </tr>`).join('');
+}
+
+function renderAlerts() {
+  document.getElementById('alertList').innerHTML = alerts.map(a => `<div class="alert-item">
+    <div class="alert-icon ${a.type}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${
+      a.type === 'danger' ? '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
+      : a.type === 'warn' ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+      : '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>'
+    }</svg></div>
+    <div style="flex:1"><div class="alert-title">${a.title}</div><div class="alert-desc">${a.desc}</div></div>
+    <span class="alert-time">${a.time}</span>
+    <span class="badge badge-teal" style="font-size:.65rem;flex-shrink:0">${a.cat}</span>
+  </div>`).join('');
+}
+
+// ── NAV ──
+function navigateTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  const navBtn = document.querySelector(`.nav-item[data-page="${page}"]`);
+  if (navBtn) navBtn.classList.add('active');
+  const titles = { dashboard:'Tableau de Bord', flotte:'Flotte', chauffeurs:'Chauffeurs', missions:'Missions', maintenance:'Maintenance', carburant:'Carburant', alertes:'Alertes' };
+  document.getElementById('pageTitle').textContent = titles[page] || page;
+  document.getElementById('pageBreadcrumb').textContent = titles[page] || page;
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('visible');
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('visible');
+}
+
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', () => navigateTo(btn.dataset.page));
+});
+
+// ── CHARTS ──
+function getCSS(prop) { return getComputedStyle(document.documentElement).getPropertyValue(prop).trim(); }
+
+function drawBarChart(canvasId, tipId, labels, datasets, unit) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const W = rect.width, H = parseInt(canvas.getAttribute('height'));
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  const pad = { top: 16, right: 16, bottom: 36, left: 52 };
+  const cW = W - pad.left - pad.right;
+  const cH = H - pad.top - pad.bottom;
+
+  const allVals = datasets.flatMap(d => d.values);
+  const maxVal = Math.ceil(Math.max(...allVals) / 100) * 100;
+
+  const textPri = getCSS('--text-primary');
+  const textMuted = getCSS('--text-muted');
+  const border = getCSS('--border-light');
+  const surface = getCSS('--surface-card');
+
+  // Grid
+  const gridLines = 5;
+  ctx.strokeStyle = border; ctx.lineWidth = 1;
+  ctx.fillStyle = textMuted; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'right';
+  for (let i = 0; i <= gridLines; i++) {
+    const y = pad.top + cH - (i / gridLines) * cH;
+    const val = Math.round((i / gridLines) * maxVal);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    ctx.fillText(val.toLocaleString('fr-FR'), pad.left - 8, y + 4);
+  }
+
+  // Bars
+  const groupW = cW / labels.length;
+  const barW = Math.min(22, (groupW - 12) / datasets.length);
+  const gap = 2;
+
+  const barPositions = [];
+
+  datasets.forEach((ds, di) => {
+    const color = getCSS(ds.color);
+    labels.forEach((label, li) => {
+      const x = pad.left + li * groupW + (groupW - barW * datasets.length - gap * (datasets.length - 1)) / 2 + di * (barW + gap);
+      const h = (ds.values[li] / maxVal) * cH;
+      const y = pad.top + cH - h;
+
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.roundRect(x, y, barW, h, [4, 4, 0, 0]);
+      ctx.fill();
+
+      barPositions.push({ x, y, w: barW, h, label, value: ds.values[li], series: ds.label, color });
+    });
+  });
+
+  // X labels
+  ctx.fillStyle = textMuted; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'center';
+  labels.forEach((l, i) => {
+    ctx.fillText(l, pad.left + i * groupW + groupW / 2, H - pad.bottom + 20);
+  });
+
+  // Tooltip
+  const tip = document.getElementById(tipId);
+  canvas.addEventListener('mousemove', (e) => {
+    const r = canvas.getBoundingClientRect();
+    const mx = e.clientX - r.left, my = e.clientY - r.top;
+    const hit = barPositions.find(b => mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.y + b.h);
+    if (hit) {
+      tip.innerHTML = `<div class="tooltip-title">${hit.label}</div><div class="tooltip-row"><span class="dot" style="background:${hit.color}"></span>${hit.series}<span class="tooltip-value">${hit.value.toLocaleString('fr-FR')}${unit ? ' ' + unit : ''}</span></div>`;
+      tip.classList.add('visible');
+      tip.style.left = (hit.x + hit.w / 2 - 60) + 'px';
+      tip.style.top = (hit.y - 60) + 'px';
+    } else { tip.classList.remove('visible'); }
+  });
+  canvas.addEventListener('mouseleave', () => tip.classList.remove('visible'));
+}
+
+function drawLineChart(canvasId, tipId, labels, datasets, unit) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const W = rect.width, H = parseInt(canvas.getAttribute('height'));
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  const pad = { top: 16, right: 16, bottom: 36, left: 52 };
+  const cW = W - pad.left - pad.right;
+  const cH = H - pad.top - pad.bottom;
+
+  const allVals = datasets.flatMap(d => d.values);
+  const maxVal = Math.ceil(Math.max(...allVals) / 1000) * 1000;
+
+  const textMuted = getCSS('--text-muted');
+  const border = getCSS('--border-light');
+  const surface = getCSS('--surface-card');
+
+  // Grid
+  const gridLines = 5;
+  ctx.strokeStyle = border; ctx.lineWidth = 1;
+  ctx.fillStyle = textMuted; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'right';
+  for (let i = 0; i <= gridLines; i++) {
+    const y = pad.top + cH - (i / gridLines) * cH;
+    const val = Math.round((i / gridLines) * maxVal);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    ctx.fillText(val.toLocaleString('fr-FR'), pad.left - 8, y + 4);
+  }
+
+  // X labels
+  ctx.fillStyle = textMuted; ctx.textAlign = 'center';
+  labels.forEach((l, i) => {
+    const x = pad.left + (i / (labels.length - 1)) * cW;
+    ctx.fillText(l, x, H - pad.bottom + 20);
+  });
+
+  const points = [];
+
+  datasets.forEach((ds) => {
+    const color = getCSS(ds.color);
+    ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+
+    // Area
+    ctx.beginPath();
+    labels.forEach((_, i) => {
+      const x = pad.left + (i / (labels.length - 1)) * cW;
+      const y = pad.top + cH - (ds.values[i] / maxVal) * cH;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    const lastX = pad.left + cW;
+    ctx.lineTo(lastX, pad.top + cH);
+    ctx.lineTo(pad.left, pad.top + cH);
+    ctx.closePath();
+    ctx.fillStyle = color.replace(')', ', 0.08)').replace('rgb', 'rgba');
+    ctx.fill();
+
+    // Line
+    ctx.beginPath();
+    labels.forEach((_, i) => {
+      const x = pad.left + (i / (labels.length - 1)) * cW;
+      const y = pad.top + cH - (ds.values[i] / maxVal) * cH;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.strokeStyle = color; ctx.stroke();
+
+    // End dot with surface ring
+    const lastI = labels.length - 1;
+    const ex = pad.left + cW;
+    const ey = pad.top + cH - (ds.values[lastI] / maxVal) * cH;
+    ctx.beginPath(); ctx.arc(ex, ey, 6, 0, Math.PI * 2);
+    ctx.fillStyle = surface; ctx.fill();
+    ctx.beginPath(); ctx.arc(ex, ey, 4, 0, Math.PI * 2);
+    ctx.fillStyle = color; ctx.fill();
+
+    // End label
+    ctx.fillStyle = getCSS('--text-primary'); ctx.font = '600 11px DM Sans, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText(ds.values[lastI].toLocaleString('fr-FR'), ex + 10, ey + 4);
+
+    labels.forEach((l, i) => {
+      const x = pad.left + (i / (labels.length - 1)) * cW;
+      const y = pad.top + cH - (ds.values[i] / maxVal) * cH;
+      points.push({ x, y, label: l, value: ds.values[i], series: ds.label, color });
+    });
+  });
+
+  // Tooltip
+  const tip = document.getElementById(tipId);
+  canvas.addEventListener('mousemove', (e) => {
+    const r = canvas.getBoundingClientRect();
+    const mx = e.clientX - r.left;
+    const nearest = points.reduce((a, b) => Math.abs(b.x - mx) < Math.abs(a.x - mx) ? b : a);
+    const sameX = points.filter(p => p.x === nearest.x);
+    if (Math.abs(nearest.x - mx) < 30) {
+      let rows = sameX.map(p => `<div class="tooltip-row"><span class="dot" style="background:${p.color}"></span>${p.series}<span class="tooltip-value">${p.value.toLocaleString('fr-FR')}${unit ? ' ' + unit : ''}</span></div>`).join('');
+      tip.innerHTML = `<div class="tooltip-title">${nearest.label}</div>${rows}`;
+      tip.classList.add('visible');
+      tip.style.left = (nearest.x - 60) + 'px';
+      tip.style.top = (Math.min(...sameX.map(p => p.y)) - 70) + 'px';
+    } else { tip.classList.remove('visible'); }
+  });
+  canvas.addEventListener('mouseleave', () => tip.classList.remove('visible'));
+}
+
+function drawPieChart(canvasId, legendId) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = 200 * dpr; canvas.height = 200 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const data = [
+    { label: 'Léger', value: 52, color: getCSS('--cat-1') },
+    { label: 'Lourd', value: 48, color: getCSS('--cat-2') },
+    { label: 'Engin', value: 28, color: getCSS('--cat-3') },
+    { label: 'Remorque', value: 19, color: getCSS('--cat-4') },
+  ];
+  const total = data.reduce((s, d) => s + d.value, 0);
+  const cx = 100, cy = 100, r = 80, ir = 48;
+  const surface = getCSS('--surface-card');
+
+  let angle = -Math.PI / 2;
+  data.forEach((d) => {
+    const slice = (d.value / total) * Math.PI * 2;
+    const gapAngle = 0.02;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, angle + gapAngle, angle + slice - gapAngle);
+    ctx.arc(cx, cy, ir, angle + slice - gapAngle, angle + gapAngle, true);
+    ctx.closePath();
+    ctx.fillStyle = d.color;
+    ctx.fill();
+    angle += slice;
+  });
+
+  // Center circle
+  ctx.beginPath(); ctx.arc(cx, cy, ir - 1, 0, Math.PI * 2);
+  ctx.fillStyle = surface; ctx.fill();
+  ctx.fillStyle = getCSS('--text-primary'); ctx.font = '700 24px DM Sans, sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText(total.toString(), cx, cy + 2);
+  ctx.fillStyle = getCSS('--text-muted'); ctx.font = '400 11px Inter, sans-serif';
+  ctx.fillText('véhicules', cx, cy + 18);
+
+  // Legend
+  document.getElementById(legendId).innerHTML = data.map(d => {
+    const pct = Math.round(d.value / total * 100);
+    return `<div class="legend-item"><span class="legend-dot" style="background:${d.color}"></span><span style="min-width:70px">${d.label}</span><span style="font-variant-numeric:tabular-nums;font-weight:600;color:var(--text-primary)">${d.value}</span><span style="color:var(--text-muted);margin-left:4px">(${pct}%)</span></div>`;
+  }).join('');
+}
+
+function drawNormChart() {
+  const vdata = [
+    { name: 'FL-005 Actros', real: 33.2, norm: 28.0 },
+    { name: 'FL-003 Actros', real: 29.5, norm: 28.0 },
+    { name: 'FL-055 CAT 320', real: 20.1, norm: 18.0 },
+    { name: 'FL-018 Isuzu', real: 15.8, norm: 14.0 },
+    { name: 'FL-060 Komatsu', real: 16.9, norm: 16.0 },
+    { name: 'FL-001 Hilux', real: 9.2, norm: 8.5 },
+    { name: 'FL-010 Kangoo', real: 5.9, norm: 5.5 },
+    { name: 'FL-002 Accent', real: 6.4, norm: 5.8 },
+  ];
+  drawBarChart('chartNorm', 'tipNorm', vdata.map(v => v.name), [
+    { label: 'Réel', values: vdata.map(v => v.real), color: '--cat-1' },
+    { label: 'Norme', values: vdata.map(v => v.norm), color: '--cat-2' },
+  ], 'L/100km');
+}
+
+// ── INIT ──
+function initCharts() {
+  const months = ['Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août'];
+  drawBarChart('chartMaint', 'tipMaint', months, [
+    { label: 'Coût Maintenance', values: [620, 480, 750, 580, 890, 847], color: '--cat-1' },
+  ], 'K DA');
+  drawPieChart('chartPie', 'pieLegend');
+  drawLineChart('chartFuel', 'tipFuel', months, [
+    { label: 'Gasoil', values: [14200, 15800, 14600, 16200, 17100, 16400], color: '--cat-1' },
+    { label: 'Essence', values: [3100, 2800, 3400, 2900, 3200, 2020], color: '--cat-2' },
+  ], 'L');
+}
+
+renderFleet();
+renderDrivers();
+renderMissions();
+renderMaint();
+renderFuel();
+renderAlerts();
+initCharts();
+
+// Redraw on resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    initCharts();
+    if (document.getElementById('page-carburant').classList.contains('active')) drawNormChart();
+  }, 200);
+});
+
+// Draw norm chart when fuel page is shown
+const origNav = navigateTo;
+const _nav = navigateTo;
+window.navigateTo = function(page) {
+  _nav(page);
+  if (page === 'carburant') setTimeout(drawNormChart, 50);
+};
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.onclick = () => {
+    const p = btn.dataset.page;
+    navigateTo(p);
+  };
+});
+</script>
