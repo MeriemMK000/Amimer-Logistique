@@ -860,6 +860,7 @@ tr.clickable{cursor:pointer}tr.clickable:hover td{background:var(--b0)}
 @keyframes mfi{from{opacity:0}to{opacity:1}}
 .modal{background:var(--sc);border:1px solid var(--bd);border-radius:var(--rad);box-shadow:var(--she);width:90%;max-width:720px;max-height:90vh;overflow-y:auto;animation:msl .2s ease}
 .modal-wide{max-width:1100px}
+.modal-full{max-width:98vw!important;width:98vw!important;max-height:96vh!important;height:96vh!important}
 @keyframes msl{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .modal-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bl)}
 .modal-hd h3{font-size:.95rem}
@@ -1403,7 +1404,7 @@ tr.clickable{cursor:pointer}tr.clickable:hover td{background:var(--b0)}
 <!-- CARTE GPS -->
 <div class="page" id="p-gpsmap">
   <div class="sg" id="gpsmapKPI"></div>
-  <div class="period-bar" style="margin-bottom:10px">
+  <div class="period-bar" style="margin-bottom:10px;flex-wrap:wrap;gap:8px">
     <label>Filtre:</label>
     <select id="gpsmapFilter" onchange="renderGPSOverview()">
       <option value="active">Missions actives</option>
@@ -1417,8 +1418,16 @@ tr.clickable{cursor:pointer}tr.clickable:hover td{background:var(--b0)}
       <option value="LOURD">Camions (Lourd)</option>
       <option value="ENGIN">Engins</option>
     </select>
+    <label style="margin-left:8px">Vehicule:</label>
+    <select id="gpsmapVh" onchange="renderGPSOverview()">
+      <option value="all">Tous</option>
+    </select>
+    <label style="margin-left:8px">Chauffeur:</label>
+    <select id="gpsmapDr" onchange="renderGPSOverview()">
+      <option value="all">Tous</option>
+    </select>
   </div>
-  <div class="gps-map-wrap" style="height:calc(100vh - var(--hh) - 180px);min-height:400px"><div id="gpsOverviewMap" style="width:100%;height:100%;z-index:1"></div></div>
+  <div class="gps-map-wrap" style="height:calc(100vh - var(--hh) - 200px);min-height:400px"><div id="gpsOverviewMap" style="width:100%;height:100%;z-index:1"></div></div>
   <div id="gpsmapLegend" style="margin-top:8px;padding:10px 14px;border:1px solid var(--bd);border-radius:var(--rs);background:var(--s0);font-size:.72rem"></div>
 </div>
 
@@ -2174,7 +2183,7 @@ function openModal(type,data,idx){
     <div class="modal-ft"><button class="btn btn-o" onclick="closeModal()">Annuler</button><button class="btn btn-p" onclick="saveDr()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> ${isE?'Mettre à jour':'Enregistrer'}</button></div>`;
   }else if(type==='addMission'||type==='editMission'){
     const m=data||{};const isE=type==='editMission';
-    html=`<div class="modal-hd"><h3>${isE?'Modifier':'Nouvelle'} Mission${m.wp&&m.wp.length?' (Multipoint)':''}</h3><button class="modal-cl" onclick="closeModal()">✕</button></div>
+    html=`<div class="modal-hd"><h3>${isE?'Modifier':'Nouvelle'} Mission${m.wp&&m.wp.length?' (Multipoint)':''}</h3><div style="display:flex;gap:6px;align-items:center"><button class="modal-cl" onclick="toggleModalFull()" title="Agrandir/Reduire" style="font-size:.75rem">⛶</button><button class="modal-cl" onclick="closeModal()">✕</button></div></div>
     <div class="modal-bd">
       <div class="form-r"><div class="form-g"><label>Date Départ <span style="color:var(--r5)">*</span></label><input id="fMiDD" type="date" value="${m.dateD||'2026-08-28'}"></div><div class="form-g"><label>Heure Départ</label><input id="fMiHD" type="time" value="${m.heureD||'07:00'}"></div></div>
       <div class="form-r"><div class="form-g"><label>Date Fin <span style="color:var(--r5)">*</span></label><input id="fMiDF" type="date" value="${m.dateF||'2026-08-28'}"></div><div class="form-g"><label>Heure Fin</label><input id="fMiHF" type="time" value="${m.heureF||'17:00'}"></div></div>
@@ -2377,6 +2386,7 @@ function openModal(type,data,idx){
   }
 }
 function closeModal(){document.getElementById('modalOv').classList.remove('vis');editIdx=null;editType=null}
+function toggleModalFull(){const box=document.getElementById('modalBox');box.classList.toggle('modal-full')}
 
 // Waypoints management
 let tempWP=[];
@@ -2408,9 +2418,14 @@ function autoCalcMulti(){
   const fRetour=document.getElementById('fMiDistRetour');
   if(fAller)fAller.value=allerKm;
   if(fRetour)fRetour.value=retKm;
-  if(totalKm>0){document.getElementById('fMiDist').value=totalKm;document.getElementById('fMiDur').value=Math.round(totalMin/60*10)/10;
+  document.getElementById('fMiDist').value=totalKm;
+  document.getElementById('fMiDur').value=totalKm>0?Math.round(totalMin/60*10)/10:'';
+  if(totalKm>0){
     const lbl=retType==='none'?'Aller seul':'Aller'+(wps.length?' MP':'')+' + Retour'+(retType==='multi'?' MP':'');
-    document.getElementById('fMiGPS').innerHTML='<span style="color:var(--tm)">&#9675;</span> Estimation '+lbl+': '+totalKm+'km (A:'+allerKm+' R:'+retKm+') — calcul route en cours...';document.getElementById('fMiGPS').style.color='var(--tm)'}
+    document.getElementById('fMiGPS').innerHTML='<span style="color:var(--tm)">&#9675;</span> Estimation '+lbl+': '+totalKm+'km (A:'+allerKm+' R:'+retKm+') — calcul route en cours...';document.getElementById('fMiGPS').style.color='var(--tm)';
+  }else if(from.trim()&&to.trim()){
+    document.getElementById('fMiGPS').innerHTML='<span style="color:var(--a5)">&#9679;</span> Calcul OSRM en cours...';document.getElementById('fMiGPS').style.color='var(--a5)';
+  }
   drawGPSMap();renderFraisPreview();
   // Launch async OSRM routing (debounced) for real road distance + itinerary
   if(from.trim()&&to.trim()){
@@ -5147,75 +5162,156 @@ function drawGPSDetailOSRM(allerGeo,retGeo,allStops,allerLen,containerId){
 }
 
 // ══════════ GPS OVERVIEW MAP ══════════
+function _populateGPSFilters(){
+  var selVh=document.getElementById('gpsmapVh');
+  var selDr=document.getElementById('gpsmapDr');
+  if(!selVh||!selDr)return;
+  var curVh=selVh.value,curDr=selDr.value;
+  var vhOpts='<option value="all">Tous</option>';
+  V.forEach(function(v){vhOpts+='<option value="'+v.c+'">'+v.c+' — '+v.b+' '+v.m+'</option>'});
+  selVh.innerHTML=vhOpts;selVh.value=curVh||'all';
+  var drOpts='<option value="all">Tous</option>';
+  D.forEach(function(d){drOpts+='<option value="'+d.n+'">'+d.nm+'</option>'});
+  selDr.innerHTML=drOpts;selDr.value=curDr||'all';
+}
+function _estimatePosition(m){
+  // Build full route: from -> wp -> to (-> retour waypoints -> from if retour)
+  var stops=[m.fr];
+  if(m.wp&&m.wp.length)stops=stops.concat(m.wp);
+  stops.push(m.to);
+  var retType=m.retType||'direct';
+  if(retType==='direct'){stops.push(m.fr)}
+  else if(retType==='multi'){
+    if(m.wpRet&&m.wpRet.length)stops=stops.concat(m.wpRet);
+    stops.push(m.fr);
+  }
+  // Resolve coordinates for each stop
+  var geos=[];
+  for(var i=0;i<stops.length;i++){
+    var g=resolveGeo(stops[i]);
+    if(g)geos.push({name:stops[i],lat:g.lat,lon:g.lon});
+  }
+  if(geos.length<2)return geos.length?{lat:geos[0].lat,lon:geos[0].lon,pct:0,label:geos[0].name}:null;
+  // Calculate segment distances
+  var segments=[];var totalDist=0;
+  for(var j=0;j<geos.length-1;j++){
+    var segKm=haversineKm(geos[j].lat,geos[j].lon,geos[j+1].lat,geos[j+1].lon)*1.3;
+    segments.push({from:geos[j],to:geos[j+1],km:segKm});
+    totalDist+=segKm;
+  }
+  if(totalDist<=0)return{lat:geos[0].lat,lon:geos[0].lon,pct:0,label:geos[0].name};
+  // Calculate elapsed distance based on time and speed
+  var now=new Date();
+  var depStr=m.dateD+'T'+(m.heureD||'07:00');
+  var dep=new Date(depStr);
+  if(isNaN(dep.getTime()))dep=new Date(m.dateD+'T07:00');
+  var elapsedH=(now-dep)/(1000*60*60);
+  if(elapsedH<0)return{lat:geos[0].lat,lon:geos[0].lon,pct:0,label:geos[0].name+' (depart)'};
+  var avgSpeed=80;
+  var distTraveled=elapsedH*avgSpeed;
+  if(distTraveled>=totalDist)return{lat:geos[geos.length-1].lat,lon:geos[geos.length-1].lon,pct:100,label:geos[geos.length-1].name+' (arrive)'};
+  // Walk segments to find position
+  var cumDist=0;
+  for(var k=0;k<segments.length;k++){
+    if(cumDist+segments[k].km>=distTraveled){
+      var ratio=(distTraveled-cumDist)/segments[k].km;
+      var lat2=segments[k].from.lat+(segments[k].to.lat-segments[k].from.lat)*ratio;
+      var lon2=segments[k].from.lon+(segments[k].to.lon-segments[k].from.lon)*ratio;
+      var pct=Math.round(distTraveled/totalDist*100);
+      var nearLabel=ratio<0.5?segments[k].from.name:segments[k].to.name;
+      return{lat:lat2,lon:lon2,pct:pct,label:'~'+nearLabel+' ('+pct+'%)',distDone:Math.round(distTraveled),distTotal:Math.round(totalDist)};
+    }
+    cumDist+=segments[k].km;
+  }
+  return{lat:geos[geos.length-1].lat,lon:geos[geos.length-1].lon,pct:100,label:'arrive'};
+}
 function renderGPSOverview(){
-  const ct=document.getElementById('gpsOverviewMap');
+  var ct=document.getElementById('gpsOverviewMap');
   if(!ct)return;
-  const filter=document.getElementById('gpsmapFilter')?.value||'active';
-  const typeFilter=document.getElementById('gpsmapType')?.value||'all';
-  const today=new Date().toISOString().slice(0,10);
-  let missions=MI.filter(m=>{
+  _populateGPSFilters();
+  var filter=document.getElementById('gpsmapFilter')?document.getElementById('gpsmapFilter').value:'active';
+  var typeFilter=document.getElementById('gpsmapType')?document.getElementById('gpsmapType').value:'all';
+  var vhFilter=document.getElementById('gpsmapVh')?document.getElementById('gpsmapVh').value:'all';
+  var drFilter=document.getElementById('gpsmapDr')?document.getElementById('gpsmapDr').value:'all';
+  var today=new Date().toISOString().slice(0,10);
+  var missions=MI.filter(function(m){
     if(filter==='active')return m.s==='EN_COURS'||m.s==='PLANIFIEE';
     if(filter==='today')return m.dateD===today||m.dateF===today||(m.dateD<=today&&m.dateF>=today);
     return true;
   });
   if(typeFilter!=='all'){
-    missions=missions.filter(m=>{const v=V.find(x=>x.c===m.vh);return v&&v.t===typeFilter});
+    missions=missions.filter(function(m){var v=V.find(function(x){return x.c===m.vh});return v&&v.t===typeFilter});
+  }
+  if(vhFilter!=='all'){
+    missions=missions.filter(function(m){return m.vh===vhFilter});
+  }
+  if(drFilter!=='all'){
+    missions=missions.filter(function(m){return m.dr===drFilter});
   }
   // KPI
-  const kpiEl=document.getElementById('gpsmapKPI');
+  var kpiEl=document.getElementById('gpsmapKPI');
   if(kpiEl){
-    const nbActive=missions.length;
-    const nbVh=new Set(missions.map(m=>m.vh)).size;
-    const nbDr=new Set(missions.map(m=>m.dr)).size;
-    const totalKm=missions.reduce((s,m)=>s+(m.d||0),0);
+    var nbActive=missions.length;
+    var nbVh=new Set(missions.map(function(m){return m.vh})).size;
+    var nbDr=new Set(missions.map(function(m){return m.dr})).size;
+    var totalKm=missions.reduce(function(s,m){return s+(m.d||0)},0);
     kpiEl.innerHTML='<div class="sc"><div class="sl">Missions</div><div class="sv" style="color:var(--b6)">'+nbActive+'</div></div><div class="sc"><div class="sl">Vehicules</div><div class="sv" style="color:var(--g6)">'+nbVh+'</div></div><div class="sc"><div class="sl">Chauffeurs</div><div class="sv">'+nbDr+'</div></div><div class="sc"><div class="sl">Km Total</div><div class="sv">'+fk(totalKm)+'</div></div>';
   }
   // Map
   if(typeof L==='undefined'){ct.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--tm);font-size:.8rem">Chargement carte...</div>';return}
   if(_leafletMaps['gpsOverviewMap']){try{_leafletMaps['gpsOverviewMap'].remove()}catch(e){}_leafletMaps['gpsOverviewMap']=null}
-  const map=L.map(ct,{zoomControl:true,attributionControl:true,scrollWheelZoom:true});
+  var map=L.map(ct,{zoomControl:true,attributionControl:true,scrollWheelZoom:true});
   _leafletMaps['gpsOverviewMap']=map;
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'OpenStreetMap',maxZoom:18}).addTo(map);
   if(!missions.length){
     map.setView([28.5,2.5],5);
-    const legendEl=document.getElementById('gpsmapLegend');
-    if(legendEl)legendEl.innerHTML='Aucune mission correspondant au filtre.';
+    var legendEl2=document.getElementById('gpsmapLegend');
+    if(legendEl2)legendEl2.innerHTML='Aucune mission correspondant au filtre.';
     return;
   }
-  const allCoords=[];
-  const drawnVh=new Set();
-  missions.forEach(m=>{
-    const v=V.find(x=>x.c===m.vh);
-    const vType=v?v.t:'LEGER';
-    const drNm=D.find(d=>d.n===m.dr);
-    const drLabel=drNm?drNm.nm:m.dr;
-    // Position vehicle at departure location
-    const geoFrom=resolveGeo(m.fr);
-    const geoTo=resolveGeo(m.to);
-    if(geoFrom&&!drawnVh.has(m.vh)){
-      drawnVh.add(m.vh);
-      allCoords.push([geoFrom.lat,geoFrom.lon]);
-      const iconSvg=_vhTypeIcon(vType);
-      const statusColor=m.s==='EN_COURS'?'#22c55e':m.s==='PLANIFIEE'?'#3b82f6':'#94a3b8';
-      const dur=m.d?Math.round(m.d/80*10)/10:0;
-      const popupContent='<div style="font-size:12px;line-height:1.5"><strong>'+m.vh+'</strong> — '+(v?v.b+' '+v.m:'')+'<br>Chauffeur: <strong>'+drLabel+'</strong><br>Mission: '+m.n+' ('+m.s+')<br>'+m.fr+' → '+m.to+'<br>'+fk(m.d||0)+' km, ~'+dur+'h</div>';
-      const icon=L.divIcon({className:'',html:'<div style="display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:'+statusColor+';border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);flex-shrink:0">'+iconSvg+'</div><div style="background:rgba(255,255,255,.95);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600;font-family:Inter,sans-serif;color:#1e293b;box-shadow:0 1px 3px rgba(0,0,0,.15);border:1px solid '+statusColor+'40;line-height:1.2">'+m.vh+'<br><span style="font-size:8px;color:var(--tm)">'+drLabel.split(' ')[0]+'</span></div></div>',iconSize:[0,0],iconAnchor:[14,14]});
-      L.marker([geoFrom.lat,geoFrom.lon],{icon}).addTo(map).bindPopup(popupContent);
+  var allCoords=[];
+  missions.forEach(function(m){
+    var v=V.find(function(x){return x.c===m.vh});
+    var vType=v?v.t:'LEGER';
+    var drNm=D.find(function(d){return d.n===m.dr});
+    var drLabel=drNm?drNm.nm:(m.dr||'');
+    var geoFrom=resolveGeo(m.fr);
+    var geoTo=resolveGeo(m.to);
+    // Calculate estimated position for EN_COURS missions
+    var pos=null;
+    if(m.s==='EN_COURS'){
+      pos=_estimatePosition(m);
+    }else if(m.s==='PLANIFIEE'){
+      if(geoFrom)pos={lat:geoFrom.lat,lon:geoFrom.lon,pct:0,label:m.fr+' (depart prevu)'};
+    }else{
+      if(geoTo)pos={lat:geoTo.lat,lon:geoTo.lon,pct:100,label:m.to+' (termine)'};
+      else if(geoFrom)pos={lat:geoFrom.lat,lon:geoFrom.lon,pct:100,label:m.fr};
     }
-    // Draw route line
+    if(!pos&&geoFrom)pos={lat:geoFrom.lat,lon:geoFrom.lon,pct:0,label:m.fr};
+    if(!pos)return;
+    allCoords.push([pos.lat,pos.lon]);
+    var iconSvg=_vhTypeIcon(vType);
+    var statusColor=m.s==='EN_COURS'?'#22c55e':m.s==='PLANIFIEE'?'#3b82f6':m.s==='TERMINEE'?'#f59e0b':'#94a3b8';
+    var dur=m.d?Math.round(m.d/80*10)/10:0;
+    var pctBar=pos.pct!=null?'<div style="width:60px;height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:'+pos.pct+'%;height:100%;background:'+statusColor+';border-radius:3px"></div></div><span style="font-size:9px;color:#64748b">'+pos.pct+'% du trajet</span>':'';
+    var popupContent='<div style="font-size:12px;line-height:1.5"><strong>'+m.vh+'</strong> — '+(v?v.b+' '+v.m:'')+'<br>Chauffeur: <strong>'+drLabel+'</strong><br>Mission: '+m.n+' ('+m.s+')<br>'+m.fr+' &rarr; '+m.to+'<br>'+fk(m.d||0)+' km, ~'+dur+'h<br>Position: '+pos.label+pctBar+'</div>';
+    var icon=L.divIcon({className:'',html:'<div style="display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:'+statusColor+';border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);flex-shrink:0">'+iconSvg+'</div><div style="background:rgba(255,255,255,.95);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600;font-family:Inter,sans-serif;color:#1e293b;box-shadow:0 1px 3px rgba(0,0,0,.15);border:1px solid '+statusColor+'40;line-height:1.2">'+m.vh+'<br><span style="font-size:8px;color:#64748b">'+drLabel.split(' ')[0]+'</span></div></div>',iconSize:[0,0],iconAnchor:[14,14]});
+    L.marker([pos.lat,pos.lon],{icon:icon}).addTo(map).bindPopup(popupContent);
+    // Draw route line from->to
     if(geoFrom&&geoTo){
-      allCoords.push([geoTo.lat,geoTo.lon]);
-      const routeColor=vType==='LOURD'?'#1e40af':vType==='ENGIN'?'#b45309':'#059669';
-      L.polyline([[geoFrom.lat,geoFrom.lon],[geoTo.lat,geoTo.lon]],{color:routeColor,weight:2,opacity:0.5,dashArray:'6,4'}).addTo(map);
+      if(pos.pct<100)allCoords.push([geoTo.lat,geoTo.lon]);
+      allCoords.push([geoFrom.lat,geoFrom.lon]);
+      var routeColor=vType==='LOURD'?'#1e40af':vType==='ENGIN'?'#b45309':'#059669';
+      L.polyline([[geoFrom.lat,geoFrom.lon],[geoTo.lat,geoTo.lon]],{color:routeColor,weight:2,opacity:0.4,dashArray:'6,4'}).addTo(map);
     }
   });
   if(allCoords.length>=2)map.fitBounds(L.latLngBounds(allCoords),{padding:[40,40],maxZoom:10});
   else if(allCoords.length===1)map.setView(allCoords[0],8);
   else map.setView([28.5,2.5],5);
   // Legend
-  const legendEl=document.getElementById('gpsmapLegend');
+  var legendEl=document.getElementById('gpsmapLegend');
   if(legendEl){
-    legendEl.innerHTML='<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;margin-right:4px"></span>En cours</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3b82f6;margin-right:4px"></span>Planifiee</span><span style="display:flex;align-items:center;gap:3px">'+_vhTypeIcon('LEGER')+' Voiture</span><span style="display:flex;align-items:center;gap:3px">'+_vhTypeIcon('LOURD')+' Camion</span><span style="display:flex;align-items:center;gap:3px">'+_vhTypeIcon('ENGIN')+' Engin</span><span style="margin-left:auto;color:var(--tm)">'+missions.length+' missions affichees</span></div>';
+    legendEl.innerHTML='<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;margin-right:4px"></span>En cours</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3b82f6;margin-right:4px"></span>Planifiee</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f59e0b;margin-right:4px"></span>Terminee</span><span style="display:flex;align-items:center;gap:3px">'+_vhTypeIcon('LEGER')+' Voiture</span><span style="display:flex;align-items:center;gap:3px">'+_vhTypeIcon('LOURD')+' Camion</span><span style="display:flex;align-items:center;gap:3px">'+_vhTypeIcon('ENGIN')+' Engin</span><span style="margin-left:auto;color:var(--tm)">'+missions.length+' missions - Position estimee a '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'</span></div>';
   }
 }
 
