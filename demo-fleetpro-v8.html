@@ -1783,6 +1783,7 @@ function gpsCalc(from,to){
 // ═══ OSRM ROUTING — vrai itineraire routier ═══
 let _osrmCache={};
 let _osrmDebounce=null;
+let _osrmGeneration=0;
 async function osrmRoute(coordsList){
   if(!coordsList||coordsList.length<2)return null;
   const key=coordsList.map(c=>c[1].toFixed(4)+','+c[0].toFixed(4)).join(';');
@@ -1808,6 +1809,7 @@ function resolveCoords(cityName){
 }
 // Async route calculation — calls OSRM, updates km + draws real road
 async function osrmCalcRoute(){
+  const gen=++_osrmGeneration;
   const from=document.getElementById('fMiFrom')?.value?.trim()||'';
   const to=document.getElementById('fMiTo')?.value?.trim()||'';
   if(!from||!to)return;
@@ -1830,21 +1832,25 @@ async function osrmCalcRoute(){
     const retCoords=retStops.map(s=>resolveCoords(s)).filter(Boolean);
     if(retCoords.length>=2){const r=await osrmRoute(retCoords);if(r){retKm=r.km;retMin=r.dur;retGeo=r.geometry}}
   }
-  // Update fields only if we got OSRM results
-  if(allerKm>0||retKm>0){
-    const totalKm=allerKm+retKm,totalMin=allerMin+retMin;
+  // Update fields — only overwrite each leg when OSRM resolved it
+  if(gen!==_osrmGeneration)return;
+  const fAller=document.getElementById('fMiDistAller');
+  const fRetour=document.getElementById('fMiDistRetour');
+  if(allerKm>0&&fAller)fAller.value=allerKm;
+  if(retKm>0&&fRetour)fRetour.value=retKm;
+  if(retType==='none'&&fRetour)fRetour.value=0;
+  const finalAller=parseInt(fAller?.value)||0;
+  const finalRetour=parseInt(fRetour?.value)||0;
+  const finalTotal=finalAller+finalRetour;
+  document.getElementById('fMiDist').value=finalTotal;
+  if(finalTotal>0){
     const repos=wps.length*(parseInt(document.getElementById('fMiRepos')?.value)||0);
-    const fAller=document.getElementById('fMiDistAller');
-    const fRetour=document.getElementById('fMiDistRetour');
-    if(fAller)fAller.value=allerKm;
-    if(fRetour)fRetour.value=retKm;
-    document.getElementById('fMiDist').value=totalKm;
-    document.getElementById('fMiDur').value=Math.round((totalMin+repos)/60*10)/10;
+    document.getElementById('fMiDur').value=Math.round((finalTotal/80*60+repos)/60*10)/10;
     const lbl=retType==='none'?'Aller seul':'Aller'+(wps.length?' MP':'')+' + Retour'+(retType==='multi'?' MP':'');
-    document.getElementById('fMiGPS').innerHTML='<span style="color:var(--g6)">&#9679;</span> Route '+lbl+': <strong>'+totalKm+'km</strong> (A:'+allerKm+' R:'+retKm+'), ~'+totalMin+'min';
+    document.getElementById('fMiGPS').innerHTML='<span style="color:var(--g6)">&#9679;</span> Route '+lbl+': <strong>'+finalTotal+'km</strong> (A:'+finalAller+' R:'+finalRetour+')';
     document.getElementById('fMiGPS').style.color='var(--g6)';
-    renderFraisPreview();
   }
+  renderFraisPreview();
   // Draw real road on map
   drawGPSMapOSRM(allerGeo,retGeo,allerStops,retType);
 }
@@ -5207,9 +5213,15 @@ function _estimatePosition(m){
   if(isNaN(dep.getTime()))dep=new Date(m.dateD+'T07:00');
   var elapsedH=(now-dep)/(1000*60*60);
   if(elapsedH<0)return{lat:geos[0].lat,lon:geos[0].lon,pct:0,label:geos[0].name+' (depart)'};
-  var avgSpeed=80;
+  var finStr=m.dateF+'T'+(m.heureF||'17:00');
+  var fin=new Date(finStr);
+  if(isNaN(fin.getTime()))fin=new Date(m.dateF+'T17:00');
+  var missionDurH=(fin-dep)/(1000*60*60);
+  if(missionDurH<=0)missionDurH=10;
+  var avgSpeed=totalDist/missionDurH;
+  if(avgSpeed<5)avgSpeed=5;if(avgSpeed>120)avgSpeed=120;
   var distTraveled=elapsedH*avgSpeed;
-  if(distTraveled>=totalDist)return{lat:geos[geos.length-1].lat,lon:geos[geos.length-1].lon,pct:100,label:geos[geos.length-1].name+' (arrive)'};
+  if(elapsedH>=missionDurH||distTraveled>=totalDist)return{lat:geos[geos.length-1].lat,lon:geos[geos.length-1].lon,pct:100,label:geos[geos.length-1].name+' (arrive)'};
   // Walk segments to find position
   var cumDist=0;
   for(var k=0;k<segments.length;k++){
@@ -5219,7 +5231,7 @@ function _estimatePosition(m){
       var lon2=segments[k].from.lon+(segments[k].to.lon-segments[k].from.lon)*ratio;
       var pct=Math.round(distTraveled/totalDist*100);
       var nearLabel=ratio<0.5?segments[k].from.name:segments[k].to.name;
-      return{lat:lat2,lon:lon2,pct:pct,label:'~'+nearLabel+' ('+pct+'%)',distDone:Math.round(distTraveled),distTotal:Math.round(totalDist)};
+      return{lat:lat2,lon:lon2,pct:pct,label:'~'+nearLabel+' ('+pct+'%, '+Math.round(distTraveled)+'km/'+Math.round(totalDist)+'km)',distDone:Math.round(distTraveled),distTotal:Math.round(totalDist)};
     }
     cumDist+=segments[k].km;
   }
@@ -5293,8 +5305,10 @@ function renderGPSOverview(){
     var iconSvg=_vhTypeIcon(vType);
     var statusColor=m.s==='EN_COURS'?'#22c55e':m.s==='PLANIFIEE'?'#3b82f6':m.s==='TERMINEE'?'#f59e0b':'#94a3b8';
     var dur=m.d?Math.round(m.d/80*10)/10:0;
+    var dateDebut=m.dateD+(m.heureD?' '+m.heureD:'');
+    var dateFin=m.dateF+(m.heureF?' '+m.heureF:'');
     var pctBar=pos.pct!=null?'<div style="width:60px;height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:'+pos.pct+'%;height:100%;background:'+statusColor+';border-radius:3px"></div></div><span style="font-size:9px;color:#64748b">'+pos.pct+'% du trajet</span>':'';
-    var popupContent='<div style="font-size:12px;line-height:1.5"><strong>'+m.vh+'</strong> — '+(v?v.b+' '+v.m:'')+'<br>Chauffeur: <strong>'+drLabel+'</strong><br>Mission: '+m.n+' ('+m.s+')<br>'+m.fr+' &rarr; '+m.to+'<br>'+fk(m.d||0)+' km, ~'+dur+'h<br>Position: '+pos.label+pctBar+'</div>';
+    var popupContent='<div style="font-size:12px;line-height:1.5"><strong>'+m.vh+'</strong> — '+(v?v.b+' '+v.m:'')+'<br>Chauffeur: <strong>'+drLabel+'</strong><br>Mission: '+m.n+' ('+m.s+')<br><span style="color:#16a34a">Debut:</span> '+dateDebut+' &mdash; <span style="color:#dc2626">Fin:</span> '+dateFin+'<br>'+m.fr+' &rarr; '+m.to+'<br>'+fk(m.d||0)+' km, ~'+dur+'h<br>Position: '+pos.label+pctBar+'</div>';
     var icon=L.divIcon({className:'',html:'<div style="display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:'+statusColor+';border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);flex-shrink:0">'+iconSvg+'</div><div style="background:rgba(255,255,255,.95);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600;font-family:Inter,sans-serif;color:#1e293b;box-shadow:0 1px 3px rgba(0,0,0,.15);border:1px solid '+statusColor+'40;line-height:1.2">'+m.vh+'<br><span style="font-size:8px;color:#64748b">'+drLabel.split(' ')[0]+'</span></div></div>',iconSize:[0,0],iconAnchor:[14,14]});
     L.marker([pos.lat,pos.lon],{icon:icon}).addTo(map).bindPopup(popupContent);
     // Draw route line from->to
