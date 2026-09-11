@@ -1,112 +1,64 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { DependencyService } from '../common/dependency.service';
+import { requireFields } from '../common/require-fields';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Vehicle } from './vehicle.entity';
-import { CreateVehicleDto } from './dto/create-vehicle.dto';
-import { UpdateVehicleDto } from './dto/update-vehicle.dto';
-import { PaginationDto, PaginatedResultDto } from '../common/dto/pagination.dto';
-import { VehicleType, VehicleStatus, OwnershipType } from '../common/enums';
+import { Vehicle } from './vehicles.entity';
 
 @Injectable()
-export class VehiclesService {
+export class VehicleService {
   constructor(
     @InjectRepository(Vehicle)
-    private readonly vehicleRepository: Repository<Vehicle>,
+    private readonly repo: Repository<Vehicle>,
+    private readonly dependency: DependencyService,
   ) {}
 
-  async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
-    const existing = await this.vehicleRepository.findOne({
-      where: { code: createVehicleDto.code },
-    });
-    if (existing) {
-      throw new ConflictException(`Un vehicule avec le code ${createVehicleDto.code} existe deja`);
-    }
-
-    const vehicle = this.vehicleRepository.create(createVehicleDto);
-    return this.vehicleRepository.save(vehicle);
-  }
-
-  async findAll(
-    paginationDto: PaginationDto,
-    filters?: { type?: VehicleType; status?: VehicleStatus; ownershipType?: OwnershipType },
-  ): Promise<PaginatedResultDto<Vehicle>> {
-    const qb = this.vehicleRepository.createQueryBuilder('vehicle');
-
-    if (filters?.type) {
-      qb.andWhere('vehicle.type = :type', { type: filters.type });
-    }
-    if (filters?.status) {
-      qb.andWhere('vehicle.status = :status', { status: filters.status });
-    }
-    if (filters?.ownershipType) {
-      qb.andWhere('vehicle.ownershipType = :ownershipType', { ownershipType: filters.ownershipType });
-    }
-
-    qb.orderBy('vehicle.createdAt', 'DESC')
-      .skip(paginationDto.skip)
-      .take(paginationDto.limit);
-
-    const [data, total] = await qb.getManyAndCount();
-    return new PaginatedResultDto(data, total, paginationDto.page, paginationDto.limit);
+  findAll(): Promise<Vehicle[]> {
+    return this.repo.find();
   }
 
   async findOne(id: string): Promise<Vehicle> {
-    const vehicle = await this.vehicleRepository.findOne({ where: { id } });
-    if (!vehicle) {
-      throw new NotFoundException(`Vehicule #${id} non trouve`);
-    }
-    return vehicle;
+    const row = await this.repo.findOne({ where: { code: id as never } });
+    if (!row) throw new NotFoundException('Vehicle ' + id + ' introuvable');
+    return row;
   }
 
-  async update(id: string, updateVehicleDto: UpdateVehicleDto): Promise<Vehicle> {
-    const vehicle = await this.findOne(id);
-
-    if (updateVehicleDto.code && updateVehicleDto.code !== vehicle.code) {
-      const existing = await this.vehicleRepository.findOne({
-        where: { code: updateVehicleDto.code },
-      });
-      if (existing) {
-        throw new ConflictException(`Un vehicule avec le code ${updateVehicleDto.code} existe deja`);
-      }
-    }
-
-    Object.assign(vehicle, updateVehicleDto);
-    return this.vehicleRepository.save(vehicle);
+  /** Norme corrigée = norme constructeur × (1 + % correction) — cohérence garantie côté serveur. */
+  private applyNormCorrection(v: Partial<Vehicle>): void {
+    const r2 = (n: number) => Math.round(n * 100) / 100;
+    const pct = v.normCorrectionPct;
+    if (pct == null) return;
+    if (v.normOff != null) v.normCorr = r2(v.normOff * (1 + pct / 100));
+    if (v.normOffH != null) v.normCorrH = r2(v.normOffH * (1 + pct / 100));
   }
 
-  async remove(id: string): Promise<void> {
-    const vehicle = await this.findOne(id);
-    await this.vehicleRepository.remove(vehicle);
+  create(data: Partial<Vehicle>): Promise<Vehicle> {
+    requireFields(data as Record<string, unknown>, [
+      { key: 'code', label: 'code / immatriculation' },
+      { key: 'brand', label: 'marque' },
+      { key: 'model', label: 'modèle' },
+      { key: 'type', label: 'type (léger / lourd / engin / remorque)' },
+    ]);
+    this.applyNormCorrection(data);
+    return this.repo.save(this.repo.create(data));
   }
 
-  async getStats() {
-    const totalVehicles = await this.vehicleRepository.count();
+  async update(id: string, data: Partial<Vehicle>): Promise<Vehicle> {
+    const row = await this.findOne(id);
+    Object.assign(row, data);
+    this.applyNormCorrection(row);
+    return this.repo.save(row);
+  }
 
-    const byStatus = await this.vehicleRepository
-      .createQueryBuilder('vehicle')
-      .select('vehicle.status', 'status')
-      .addSelect('COUNT(*)', 'count')
-      .groupBy('vehicle.status')
-      .getRawMany();
+  async remove(id: string): Promise<{ deleted: true }> {
+    await this.findOne(id);
+    await this.dependency.assertRemovable('vehicles', id);
+    await this.repo.delete(id);
+    return { deleted: true };
+  }
 
-    const byType = await this.vehicleRepository
-      .createQueryBuilder('vehicle')
-      .select('vehicle.type', 'type')
-      .addSelect('COUNT(*)', 'count')
-      .groupBy('vehicle.type')
-      .getRawMany();
-
-    const byOwnership = await this.vehicleRepository
-      .createQueryBuilder('vehicle')
-      .select('vehicle.ownershipType', 'ownershipType')
-      .addSelect('COUNT(*)', 'count')
-      .groupBy('vehicle.ownershipType')
-      .getRawMany();
-
-    return { totalVehicles, byStatus, byType, byOwnership };
+  async replaceAll(rows: Partial<Vehicle>[]): Promise<Vehicle[]> {
+    await this.repo.clear();
+    return this.repo.save(rows.map((row) => this.repo.create(row)));
   }
 }

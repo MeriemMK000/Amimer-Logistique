@@ -1,0 +1,4149 @@
+{
+  "V": [
+    {
+      "c": "FL-001",
+      "b": "Hino",
+      "m": "300 815 (benne 3.5T)",
+      "t": "LOURD",
+      "pl": "01234-116-16",
+      "s": "DISPONIBLE",
+      "km": 87420,
+      "fu": "GASOIL",
+      "ow": "PROPRE",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 80,
+      "no": 8.5,
+      "nc": 8.9,
+      "ct": "2026-11-15",
+      "cts": "VALIDE",
+      "ass": "2026-08-31",
+      "assn": "ASS-2024-1847",
+      "asss": "URGENT",
+      "cg": "2028-03-20",
+      "vi": "2027-01-31",
+      "dr": "EMP-102",
+      "panneH": 0,
+      "coutH": 3500,
+      "equip": [
+        {
+          "nom": "Roue de secours",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Extincteur",
+          "qty": 2,
+          "etat": "BON",
+          "notes": "À remplacer",
+          "expiry": "2026-07-20"
+        },
+        {
+          "nom": "Triangle de signalisation",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Cric hydraulique",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        }
+      ],
+      "genre": "CAM",
+      "lessor": null,
+      "year": 2020,
+      "cv": 12,
+      "site": "Seddouk",
+      "chassis": "JHFDE8JEK0M041201",
+      "seats": 2,
+      "tires": 6,
+      "ton": 1.5
+    },
+    {
+      "c": "FL-002",
+      "b": "Fiat",
+      "m": "Tipo Sedan 1.4",
+      "t": "LEGER",
+      "pl": "02891-117-16",
+      "s": "EN_MISSION",
+      "km": 42180,
+      "fu": "ESSENCE",
+      "ow": "LEASING",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 45,
+      "no": 5.8,
+      "nc": 6.1,
+      "ct": "2027-05-20",
+      "cts": "VALIDE",
+      "ass": "2027-04-15",
+      "assn": "ASS-2024-1902",
+      "asss": "VALIDE",
+      "cg": "2028-06-10",
+      "vi": "2027-01-31",
+      "dr": "EMP-118",
+      "panneH": 0,
+      "coutH": 1800,
+      "equip": [
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        },
+        {
+          "nom": "Gilet réfléchissant",
+          "qty": 2,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Triangle de signalisation",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        }
+      ],
+      "genre": "VIP",
+      "lessor": null,
+      "year": 2022,
+      "cv": 7,
+      "site": "Seddouk",
+      "chassis": "ZFA35600007654218",
+      "seats": 4,
+      "tires": 4,
+      "ton": null
+    },
+    {
+      "c": "FL-003",
+      "b": "MAN",
+      "m": "TGS 33.400 6x4",
+      "t": "LOURD",
+      "pl": "00312-118-09",
+      "s": "EN_MISSION",
+      "km": 312600,
+      "fu": "GASOIL",
+      "ow": "PROPRE",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 400,
+      "no": 28,
+      "nc": 29.4,
+      "ct": "2026-12-01",
+      "cts": "VALIDE",
+      "ass": "2027-02-28",
+      "assn": "ASS-2025-0103",
+      "asss": "VALIDE",
+      "cg": "2028-09-15",
+      "vi": "2027-01-31",
+      "dr": "EMP-101",
+      "panneH": 0,
+      "coutH": 5500,
+      "equip": [
+        {
+          "nom": "Roue de secours",
+          "qty": 2,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Extincteur",
+          "qty": 3,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        },
+        {
+          "nom": "Chaînes neige",
+          "qty": 1,
+          "etat": "USURE",
+          "notes": "À remplacer"
+        },
+        {
+          "nom": "Bâche de protection",
+          "qty": 2,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Câbles de démarrage",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Kit outillage",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "Clés, tournevis"
+        }
+      ],
+      "genre": "TR",
+      "lessor": null,
+      "year": 2018,
+      "cv": 40,
+      "site": "Seddouk",
+      "chassis": "WMA33SZZ8JM612044",
+      "seats": 1,
+      "tires": 10,
+      "ton": 38
+    },
+    {
+      "c": "FL-005",
+      "b": "Renault",
+      "m": "Kerax 380 DXI (porteur grue)",
+      "t": "LOURD",
+      "pl": "00587-119-09",
+      "s": "DISPONIBLE",
+      "km": 248300,
+      "fu": "GASOIL",
+      "ow": "PROPRE",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 400,
+      "no": 30,
+      "nc": 31.5,
+      "ct": "2027-01-20",
+      "cts": "VALIDE",
+      "ass": "2026-10-15",
+      "assn": "ASS-2024-1755",
+      "asss": "VALIDE",
+      "cg": "2029-01-10",
+      "vi": "2027-01-31",
+      "dr": "EMP-108",
+      "panneH": 0,
+      "coutH": 6000,
+      "equip": [
+        {
+          "nom": "Roue de secours",
+          "qty": 2,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Extincteur",
+          "qty": 2,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        },
+        {
+          "nom": "Chaînes neige",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Antenne radio",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        }
+      ],
+      "genre": "CAM",
+      "lessor": null,
+      "year": 2019,
+      "cv": 33,
+      "site": "Seddouk",
+      "chassis": "VF640ACA000012887",
+      "seats": 2,
+      "tires": 6,
+      "ton": 12
+    },
+    {
+      "c": "FL-010",
+      "b": "Fiat",
+      "m": "Doblo Cargo 1.6 MJT",
+      "t": "LEGER",
+      "pl": "03102-116-16",
+      "s": "DISPONIBLE",
+      "km": 56300,
+      "fu": "GASOIL",
+      "ow": "LOCATION",
+      "locEnd": "2027-03-31",
+      "locAlertDays": 60,
+      "locCost": 85000,
+      "locStart": "2025-04-01",
+      "res": 60,
+      "no": 5.5,
+      "nc": 5.8,
+      "ct": "2026-09-30",
+      "cts": "VALIDE",
+      "ass": "2026-12-31",
+      "assn": "ASS-2024-2010",
+      "asss": "VALIDE",
+      "cg": "2027-11-20",
+      "vi": "2027-01-31",
+      "dr": "EMP-115",
+      "panneH": 0,
+      "coutH": 2200,
+      "equip": [
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        },
+        {
+          "nom": "Gilet réfléchissant",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Trousse premiers secours",
+          "qty": 1,
+          "etat": "USURE",
+          "notes": "Incomplète"
+        }
+      ],
+      "genre": "CTTE",
+      "lessor": "EURL SAADNA",
+      "year": 2023,
+      "cv": 6,
+      "site": "Blida",
+      "chassis": "ZFA26300009911234",
+      "seats": 2,
+      "tires": 4,
+      "ton": 0.75
+    },
+    {
+      "c": "FL-018",
+      "b": "Isuzu",
+      "m": "NQR 90 (plateau)",
+      "t": "LOURD",
+      "pl": "00891-120-31",
+      "s": "EN_PANNE",
+      "km": 145200,
+      "fu": "GASOIL",
+      "ow": "PROPRE",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 100,
+      "no": 14,
+      "nc": 14.7,
+      "ct": "2027-03-15",
+      "cts": "VALIDE",
+      "ass": "2027-01-20",
+      "assn": "ASS-2025-0088",
+      "asss": "VALIDE",
+      "cg": "2028-04-10",
+      "vi": "2027-01-31",
+      "dr": null,
+      "panneH": 72,
+      "coutH": 4000,
+      "equip": [
+        {
+          "nom": "Roue de secours",
+          "qty": 1,
+          "etat": "HS",
+          "notes": "Crevée"
+        },
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        }
+      ],
+      "genre": "CAM",
+      "lessor": null,
+      "year": 2017,
+      "cv": 16,
+      "site": "Seddouk",
+      "chassis": "JAANQR90H07100455",
+      "seats": 2,
+      "tires": 6,
+      "ton": 5.5,
+      "bdStatus": "en_reparation",
+      "repairEta": "2026-09-09"
+    },
+    {
+      "c": "FL-025",
+      "b": "Audi",
+      "m": "A6 2.0 TDI",
+      "t": "LEGER",
+      "pl": "04521-116-16",
+      "s": "DISPONIBLE",
+      "km": 23100,
+      "fu": "GASOIL",
+      "ow": "LEASING",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 55,
+      "no": 5.6,
+      "nc": 5.9,
+      "ct": "2028-02-10",
+      "cts": "VALIDE",
+      "ass": "2027-08-30",
+      "assn": "ASS-2025-0210",
+      "asss": "VALIDE",
+      "cg": "2029-05-15",
+      "vi": "2027-01-31",
+      "dr": "EMP-105",
+      "panneH": 0,
+      "coutH": 1500,
+      "equip": [
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2026-10-13"
+        },
+        {
+          "nom": "Triangle de signalisation",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Gilet réfléchissant",
+          "qty": 2,
+          "etat": "BON",
+          "notes": ""
+        }
+      ],
+      "genre": "VIP",
+      "lessor": null,
+      "year": 2022,
+      "cv": 11,
+      "site": "Seddouk",
+      "chassis": "WAUZZZF20MN098311",
+      "seats": 4,
+      "tires": 4,
+      "ton": null
+    },
+    {
+      "c": "FL-042",
+      "b": "Renault",
+      "m": "Kangoo Express 1.5 dCi",
+      "t": "LEGER",
+      "pl": "05102-121-16",
+      "s": "HORS_SERVICE",
+      "km": 68400,
+      "fu": "GASOIL",
+      "ow": "LOCATION",
+      "locEnd": "2026-09-15",
+      "locAlertDays": 15,
+      "locCost": 72000,
+      "locStart": "2024-10-01",
+      "res": 50,
+      "no": 5.2,
+      "nc": 5.5,
+      "ct": "2026-08-10",
+      "cts": "EXPIRE",
+      "ass": "2026-07-31",
+      "assn": "ASS-2024-1990",
+      "asss": "EXPIRE",
+      "cg": "2027-09-01",
+      "vi": "2026-12-31",
+      "dr": null,
+      "panneH": 55,
+      "coutH": 2000,
+      "equip": [],
+      "genre": "CTTE",
+      "lessor": "SOVAC",
+      "year": 2021,
+      "cv": 5,
+      "site": "Blida",
+      "chassis": "VF1FW51J167221904",
+      "seats": 1,
+      "tires": 4,
+      "ton": 0.6,
+      "bdStatus": "non_pris_en_charge",
+      "repairEta": null
+    },
+    {
+      "c": "FL-055",
+      "b": "JCB",
+      "m": "3CX (rétrochargeur)",
+      "t": "ENGIN",
+      "pl": "—",
+      "s": "EN_MISSION",
+      "km": 4820,
+      "fu": "GASOIL",
+      "ow": "LOCATION",
+      "locEnd": "2026-10-10",
+      "locAlertDays": 30,
+      "locCost": 350000,
+      "locStart": "2025-11-01",
+      "res": 300,
+      "no": 18,
+      "nc": 20.7,
+      "noH": 12.5,
+      "ncH": 14.4,
+      "ct": "—",
+      "cts": "N/A",
+      "ass": "2026-11-30",
+      "assn": "ASS-2025-0320",
+      "asss": "VALIDE",
+      "cg": "—",
+      "vi": "—",
+      "dr": null,
+      "panneH": 0,
+      "hm": 4820,
+      "coutH": 15000,
+      "equip": [
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        },
+        {
+          "nom": "Kit outillage",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        }
+      ],
+      "genre": "ENGIN",
+      "lessor": "EURL SAADNA",
+      "year": 2020,
+      "cv": null,
+      "site": "Gassi Touil",
+      "chassis": "JCB3CX00T02551477",
+      "seats": 1,
+      "tires": 4,
+      "ton": null
+    },
+    {
+      "c": "FL-060",
+      "b": "Caterpillar",
+      "m": "428F2 (rétrochargeur)",
+      "t": "ENGIN",
+      "pl": "—",
+      "s": "DISPONIBLE",
+      "km": 6310,
+      "fu": "GASOIL",
+      "ow": "LOCATION",
+      "locEnd": "2027-06-30",
+      "locAlertDays": 60,
+      "locCost": 420000,
+      "locStart": "2025-07-01",
+      "res": 350,
+      "no": 16,
+      "nc": 18.4,
+      "noH": 11,
+      "ncH": 12.7,
+      "ct": "—",
+      "cts": "N/A",
+      "ass": "2027-03-15",
+      "assn": "ASS-2025-0415",
+      "asss": "VALIDE",
+      "cg": "—",
+      "vi": "—",
+      "dr": null,
+      "panneH": 0,
+      "hm": 6310,
+      "coutH": 18000,
+      "equip": [
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        },
+        {
+          "nom": "Kit outillage",
+          "qty": 1,
+          "etat": "USURE",
+          "notes": "Incomplet"
+        }
+      ],
+      "genre": "ENGIN",
+      "lessor": "Loc. Sud Engins",
+      "year": 2019,
+      "cv": null,
+      "site": "Gassi Touil",
+      "chassis": "CAT0428FLLBF01922",
+      "seats": 1,
+      "tires": 4,
+      "ton": null
+    },
+    {
+      "c": "FL-065",
+      "b": "Liebherr",
+      "m": "LTM 1050 (grue mobile)",
+      "t": "ENGIN",
+      "pl": "—",
+      "s": "EN_PANNE",
+      "km": 3100,
+      "fu": "GASOIL",
+      "ow": "PROPRE",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 280,
+      "no": 15,
+      "nc": 17.3,
+      "noH": 10.5,
+      "ncH": 12.1,
+      "ct": "—",
+      "cts": "N/A",
+      "ass": "2027-02-28",
+      "assn": "ASS-2025-0390",
+      "asss": "VALIDE",
+      "cg": "—",
+      "vi": "—",
+      "dr": null,
+      "panneH": 96,
+      "hm": 3100,
+      "coutH": 14000,
+      "equip": [
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        }
+      ],
+      "genre": "ENGIN",
+      "lessor": null,
+      "year": 2016,
+      "cv": null,
+      "site": "El Goléa",
+      "chassis": "W09054221H1050318",
+      "seats": 1,
+      "tires": 8,
+      "ton": null,
+      "bdStatus": "pris_en_charge",
+      "repairEta": "2026-09-23"
+    },
+    {
+      "c": "FL-071",
+      "b": "Comet",
+      "m": "Semi-remorque 40T (porte-engin)",
+      "t": "REMORQUE",
+      "pl": "00201-122-09",
+      "s": "DISPONIBLE",
+      "km": 189500,
+      "fu": "—",
+      "ow": "PROPRE",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 0,
+      "no": 0,
+      "nc": 0,
+      "ct": "2027-06-30",
+      "cts": "VALIDE",
+      "ass": "2027-05-15",
+      "assn": "ASS-2025-0500",
+      "asss": "VALIDE",
+      "cg": "2029-02-20",
+      "vi": "2027-01-31",
+      "dr": null,
+      "panneH": 0,
+      "coutH": 0,
+      "equip": [
+        {
+          "nom": "Bâche de protection",
+          "qty": 3,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Cône de signalisation",
+          "qty": 4,
+          "etat": "BON",
+          "notes": ""
+        }
+      ],
+      "genre": "REMORQUE",
+      "lessor": null,
+      "year": 2019,
+      "cv": null,
+      "site": "Seddouk",
+      "chassis": "VG9SR3400K1140077",
+      "seats": 0,
+      "tires": 8,
+      "ton": 27
+    },
+    {
+      "c": "FL-030",
+      "b": "Renault",
+      "m": "Trafic Combi 2.0 dCi (9 places)",
+      "t": "LEGER",
+      "pl": "06012-122-16",
+      "s": "DISPONIBLE",
+      "km": 38700,
+      "fu": "GASOIL",
+      "ow": "PROPRE",
+      "locEnd": null,
+      "locAlertDays": 30,
+      "res": 80,
+      "no": 7.8,
+      "nc": 8.2,
+      "ct": "2027-07-15",
+      "cts": "VALIDE",
+      "ass": "2027-05-20",
+      "assn": "ASS-2025-0611",
+      "asss": "VALIDE",
+      "cg": "2029-03-10",
+      "vi": "2027-01-31",
+      "dr": null,
+      "panneH": 0,
+      "coutH": 2600,
+      "genre": "CTTE",
+      "lessor": null,
+      "year": 2022,
+      "cv": 9,
+      "chassis": "VF1FL000067712045",
+      "site": "Seddouk",
+      "seats": 8,
+      "equip": [
+        {
+          "nom": "Extincteur",
+          "qty": 1,
+          "etat": "BON",
+          "notes": "",
+          "expiry": "2027-10-08"
+        },
+        {
+          "nom": "Trousse premiers secours",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Triangle de signalisation",
+          "qty": 1,
+          "etat": "BON",
+          "notes": ""
+        },
+        {
+          "nom": "Gilet réfléchissant",
+          "qty": 4,
+          "etat": "BON",
+          "notes": ""
+        }
+      ],
+      "tires": 4,
+      "ton": 1
+    }
+  ],
+  "D": [
+    {
+      "n": "EMP-101",
+      "nm": "Benmoussa Youcef",
+      "lic": "C+E",
+      "lx": "2027-03-15",
+      "qual": [
+        "ADR",
+        "Frigo"
+      ],
+      "s": "EN_MISSION",
+      "hw": 38,
+      "hm": 156,
+      "fat": 0.79,
+      "vh": "FL-003",
+      "perm": true,
+      "tel": "0555 12 34 56",
+      "coutH": 1200,
+      "plan": [
+        {
+          "t": "MIS",
+          "h1": "06:00",
+          "h2": "18:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "14:00",
+          "h2": "20:00"
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "MIS",
+          "h1": "07:00",
+          "h2": "19:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "06:00",
+          "h2": "17:00"
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        }
+      ]
+    },
+    {
+      "n": "EMP-102",
+      "nm": "Hadj Ali Rachid",
+      "lic": "C",
+      "lx": "2026-11-20",
+      "qual": [
+        "ADR"
+      ],
+      "s": "DISPONIBLE",
+      "hw": 24,
+      "hm": 98,
+      "fat": 0.5,
+      "vh": "FL-001",
+      "perm": true,
+      "tel": "0661 22 33 44",
+      "coutH": 1000,
+      "plan": [
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "MIS",
+          "h1": "08:00",
+          "h2": "12:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "08:00",
+          "h2": "16:00"
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        }
+      ]
+    },
+    {
+      "n": "EMP-105",
+      "nm": "Slimani Karim",
+      "lic": "B",
+      "lx": "2028-06-10",
+      "qual": [],
+      "s": "DISPONIBLE",
+      "hw": 32,
+      "hm": 128,
+      "fat": 0.67,
+      "vh": "FL-025",
+      "perm": false,
+      "tel": "0770 44 55 66",
+      "coutH": 800,
+      "plan": [
+        {
+          "t": "MIS",
+          "h1": "07:30",
+          "h2": "12:00"
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "FRM",
+          "h1": "09:00",
+          "h2": "16:00"
+        },
+        {
+          "t": "FRM",
+          "h1": "09:00",
+          "h2": "16:00"
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        }
+      ]
+    },
+    {
+      "n": "EMP-108",
+      "nm": "Boudiaf Mohamed",
+      "lic": "C+E",
+      "lx": "2027-01-05",
+      "qual": [
+        "ADR",
+        "Matières Dangereuses"
+      ],
+      "s": "EN_MISSION",
+      "hw": 42,
+      "hm": 168,
+      "fat": 0.88,
+      "vh": "FL-005",
+      "perm": true,
+      "tel": "0555 77 88 99",
+      "coutH": 1200,
+      "plan": [
+        {
+          "t": "MIS",
+          "h1": "05:00",
+          "h2": "14:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "06:00",
+          "h2": "18:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "06:00",
+          "h2": "14:00"
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        }
+      ]
+    },
+    {
+      "n": "EMP-112",
+      "nm": "Mebarki Sofiane",
+      "lic": "D",
+      "lx": "2026-09-30",
+      "qual": [
+        "Transport Personnes"
+      ],
+      "s": "EN_REPOS",
+      "hw": 48,
+      "hm": 192,
+      "fat": 0.99,
+      "vh": null,
+      "perm": false,
+      "tel": "0661 11 22 33",
+      "coutH": 900,
+      "plan": [
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "TRP",
+          "h1": "07:00",
+          "h2": "08:30"
+        },
+        {
+          "t": "TRP",
+          "h1": "07:00",
+          "h2": "08:30"
+        }
+      ]
+    },
+    {
+      "n": "EMP-115",
+      "nm": "Khelifi Amine",
+      "lic": "C",
+      "lx": "2028-02-28",
+      "qual": [],
+      "s": "DISPONIBLE",
+      "hw": 18,
+      "hm": 72,
+      "fat": 0.38,
+      "vh": "FL-010",
+      "perm": false,
+      "tel": "0770 99 88 77",
+      "coutH": 850,
+      "plan": [
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "MIS",
+          "h1": "08:00",
+          "h2": "17:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "08:00",
+          "h2": "12:00"
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "MIS",
+          "h1": "07:00",
+          "h2": "15:00"
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        }
+      ]
+    },
+    {
+      "n": "EMP-118",
+      "nm": "Benali Farid",
+      "lic": "B",
+      "lx": "2027-08-15",
+      "qual": [
+        "Frigo"
+      ],
+      "s": "EN_MISSION",
+      "hw": 36,
+      "hm": 144,
+      "fat": 0.75,
+      "vh": "FL-002",
+      "perm": true,
+      "tel": "0555 66 55 44",
+      "coutH": 800,
+      "plan": [
+        {
+          "t": "MIS",
+          "h1": "07:00",
+          "h2": "12:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "07:00",
+          "h2": "16:00"
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "MNT",
+          "h1": "08:00",
+          "h2": "12:00"
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        }
+      ]
+    },
+    {
+      "n": "EMP-122",
+      "nm": "Tounsi Abdelkader",
+      "lic": "C+E",
+      "lx": "2026-12-01",
+      "qual": [
+        "ADR"
+      ],
+      "s": "DISPONIBLE",
+      "hw": 28,
+      "hm": 112,
+      "fat": 0.58,
+      "vh": null,
+      "perm": false,
+      "tel": "0661 44 33 22",
+      "coutH": 1100,
+      "plan": [
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "DIS",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "MIS",
+          "h1": "06:00",
+          "h2": "14:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "06:00",
+          "h2": "20:00"
+        },
+        {
+          "t": "MIS",
+          "h1": "06:00",
+          "h2": "14:00"
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        },
+        {
+          "t": "REP",
+          "h1": "",
+          "h2": ""
+        }
+      ]
+    }
+  ],
+  "MI": [
+    {
+      "n": "M-2026-0847",
+      "dr": "EMP-101",
+      "vh": "FL-003",
+      "fr": "Alger Port",
+      "to": "Oran — Zone Ind.",
+      "s": "EN_COURS",
+      "dateD": "2026-08-26",
+      "heureD": "06:00",
+      "dateF": "2026-08-27",
+      "heureF": "18:00",
+      "d": 432,
+      "z": "Nationale",
+      "co": 68400,
+      "wp": [],
+      "closed": false,
+      "bu": "LOG",
+      "ca": "LOG-TRP"
+    },
+    {
+      "n": "M-2026-0846",
+      "dr": "EMP-108",
+      "vh": "FL-005",
+      "fr": "Hassi Messaoud",
+      "to": "Alger — Rouiba",
+      "s": "EN_COURS",
+      "dateD": "2026-08-25",
+      "heureD": "05:00",
+      "dateF": "2026-08-27",
+      "heureF": "20:00",
+      "d": 810,
+      "z": "Sud",
+      "co": 142800,
+      "wp": [],
+      "closed": false,
+      "bu": "OPS",
+      "ca": "OPS-CHT"
+    },
+    {
+      "n": "M-2026-0845",
+      "dr": "EMP-118",
+      "vh": "FL-002",
+      "fr": "Alger Centre",
+      "to": "Blida — Zone Ind.",
+      "s": "EN_COURS",
+      "dateD": "2026-08-26",
+      "heureD": "07:00",
+      "dateF": "2026-08-26",
+      "heureF": "16:00",
+      "d": 52,
+      "z": "Locale",
+      "co": 5200,
+      "wp": [],
+      "closed": false,
+      "bu": "ADM",
+      "ca": "ADM-ACH"
+    },
+    {
+      "n": "M-2026-0849",
+      "dr": "EMP-101",
+      "vh": "FL-003",
+      "fr": "Alger Rouiba",
+      "to": "Sétif",
+      "s": "PLANIFIEE",
+      "dateD": "2026-08-26",
+      "heureD": "14:00",
+      "dateF": "2026-08-26",
+      "heureF": "20:00",
+      "d": 300,
+      "z": "Nationale",
+      "co": 32000,
+      "wp": [
+        "Bouira",
+        "Bordj Bou Arréridj"
+      ],
+      "closed": false,
+      "bu": "LOG",
+      "ca": "LOG-DIS"
+    },
+    {
+      "n": "M-2026-0844",
+      "dr": "EMP-105",
+      "vh": "FL-025",
+      "fr": "Bab Ezzouar",
+      "to": "Tizi Ouzou",
+      "s": "PLANIFIEE",
+      "dateD": "2026-08-27",
+      "heureD": "07:30",
+      "dateF": "2026-08-27",
+      "heureF": "16:30",
+      "d": 105,
+      "z": "Régionale",
+      "co": 12600,
+      "wp": [],
+      "closed": false,
+      "bu": "ADM",
+      "ca": "ADM-RH"
+    },
+    {
+      "n": "M-2026-0843",
+      "dr": "EMP-115",
+      "vh": "FL-010",
+      "fr": "Alger — Chéraga",
+      "to": "Médéa Centre",
+      "s": "PLANIFIEE",
+      "dateD": "2026-08-28",
+      "heureD": "08:00",
+      "dateF": "2026-08-28",
+      "heureF": "17:00",
+      "d": 88,
+      "z": "Locale",
+      "co": 8800,
+      "wp": [],
+      "closed": false,
+      "bu": "MNT",
+      "ca": "MNT-PRE"
+    },
+    {
+      "n": "M-2026-0840",
+      "dr": "EMP-102",
+      "vh": "FL-001",
+      "fr": "Sétif",
+      "to": "Constantine",
+      "s": "TERMINEE",
+      "dateD": "2026-08-24",
+      "heureD": "06:00",
+      "dateF": "2026-08-24",
+      "heureF": "18:00",
+      "d": 128,
+      "z": "Régionale",
+      "co": 18200,
+      "wp": [],
+      "closed": false,
+      "bu": "LOG",
+      "ca": "LOG-TRP"
+    },
+    {
+      "n": "M-2026-0838",
+      "dr": "EMP-122",
+      "vh": "FL-071",
+      "fr": "Oran Port",
+      "to": "Alger — Rouiba",
+      "s": "TERMINEE",
+      "dateD": "2026-08-23",
+      "heureD": "05:30",
+      "dateF": "2026-08-24",
+      "heureF": "14:00",
+      "d": 420,
+      "z": "Nationale",
+      "co": 52500,
+      "wp": [
+        "Mostaganem",
+        "Chlef",
+        "Blida"
+      ],
+      "closed": false,
+      "bu": "OPS",
+      "ca": "OPS-PRJ"
+    },
+    {
+      "n": "M-2026-0835",
+      "dr": "EMP-101",
+      "vh": "FL-003",
+      "fr": "Alger",
+      "to": "Ghardaïa",
+      "s": "CLOTUREE",
+      "dateD": "2026-08-21",
+      "heureD": "04:00",
+      "dateF": "2026-08-22",
+      "heureF": "20:00",
+      "d": 600,
+      "z": "Sud",
+      "co": 108000,
+      "wp": [
+        "Djelfa"
+      ],
+      "closed": true,
+      "bu": "LOG",
+      "ca": "LOG-TRP"
+    }
+  ],
+  "MT": [
+    {
+      "n": "OT-0412",
+      "vh": "FL-018",
+      "t": "CURATIVE",
+      "ti": "Boîte de vitesses + circuit électrique (démarreur)",
+      "pr": "CRITIQUE",
+      "s": "EN_COURS",
+      "pi": 85000,
+      "mo": 45000,
+      "co": 130000,
+      "dt": "24/08/2026",
+      "frn": "FRN-001",
+      "ops": [
+        {
+          "desc": "Dépose boîte de vitesses",
+          "duree": "4h",
+          "tech": "Boudiaf M.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Remplacement synchros 3ème/4ème",
+          "duree": "3h",
+          "tech": "Boudiaf M.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Remontage + réglage",
+          "duree": "2h",
+          "tech": "Boudiaf M.",
+          "statut": "EN_COURS"
+        },
+        {
+          "desc": "Essai route",
+          "duree": "1h",
+          "tech": "Slimani K.",
+          "statut": "A_FAIRE"
+        }
+      ]
+    },
+    {
+      "n": "OT-0411",
+      "vh": "FL-003",
+      "t": "CURATIVE",
+      "ti": "Plaquettes + disques frein AV/AR",
+      "pr": "HAUTE",
+      "s": "PLANIFIE",
+      "pi": 54000,
+      "mo": 28000,
+      "co": 82000,
+      "dt": "28/08/2026",
+      "frn": "FRN-001",
+      "ops": [
+        {
+          "desc": "Dépose roues + étriers",
+          "duree": "1h",
+          "tech": "Slimani K.",
+          "statut": "A_FAIRE"
+        },
+        {
+          "desc": "Remplacement plaquettes AV+AR",
+          "duree": "2h",
+          "tech": "Slimani K.",
+          "statut": "A_FAIRE"
+        },
+        {
+          "desc": "Purge liquide frein",
+          "duree": "30min",
+          "tech": "Slimani K.",
+          "statut": "A_FAIRE"
+        },
+        {
+          "desc": "Essai freinage",
+          "duree": "30min",
+          "tech": "Boudiaf M.",
+          "statut": "A_FAIRE"
+        }
+      ]
+    },
+    {
+      "n": "OT-0410",
+      "vh": "FL-042",
+      "t": "CURATIVE",
+      "ti": "Injection common rail — 4 injecteurs + pompe HP",
+      "pr": "CRITIQUE",
+      "s": "EN_COURS",
+      "pi": 112000,
+      "mo": 44000,
+      "co": 156000,
+      "dt": "24/08/2026",
+      "frn": "FRN-003",
+      "ops": [
+        {
+          "desc": "Diagnostic électronique",
+          "duree": "1h",
+          "tech": "Khelifi A.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Dépose rampe + injecteurs",
+          "duree": "2h",
+          "tech": "Khelifi A.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Remplacement injecteurs",
+          "duree": "3h",
+          "tech": "Khelifi A.",
+          "statut": "EN_COURS"
+        },
+        {
+          "desc": "Calibration pompe HP",
+          "duree": "2h",
+          "tech": "Khelifi A.",
+          "statut": "A_FAIRE"
+        },
+        {
+          "desc": "Test pression + essai",
+          "duree": "1h",
+          "tech": "Boudiaf M.",
+          "statut": "A_FAIRE"
+        }
+      ]
+    },
+    {
+      "n": "OT-0409",
+      "vh": "FL-060",
+      "t": "PERIODIQUE",
+      "ti": "Graissage complet + contrôle circuit hydraulique",
+      "pr": "MOYENNE",
+      "s": "PLANIFIE",
+      "pi": 18000,
+      "mo": 17000,
+      "co": 35000,
+      "dt": "30/08/2026",
+      "frn": "FRN-003",
+      "ops": [
+        {
+          "desc": "Graissage complet points articulés",
+          "duree": "2h",
+          "tech": "Hamdi A.",
+          "statut": "A_FAIRE"
+        },
+        {
+          "desc": "Contrôle pression hydraulique",
+          "duree": "1h",
+          "tech": "Hamdi A.",
+          "statut": "A_FAIRE"
+        },
+        {
+          "desc": "Remplacement filtre hydraulique",
+          "duree": "30min",
+          "tech": "Hamdi A.",
+          "statut": "A_FAIRE"
+        }
+      ]
+    },
+    {
+      "n": "OT-0407",
+      "vh": "FL-005",
+      "t": "PERIODIQUE",
+      "ti": "Révision porteur grue — flèche + hydraulique + vidange",
+      "pr": "HAUTE",
+      "s": "TERMINE",
+      "pi": 138000,
+      "mo": 72000,
+      "co": 210000,
+      "dt": "20/08/2026",
+      "frn": "FRN-002",
+      "ops": [
+        {
+          "desc": "Vidange moteur + filtres",
+          "duree": "1h30",
+          "tech": "Boudiaf M.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Remplacement courroie distribution",
+          "duree": "4h",
+          "tech": "Boudiaf M.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Remplacement pompe à eau",
+          "duree": "1h",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Contrôle freins complet",
+          "duree": "1h",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Contrôle géométrie + parallélisme",
+          "duree": "1h",
+          "tech": "Khelifi A.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Essai route 50km",
+          "duree": "1h",
+          "tech": "Boudiaf M.",
+          "statut": "FAIT"
+        }
+      ]
+    },
+    {
+      "n": "OT-0405",
+      "vh": "FL-001",
+      "t": "CURATIVE",
+      "ti": "Amortisseurs AV + rotules de direction",
+      "pr": "MOYENNE",
+      "s": "TERMINE",
+      "pi": 22000,
+      "mo": 15000,
+      "co": 37000,
+      "dt": "18/08/2026",
+      "frn": "FRN-004",
+      "ops": [
+        {
+          "desc": "Dépose amortisseurs AV",
+          "duree": "1h30",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Montage + serrage au couple",
+          "duree": "1h30",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Contrôle géométrie",
+          "duree": "30min",
+          "tech": "Khelifi A.",
+          "statut": "FAIT"
+        }
+      ]
+    },
+    {
+      "n": "OT-0403",
+      "vh": "FL-010",
+      "t": "PERIODIQUE",
+      "ti": "Révision 40 000 km (Doblo)",
+      "pr": "BASSE",
+      "s": "TERMINE",
+      "pi": 15000,
+      "mo": 12000,
+      "co": 27000,
+      "dt": "15/08/2026",
+      "frn": "FRN-005",
+      "ops": [
+        {
+          "desc": "Vidange huile + filtre",
+          "duree": "45min",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Remplacement filtre air",
+          "duree": "15min",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Contrôle niveaux + pneus",
+          "duree": "30min",
+          "tech": "Khelifi A.",
+          "statut": "FAIT"
+        }
+      ]
+    },
+    {
+      "n": "OT-0401",
+      "vh": "FL-025",
+      "t": "PERIODIQUE",
+      "ti": "Vidange + filtres + contrôle freins (A6)",
+      "pr": "BASSE",
+      "s": "TERMINE",
+      "pi": 8000,
+      "mo": 10000,
+      "co": 18000,
+      "dt": "12/08/2026",
+      "frn": null,
+      "ops": [
+        {
+          "desc": "Vidange huile moteur",
+          "duree": "30min",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Contrôle plaquettes frein",
+          "duree": "20min",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Contrôle liquide frein",
+          "duree": "10min",
+          "tech": "Slimani K.",
+          "statut": "FAIT"
+        }
+      ]
+    },
+    {
+      "n": "OT-0413",
+      "vh": "FL-065",
+      "t": "CURATIVE",
+      "ti": "Bras de grue bloqué + fuite huile hydraulique + électricité",
+      "pr": "CRITIQUE",
+      "s": "EN_COURS",
+      "pi": 240000,
+      "mo": 90000,
+      "co": 330000,
+      "dt": "26/08/2026",
+      "frn": "FRN-003",
+      "ops": [
+        {
+          "desc": "Diagnostic circuit hydraulique",
+          "duree": "3h",
+          "tech": "Meziane Y.",
+          "statut": "FAIT"
+        },
+        {
+          "desc": "Remplacement flexibles + vérin de flèche",
+          "duree": "6h",
+          "tech": "Meziane Y.",
+          "statut": "EN_COURS"
+        },
+        {
+          "desc": "Réparation faisceau électrique tourelle",
+          "duree": "4h",
+          "tech": "Khelifi A.",
+          "statut": "A_FAIRE"
+        },
+        {
+          "desc": "Mise à niveau huile + essai de charge",
+          "duree": "2h",
+          "tech": "Meziane Y.",
+          "statut": "A_FAIRE"
+        }
+      ]
+    }
+  ],
+  "FU": [
+    {
+      "dt": "26/08",
+      "vh": "FL-003",
+      "dr": "EMP-101",
+      "ty": "GASOIL",
+      "q": 180,
+      "px": 52.5,
+      "km2": 312600,
+      "km1": 312200,
+      "rb": 45,
+      "no": 29.4,
+      "closed": false
+    },
+    {
+      "dt": "25/08",
+      "vh": "FL-005",
+      "dr": "EMP-108",
+      "ty": "GASOIL",
+      "q": 220,
+      "px": 52.5,
+      "km2": 248300,
+      "km1": 247680,
+      "rb": 60,
+      "no": 31.5,
+      "closed": false
+    },
+    {
+      "dt": "25/08",
+      "vh": "FL-002",
+      "dr": "EMP-118",
+      "ty": "ESSENCE",
+      "q": 42,
+      "px": 56.2,
+      "km2": 42180,
+      "km1": 41480,
+      "rb": 8,
+      "no": 6.1,
+      "closed": false
+    },
+    {
+      "dt": "24/08",
+      "vh": "FL-001",
+      "dr": "EMP-102",
+      "ty": "GASOIL",
+      "q": 85,
+      "px": 52.5,
+      "km2": 87420,
+      "km1": 86520,
+      "rb": 12,
+      "no": 8.9,
+      "closed": true
+    },
+    {
+      "dt": "24/08",
+      "vh": "FL-010",
+      "dr": "EMP-115",
+      "ty": "GASOIL",
+      "q": 38,
+      "px": 52.5,
+      "km2": 56300,
+      "km1": 55620,
+      "rb": 15,
+      "no": 5.8,
+      "closed": false
+    },
+    {
+      "dt": "23/08",
+      "vh": "FL-055",
+      "dr": null,
+      "ty": "GASOIL",
+      "q": 150,
+      "px": 52.5,
+      "km2": 4820,
+      "km1": 4120,
+      "rb": 40,
+      "no": 20.7,
+      "closed": true
+    },
+    {
+      "dt": "22/08",
+      "vh": "FL-003",
+      "dr": "EMP-101",
+      "ty": "GASOIL",
+      "q": 200,
+      "px": 52.5,
+      "km2": 312200,
+      "km1": 311580,
+      "rb": 30,
+      "no": 29.4,
+      "closed": true
+    },
+    {
+      "dt": "22/08",
+      "vh": "FL-001",
+      "dr": "EMP-102",
+      "ty": "GASOIL",
+      "q": 65,
+      "px": 52.5,
+      "km2": 86520,
+      "km1": 85800,
+      "rb": 18,
+      "no": 8.9,
+      "closed": true
+    },
+    {
+      "dt": "21/08",
+      "vh": "FL-005",
+      "dr": "EMP-108",
+      "ty": "GASOIL",
+      "q": 240,
+      "px": 52.5,
+      "km2": 247680,
+      "km1": 246960,
+      "rb": 35,
+      "no": 31.5,
+      "closed": true
+    },
+    {
+      "dt": "20/08",
+      "vh": "FL-025",
+      "dr": "EMP-105",
+      "ty": "ESSENCE",
+      "q": 35,
+      "px": 56.2,
+      "km2": 23100,
+      "km1": 22480,
+      "rb": 10,
+      "no": 5.9,
+      "closed": true
+    }
+  ],
+  "FUE": [
+    {
+      "dt": "26/08",
+      "vh": "FL-055",
+      "op": "Hamdi Ali",
+      "ty": "GASOIL",
+      "q": 120,
+      "px": 52.5,
+      "h2": 4820,
+      "h1": 4810,
+      "noH": 14.4,
+      "closed": false
+    },
+    {
+      "dt": "25/08",
+      "vh": "FL-060",
+      "op": "Saadi Kamel",
+      "ty": "GASOIL",
+      "q": 95,
+      "px": 52.5,
+      "h2": 6310,
+      "h1": 6302,
+      "noH": 12.7,
+      "closed": false
+    },
+    {
+      "dt": "25/08",
+      "vh": "FL-065",
+      "op": "Benziane Omar",
+      "ty": "GASOIL",
+      "q": 110,
+      "px": 52.5,
+      "h2": 3100,
+      "h1": 3091,
+      "noH": 12.1,
+      "closed": false
+    },
+    {
+      "dt": "24/08",
+      "vh": "FL-055",
+      "op": "Hamdi Ali",
+      "ty": "GASOIL",
+      "q": 135,
+      "px": 52.5,
+      "h2": 4810,
+      "h1": 4800,
+      "noH": 14.4,
+      "closed": true
+    },
+    {
+      "dt": "23/08",
+      "vh": "FL-060",
+      "op": "Saadi Kamel",
+      "ty": "GASOIL",
+      "q": 80,
+      "px": 52.5,
+      "h2": 6302,
+      "h1": 6296,
+      "noH": 12.7,
+      "closed": true
+    },
+    {
+      "dt": "22/08",
+      "vh": "FL-065",
+      "op": "Benziane Omar",
+      "ty": "GASOIL",
+      "q": 100,
+      "px": 52.5,
+      "h2": 3091,
+      "h1": 3082,
+      "noH": 12.1,
+      "closed": true
+    }
+  ],
+  "DPC": [
+    {
+      "code": "DPC-2026-0001",
+      "dateSaisie": "2026-08-20",
+      "dateAller": "2026-08-28",
+      "dateRetour": "2026-08-30",
+      "depAller": "Alger",
+      "destAller": "Oran",
+      "depRetour": "Oran",
+      "destRetour": "Alger",
+      "bu": "Logistique",
+      "structure": "Matériel informatique (2 palettes)",
+      "priorite": "HAUTE",
+      "urgence": "URGENTE",
+      "statut": "EN_ATTENTE",
+      "notes": "Livraison urgente matériel IT pour nouveau bureau Oran",
+      "demandeur": "K. Azouaou",
+      "missionRef": null,
+      "tonnage": 0.8
+    },
+    {
+      "code": "DPC-2026-0002",
+      "dateSaisie": "2026-08-18",
+      "dateAller": "2026-09-01",
+      "dateRetour": "2026-09-02",
+      "depAller": "Alger",
+      "destAller": "Constantine",
+      "depRetour": "Constantine",
+      "destRetour": "Alger",
+      "bu": "Commercial",
+      "structure": "Échantillons produits (500 kg)",
+      "priorite": "NORMALE",
+      "urgence": "NORMALE",
+      "statut": "VALIDEE",
+      "notes": "Présentation commerciale salon Est",
+      "demandeur": "M. Benali",
+      "missionRef": null
+    },
+    {
+      "code": "DPC-2026-0003",
+      "dateSaisie": "2026-08-15",
+      "dateAller": "2026-08-22",
+      "dateRetour": "2026-08-22",
+      "depAller": "Blida",
+      "destAller": "Médéa",
+      "depRetour": "Médéa",
+      "destRetour": "Blida",
+      "bu": "Production",
+      "structure": "Pièces détachées moteur",
+      "priorite": "BASSE",
+      "urgence": "NORMALE",
+      "statut": "TRANSFORMEE",
+      "notes": "Réappro usine Médéa",
+      "demandeur": "S. Hamidi",
+      "missionRef": "M-2026-0042"
+    },
+    {
+      "code": "DPC-2026-0004",
+      "dateSaisie": "2026-08-25",
+      "dateAller": "2026-09-05",
+      "dateRetour": "2026-09-07",
+      "depAller": "Alger",
+      "destAller": "Hassi Messaoud",
+      "depRetour": "Hassi Messaoud",
+      "destRetour": "Alger",
+      "bu": "Énergie",
+      "structure": "Équipements lourds (3T)",
+      "priorite": "HAUTE",
+      "urgence": "URGENTE",
+      "statut": "EN_ATTENTE",
+      "notes": "Équipements pour chantier HMD - prioritaire",
+      "demandeur": "A. Touati",
+      "missionRef": null,
+      "tonnage": 3
+    }
+  ],
+  "FOURNISSEURS": [
+    {
+      "code": "FRN-001",
+      "nom": "Falcon Motors (agent Fiat / Iveco)",
+      "contact": "Hamid Bensalem",
+      "tel": "023 45 67 89",
+      "email": "contact@falconmotors.dz",
+      "ville": "Alger"
+    },
+    {
+      "code": "FRN-002",
+      "nom": "AS Trucks — poids lourd",
+      "contact": "Samir Belkacem",
+      "tel": "036 23 45 67",
+      "email": "atelier@astrucks.dz",
+      "ville": "Sétif"
+    },
+    {
+      "code": "FRN-003",
+      "nom": "Hydro-Ouest (hydraulique engins)",
+      "contact": "Yacine Meziane",
+      "tel": "025 78 90 12",
+      "email": "commercial@hydro-ouest.dz",
+      "ville": "Blida"
+    },
+    {
+      "code": "FRN-004",
+      "nom": "Mazari Auto",
+      "contact": "Redouane Kaci",
+      "tel": "031 56 78 90",
+      "email": "vente@mazariauto.dz",
+      "ville": "Constantine"
+    },
+    {
+      "code": "FRN-005",
+      "nom": "SIAD Pièces Auto",
+      "contact": "Nabil Ouali",
+      "tel": "023 99 88 77",
+      "email": "nabil@siad-pieces.dz",
+      "ville": "Alger"
+    }
+  ],
+  "BC_LIST": [
+    {
+      "n": "BC-2026-0087",
+      "ot": "OT-0412",
+      "frn": "FRN-001",
+      "date": "23/08/2026",
+      "montant": 85000,
+      "statut": "LIVREE",
+      "items": [
+        {
+          "desc": "Kit boîte de vitesses ZF",
+          "qty": 1,
+          "pu": 62000,
+          "total": 62000
+        },
+        {
+          "desc": "Joint carter BV",
+          "qty": 2,
+          "pu": 3500,
+          "total": 7000
+        },
+        {
+          "desc": "Huile BV 75W90 5L",
+          "qty": 2,
+          "pu": 8000,
+          "total": 16000
+        }
+      ]
+    },
+    {
+      "n": "BC-2026-0086",
+      "ot": "OT-0411",
+      "frn": "FRN-001",
+      "date": "27/08/2026",
+      "montant": 54000,
+      "statut": "EN_ATTENTE",
+      "items": [
+        {
+          "desc": "Plaquettes frein AV Actros",
+          "qty": 2,
+          "pu": 18000,
+          "total": 36000
+        },
+        {
+          "desc": "Plaquettes frein AR",
+          "qty": 2,
+          "pu": 9000,
+          "total": 18000
+        }
+      ]
+    },
+    {
+      "n": "BC-2026-0085",
+      "ot": "OT-0410",
+      "frn": "FRN-003",
+      "date": "23/08/2026",
+      "montant": 112000,
+      "statut": "LIVREE",
+      "items": [
+        {
+          "desc": "Injecteur common rail",
+          "qty": 4,
+          "pu": 22000,
+          "total": 88000
+        },
+        {
+          "desc": "Pompe haute pression",
+          "qty": 1,
+          "pu": 24000,
+          "total": 24000
+        }
+      ]
+    },
+    {
+      "n": "BC-2026-0084",
+      "ot": "OT-0409",
+      "frn": "FRN-003",
+      "date": "29/08/2026",
+      "montant": 18000,
+      "statut": "EN_ATTENTE",
+      "items": [
+        {
+          "desc": "Graisse lithium 15kg",
+          "qty": 2,
+          "pu": 4500,
+          "total": 9000
+        },
+        {
+          "desc": "Filtre hydraulique",
+          "qty": 3,
+          "pu": 3000,
+          "total": 9000
+        }
+      ]
+    },
+    {
+      "n": "BC-2026-0083",
+      "ot": "OT-0407",
+      "frn": "FRN-002",
+      "date": "18/08/2026",
+      "montant": 138000,
+      "statut": "LIVREE",
+      "items": [
+        {
+          "desc": "Kit courroie distribution",
+          "qty": 1,
+          "pu": 45000,
+          "total": 45000
+        },
+        {
+          "desc": "Pompe à eau",
+          "qty": 1,
+          "pu": 28000,
+          "total": 28000
+        },
+        {
+          "desc": "Kit filtration complet",
+          "qty": 1,
+          "pu": 35000,
+          "total": 35000
+        },
+        {
+          "desc": "Huile 15W40 20L",
+          "qty": 2,
+          "pu": 15000,
+          "total": 30000
+        }
+      ]
+    },
+    {
+      "n": "BC-2026-0082",
+      "ot": "OT-0405",
+      "frn": "FRN-004",
+      "date": "16/08/2026",
+      "montant": 22000,
+      "statut": "LIVREE",
+      "items": [
+        {
+          "desc": "Amortisseur AV",
+          "qty": 2,
+          "pu": 8500,
+          "total": 17000
+        },
+        {
+          "desc": "Coupelle amortisseur",
+          "qty": 2,
+          "pu": 2500,
+          "total": 5000
+        }
+      ]
+    },
+    {
+      "n": "BC-2026-0081",
+      "ot": "OT-0403",
+      "frn": "FRN-005",
+      "date": "14/08/2026",
+      "montant": 15000,
+      "statut": "LIVREE",
+      "items": [
+        {
+          "desc": "Filtre huile",
+          "qty": 1,
+          "pu": 2500,
+          "total": 2500
+        },
+        {
+          "desc": "Filtre air",
+          "qty": 1,
+          "pu": 3500,
+          "total": 3500
+        },
+        {
+          "desc": "Huile 5W30 5L",
+          "qty": 1,
+          "pu": 9000,
+          "total": 9000
+        }
+      ]
+    }
+  ],
+  "LOC_CONTRACTS": [
+    {
+      "id": "LC-001",
+      "vh": "FL-010",
+      "num": "CTR-2025-010",
+      "dailyPrice": 2833,
+      "startDate": "2025-04-01",
+      "endDate": "2027-03-31",
+      "notes": "Fiat Doblo Cargo — location longue durée (EURL SAADNA)"
+    },
+    {
+      "id": "LC-002",
+      "vh": "FL-042",
+      "num": "CTR-2024-042",
+      "dailyPrice": 2400,
+      "startDate": "2024-10-01",
+      "endDate": "2026-09-15",
+      "notes": "Renault Kangoo Express — location avec maintenance (SOVAC)"
+    },
+    {
+      "id": "LC-003",
+      "vh": "FL-055",
+      "num": "CTR-2025-055",
+      "dailyPrice": 11667,
+      "startDate": "2025-11-01",
+      "endDate": "2026-10-10",
+      "notes": "JCB 3CX rétrochargeur — chantier Gassi Touil"
+    },
+    {
+      "id": "LC-004",
+      "vh": "FL-060",
+      "num": "CTR-2025-060",
+      "dailyPrice": 14000,
+      "startDate": "2025-07-01",
+      "endDate": "2027-06-30",
+      "notes": "Caterpillar 428F2 rétrochargeur — travaux Sud"
+    }
+  ],
+  "LOC_POINTAGE": [
+    {
+      "vh": "FL-010",
+      "date": "2026-07-31",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-02",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-03",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-04",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-06",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-07",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-08",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-09",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-10",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-11",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-12",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-13",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-14",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-16",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-17",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-18",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-19",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-20",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-21",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-22",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-23",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-24",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-25",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-26",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-27",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-28",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-29",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-08-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-06-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-02",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-03",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-04",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-06",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-07",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-08",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-09",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-10",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-11",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-12",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-13",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-14",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-16",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-17",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-18",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-19",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-20",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-21",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-22",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-23",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-24",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-25",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-26",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-27",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-28",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-29",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-010",
+      "date": "2026-07-30",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-31",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-02",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-03",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-04",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-06",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-07",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-08",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-09",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-10",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-11",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-12",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-13",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-14",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-16",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-17",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-18",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-19",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-20",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-21",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-22",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-23",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-24",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-25",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-26",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-27",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-28",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-29",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-08-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-06-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-02",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-03",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-04",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-06",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-07",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-08",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-09",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-10",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-11",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-12",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-13",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-14",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-16",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-17",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-18",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-19",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-20",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-21",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-22",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-23",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-24",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-25",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-26",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-27",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-28",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-29",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-042",
+      "date": "2026-07-30",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-31",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-02",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-03",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-04",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-06",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-07",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-08",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-09",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-10",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-11",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-12",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-13",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-14",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-16",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-17",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-18",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-19",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-20",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-21",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-22",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-23",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-24",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-25",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-26",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-27",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-28",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-29",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-08-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-06-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-02",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-03",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-04",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-06",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-07",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-08",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-09",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-10",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-11",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-12",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-13",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-14",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-16",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-17",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-18",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-19",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-20",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-21",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-22",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-23",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-24",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-25",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-26",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-27",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-28",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-29",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-055",
+      "date": "2026-07-30",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-31",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-02",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-03",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-04",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-06",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-07",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-08",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-09",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-10",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-11",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-12",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-13",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-14",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-16",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-17",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-18",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-19",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-20",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-21",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-22",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-23",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-24",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-25",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-26",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-27",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-28",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-29",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-08-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-06-30",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-01",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-02",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-03",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-04",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-05",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-06",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-07",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-08",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-09",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-10",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-11",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-12",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-13",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-14",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-15",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-16",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-17",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-18",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-19",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-20",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-21",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-22",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-23",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-24",
+      "present": false,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-25",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-26",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-27",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-28",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-29",
+      "present": true,
+      "notes": ""
+    },
+    {
+      "vh": "FL-060",
+      "date": "2026-07-30",
+      "present": false,
+      "notes": ""
+    }
+  ],
+  "AL": [
+    {
+      "ty": "dg",
+      "ti": "CT expiré — Kangoo Express (FL-042)",
+      "ds": "CT dépassé depuis 16 jours.",
+      "tm": "2h",
+      "cat": "doc",
+      "pr": "CRITIQUE"
+    },
+    {
+      "ty": "dg",
+      "ti": "Assurance expirée — Kangoo Express (FL-042)",
+      "ds": "Police ASS-2024-1990 expirée le 31/07.",
+      "tm": "2h",
+      "cat": "ass",
+      "pr": "CRITIQUE"
+    },
+    {
+      "ty": "dg",
+      "ti": "Assurance expire 5j — Hino 300 (FL-001)",
+      "ds": "Police ASS-2024-1847 expire le 31/08.",
+      "tm": "4h",
+      "cat": "ass",
+      "pr": "HAUTE"
+    },
+    {
+      "ty": "wr",
+      "ti": "Permis expire 35j — Mebarki (EMP-112)",
+      "ds": "Permis D expire le 30/09/2026.",
+      "tm": "6h",
+      "cat": "doc",
+      "pr": "HAUTE"
+    },
+    {
+      "ty": "dg",
+      "ti": "EN PANNE — Grue Liebherr LTM 1050 (FL-065)",
+      "ds": "Immobilisée 96h. Bras bloqué + fuite hydraulique. OT-0413.",
+      "tm": "4j",
+      "cat": "mnt",
+      "pr": "CRITIQUE"
+    },
+    {
+      "ty": "dg",
+      "ti": "EN PANNE — Isuzu NQR (FL-018)",
+      "ds": "En panne 72h. OT-0412 en cours.",
+      "tm": "3j",
+      "cat": "mnt",
+      "pr": "CRITIQUE"
+    },
+    {
+      "ty": "dg",
+      "ti": "Surconsommation +17% — Renault Kerax (FL-005)",
+      "ds": "35,5 L/100 vs 31,5 norme.",
+      "tm": "1j",
+      "cat": "carb",
+      "pr": "HAUTE"
+    },
+    {
+      "ty": "wr",
+      "ti": "Surconsommation +11% — JCB 3CX (FL-055)",
+      "ds": "16,0 L/h vs 14,4 norme.",
+      "tm": "1j",
+      "cat": "carb",
+      "pr": "MOYENNE"
+    },
+    {
+      "ty": "wr",
+      "ti": "Écart carburant — Hino 300 (FL-001)",
+      "ds": "210L pour 2220km. +7% norme.",
+      "tm": "1j",
+      "cat": "carb",
+      "pr": "MOYENNE"
+    },
+    {
+      "ty": "in",
+      "ti": "Fin location 45j — JCB 3CX (FL-055)",
+      "ds": "Expire 10/10/2026.",
+      "tm": "2j",
+      "cat": "loc",
+      "pr": "MOYENNE"
+    },
+    {
+      "ty": "in",
+      "ti": "Fin location 20j — Kangoo Express (FL-042)",
+      "ds": "Expire 15/09/2026.",
+      "tm": "1j",
+      "cat": "loc",
+      "pr": "HAUTE"
+    },
+    {
+      "ty": "dg",
+      "ti": "Heures dépassées — Mebarki (EMP-112)",
+      "ds": "48h/sem. Repos obligatoire.",
+      "tm": "2j",
+      "cat": "chauf",
+      "pr": "CRITIQUE"
+    },
+    {
+      "ty": "wr",
+      "ti": "Fatigue élevée — Boudiaf (EMP-108)",
+      "ds": "88%. 42h/sem.",
+      "tm": "2j",
+      "cat": "chauf",
+      "pr": "HAUTE"
+    }
+  ],
+  "BU_CA": [
+    {
+      "code": "ALF",
+      "nom": "Amimer Lil Filaha",
+      "manager": {
+        "name": "TERKI Djilali",
+        "email": "djilaliterki@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "AUD",
+      "nom": "Audit",
+      "manager": {
+        "name": "YANAT Rosa",
+        "email": "rosayanat@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "CPI",
+      "nom": "Commercial Pôle Industrie",
+      "manager": null,
+      "ca": []
+    },
+    {
+      "code": "CPP",
+      "nom": "Commercial Pôle Projet",
+      "manager": {
+        "name": "ZETOUTOU Arezki",
+        "email": "arezkizetoutou@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "CPT",
+      "nom": "Comptabilité",
+      "manager": {
+        "name": "OUBRAHAM Abdeliamine",
+        "email": "lyamineoubraham@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "CDG",
+      "nom": "Contrôle de Gestion",
+      "manager": {
+        "name": "GUENDOUL Lydia",
+        "email": "lydiaguendoul@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "EMO",
+      "nom": "Emotech",
+      "manager": {
+        "name": "BOUKHEDDAMI Anis Mustapha",
+        "email": "anisboukheddami@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "FIN",
+      "nom": "Finance",
+      "manager": {
+        "name": "SI CHAIB Chiheb",
+        "email": "chihabsichaib@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "JUR",
+      "nom": "Juridique et Recouvrement",
+      "manager": {
+        "name": "BENZEGHIBA Nasserdine",
+        "email": "nasserdinebenzeghiba@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "LOG",
+      "nom": "Logistique",
+      "manager": {
+        "name": "KEBBI Saad",
+        "email": "saadkebbi@amimer.com"
+      },
+      "ca": [
+        {
+          "code": "LOG-TRP",
+          "nom": "Transport"
+        },
+        {
+          "code": "LOG-MAG",
+          "nom": "Magasinage"
+        }
+      ]
+    },
+    {
+      "code": "MQ",
+      "nom": "Management Qualité",
+      "manager": {
+        "name": "BENABDESLAM Hadjira",
+        "email": "hadjirabenabdeslam@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "MGX",
+      "nom": "MGX et HSE",
+      "manager": {
+        "name": "BOUMAZZA Rafik",
+        "email": "rafikboumazza@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "PWT",
+      "nom": "Powertech",
+      "manager": {
+        "name": "AYAD Abdelhalim",
+        "email": "abdelhalimayad@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "RH",
+      "nom": "Ressources Humaines",
+      "manager": {
+        "name": "BRAHMI Ibtissem",
+        "email": "ibtissembrahmi@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "SRC",
+      "nom": "Service Réclamation Client",
+      "manager": {
+        "name": "BOUREZGUÉ Lyza",
+        "email": "lyzabourezgue@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "SI",
+      "nom": "Système d'Information",
+      "manager": {
+        "name": "KHIARI Fadila",
+        "email": "fadilakhiari@amimer.com"
+      },
+      "ca": []
+    },
+    {
+      "code": "UOI",
+      "nom": "Unité Opérations Industrie",
+      "manager": {
+        "name": "LAMRIBEN Nabil",
+        "email": "nabillamriben@amimer.com"
+      },
+      "ca": [
+        {
+          "code": "UOI-CHT",
+          "nom": "Chantiers industrie"
+        }
+      ]
+    },
+    {
+      "code": "UOP",
+      "nom": "Unité Opérations Projets",
+      "manager": {
+        "name": "OUAKLI Djamel",
+        "email": "djamelouakli@amimer.com"
+      },
+      "ca": [
+        {
+          "code": "UOP-CHT",
+          "nom": "Chantiers"
+        }
+      ]
+    }
+  ],
+  "FUEL_PRICES": {
+    "GASOIL": 52.5,
+    "ESSENCE": 56.2,
+    "SP": 55,
+    "SUPER": 58,
+    "GPL": 28
+  },
+  "PARAMS": {
+    "reposMin": 30,
+    "vitMoy": 80,
+    "locAlertDef": 30
+  },
+  "BAREME_MISSION": {
+    "grille": {
+      "LEGER": {
+        "NORD": {
+          "repas": 800,
+          "nuitee": 3000,
+          "petitDej": 350,
+          "km": 10,
+          "suppZone": 0,
+          "pauseCafe": 200,
+          "plafondJour": 12000
+        },
+        "SUD": {
+          "repas": 1200,
+          "nuitee": 5000,
+          "petitDej": 500,
+          "km": 15,
+          "suppZone": 3000,
+          "pauseCafe": 300,
+          "plafondJour": 20000
+        }
+      },
+      "LOURD": {
+        "NORD": {
+          "repas": 1000,
+          "nuitee": 3500,
+          "petitDej": 400,
+          "km": 12,
+          "suppZone": 0,
+          "pauseCafe": 250,
+          "plafondJour": 15000
+        },
+        "SUD": {
+          "repas": 1500,
+          "nuitee": 6000,
+          "petitDej": 600,
+          "km": 18,
+          "suppZone": 5000,
+          "pauseCafe": 350,
+          "plafondJour": 25000
+        }
+      }
+    },
+    "indemnites": {
+      "couchage": 500,
+      "salissure": 300,
+      "risque": 1000,
+      "weekend": 1500
+    }
+  },
+  "MARGE_TYPE": {
+    "LEGER": 12,
+    "LOURD": 12,
+    "ENGIN": 15,
+    "REMORQUE": 10
+  },
+  "MARGE_PCT": 12,
+  "PREV_PROGS": [
+    {
+      "id": 1,
+      "nom": "Vidange Moteur",
+      "interval": "10 000 km / 6 mois",
+      "travaux": [
+        "Vidange huile moteur",
+        "Remplacement filtre huile",
+        "Contrôle niveaux"
+      ],
+      "cout": 8500,
+      "vh": [
+        "FL-001",
+        "FL-003",
+        "FL-005"
+      ]
+    },
+    {
+      "id": 2,
+      "nom": "Révision Freins",
+      "interval": "30 000 km / 12 mois",
+      "travaux": [
+        "Contrôle plaquettes",
+        "Contrôle disques",
+        "Purge liquide frein",
+        "Réglage frein de parking"
+      ],
+      "cout": 22000,
+      "vh": [
+        "FL-001",
+        "FL-002",
+        "FL-003"
+      ]
+    },
+    {
+      "id": 3,
+      "nom": "Distribution",
+      "interval": "120 000 km / 5 ans",
+      "travaux": [
+        "Remplacement courroie",
+        "Galets tendeurs",
+        "Pompe à eau",
+        "Contrôle courroie accessoires"
+      ],
+      "cout": 45000,
+      "vh": [
+        "FL-003",
+        "FL-005"
+      ]
+    },
+    {
+      "id": 4,
+      "nom": "Climatisation",
+      "interval": "24 mois",
+      "travaux": [
+        "Recharge gaz",
+        "Nettoyage filtre habitacle",
+        "Contrôle compresseur"
+      ],
+      "cout": 12000,
+      "vh": [
+        "FL-002",
+        "FL-010",
+        "FL-025"
+      ]
+    }
+  ]
+}

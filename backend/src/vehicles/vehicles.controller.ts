@@ -1,79 +1,40 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-  UseGuards,
-  ParseUUIDPipe,
-} from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { VehiclesService } from './vehicles.service';
-import { CreateVehicleDto } from './dto/create-vehicle.dto';
-import { UpdateVehicleDto } from './dto/update-vehicle.dto';
-import { PaginationDto } from '../common/dto/pagination.dto';
-import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
-import { RolesGuard } from '../common/guards/roles.guard';
-import { Roles } from '../common/decorators/roles.decorator';
-import { UserRole, VehicleType, VehicleStatus, OwnershipType } from '../common/enums';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { VehicleService } from './vehicles.service';
+import { Vehicle } from './vehicles.entity';
 
-@ApiTags('Vehicules')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
+@ApiTags('Vehicle')
 @Controller('vehicles')
-export class VehiclesController {
-  constructor(private readonly vehiclesService: VehiclesService) {}
-
-  @Post()
-  @Roles(UserRole.ADMIN, UserRole.GESTIONNAIRE_FLOTTE)
-  @ApiOperation({ summary: 'Creer un vehicule' })
-  create(@Body() createVehicleDto: CreateVehicleDto) {
-    return this.vehiclesService.create(createVehicleDto);
-  }
+export class VehicleController {
+  constructor(private readonly service: VehicleService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Lister les vehicules avec filtres' })
-  @ApiQuery({ name: 'type', enum: VehicleType, required: false })
-  @ApiQuery({ name: 'status', enum: VehicleStatus, required: false })
-  @ApiQuery({ name: 'ownershipType', enum: OwnershipType, required: false })
-  findAll(
-    @Query() paginationDto: PaginationDto,
-    @Query('type') type?: VehicleType,
-    @Query('status') status?: VehicleStatus,
-    @Query('ownershipType') ownershipType?: OwnershipType,
-  ) {
-    return this.vehiclesService.findAll(paginationDto, { type, status, ownershipType });
+  findAll() {
+    return this.service.findAll();
   }
 
-  @Get('stats')
-  @ApiOperation({ summary: 'Statistiques du parc vehicules' })
-  getStats() {
-    return this.vehiclesService.getStats();
+  @Put('bulk')
+  replaceAll(@Body() body: Partial<Vehicle>[]) {
+    return this.service.replaceAll(body);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Obtenir un vehicule par ID' })
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.vehiclesService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.service.findOne(id);
+  }
+
+  @Post()
+  create(@Body() body: Partial<Vehicle>) {
+    return this.service.create(body);
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN, UserRole.GESTIONNAIRE_FLOTTE)
-  @ApiOperation({ summary: 'Modifier un vehicule' })
-  update(
-    @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateVehicleDto: UpdateVehicleDto,
-  ) {
-    return this.vehiclesService.update(id, updateVehicleDto);
+  update(@Param('id') id: string, @Body() body: Partial<Vehicle>) {
+    return this.service.update(id, body);
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Supprimer un vehicule' })
-  remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.vehiclesService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.service.remove(id);
   }
 }

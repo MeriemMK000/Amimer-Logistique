@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { IncidentsService } from './incidents.service';
-import { IncidentsController } from './incidents.controller';
-import { Incident } from './incident.entity';
+import { Incident } from './incidents.entity';
+import { IncidentService } from './incidents.service';
+import { IncidentController } from './incidents.controller';
+import { Vehicle } from '../vehicles/vehicles.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Incident])],
-  controllers: [IncidentsController],
-  providers: [IncidentsService],
-  exports: [IncidentsService],
+  imports: [TypeOrmModule.forFeature([Incident, Vehicle])],
+  controllers: [IncidentController],
+  providers: [IncidentService],
+  exports: [IncidentService],
 })
-export class IncidentsModule {}
+export class IncidentModule {}

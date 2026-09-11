@@ -1,10 +1,4 @@
-export enum UserRole {
-  ADMIN = 'ADMIN',
-  GESTIONNAIRE_FLOTTE = 'GESTIONNAIRE_FLOTTE',
-  DISPATCHEUR = 'DISPATCHEUR',
-  CHAUFFEUR = 'CHAUFFEUR',
-  COMPTABLE = 'COMPTABLE',
-}
+// Enums metier — alignes sur demo-fleetpro-v8 (reference/fleetpro-v8.js)
 
 export enum VehicleType {
   LEGER = 'LEGER',
@@ -17,6 +11,7 @@ export enum VehicleStatus {
   DISPONIBLE = 'DISPONIBLE',
   EN_MISSION = 'EN_MISSION',
   EN_MAINTENANCE = 'EN_MAINTENANCE',
+  EN_PANNE = 'EN_PANNE',
   HORS_SERVICE = 'HORS_SERVICE',
 }
 
@@ -26,17 +21,25 @@ export enum OwnershipType {
 }
 
 export enum FuelType {
-  ESSENCE = 'ESSENCE',
   GASOIL = 'GASOIL',
+  ESSENCE = 'ESSENCE',
   GPL = 'GPL',
 }
 
-export enum DocumentType {
-  CARTE_GRISE = 'CARTE_GRISE',
-  CONTROLE_TECHNIQUE = 'CONTROLE_TECHNIQUE',
-  ASSURANCE = 'ASSURANCE',
-  PERMIS = 'PERMIS',
-  AUTRE = 'AUTRE',
+export enum DriverStatus {
+  DISPONIBLE = 'DISPONIBLE',
+  EN_MISSION = 'EN_MISSION',
+  EN_REPOS = 'EN_REPOS',
+  EN_CONGE = 'EN_CONGE',
+  INDISPONIBLE = 'INDISPONIBLE',
+}
+
+export enum MissionStatus {
+  PLANIFIEE = 'PLANIFIEE',
+  EN_COURS = 'EN_COURS',
+  TERMINEE = 'TERMINEE',
+  CLOTUREE = 'CLOTUREE',
+  ANNULEE = 'ANNULEE',
 }
 
 export enum MaintenanceType {
@@ -51,56 +54,16 @@ export enum MaintenanceStatus {
   ANNULE = 'ANNULE',
 }
 
-export enum IncidentType {
-  INCIDENT = 'INCIDENT',
-  ACCIDENT = 'ACCIDENT',
-}
-
-export enum IncidentSeverity {
-  MINEUR = 'MINEUR',
-  MOYEN = 'MOYEN',
-  GRAVE = 'GRAVE',
-}
-
-export enum IncidentStatus {
-  OUVERT = 'OUVERT',
-  EN_COURS = 'EN_COURS',
-  RESOLU = 'RESOLU',
-  CLOS = 'CLOS',
-}
-
-export enum MissionStatus {
-  PLANIFIEE = 'PLANIFIEE',
-  EN_COURS = 'EN_COURS',
-  MODIFIEE = 'MODIFIEE',
-  TERMINEE = 'TERMINEE',
-  ANNULEE = 'ANNULEE',
-}
-
-export enum DriverStatus {
-  DISPONIBLE = 'DISPONIBLE',
-  EN_MISSION = 'EN_MISSION',
-  EN_REPOS = 'EN_REPOS',
-  INDISPONIBLE = 'INDISPONIBLE',
-}
-
-export enum ExpenseStatus {
-  CALCULE = 'CALCULE',
-  VALIDE = 'VALIDE',
-  PAYE = 'PAYE',
-}
-
-export enum AlertType {
-  DOCUMENT_EXPIRY = 'DOCUMENT_EXPIRY',
-  MAINTENANCE_DUE = 'MAINTENANCE_DUE',
-  LEASE_EXPIRY = 'LEASE_EXPIRY',
-  FUEL_ANOMALY = 'FUEL_ANOMALY',
-  DRIVER_HOURS = 'DRIVER_HOURS',
-}
-
-export enum AlertPriority {
+export enum Priority {
   BASSE = 'BASSE',
   MOYENNE = 'MOYENNE',
   HAUTE = 'HAUTE',
   CRITIQUE = 'CRITIQUE',
+}
+
+export enum DpcStatus {
+  EN_ATTENTE = 'EN_ATTENTE',
+  VALIDEE = 'VALIDEE',
+  TRANSFORMEE = 'TRANSFORMEE',
+  REFUSEE = 'REFUSEE',
 }

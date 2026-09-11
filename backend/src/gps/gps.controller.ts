@@ -1,36 +1,19 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { GpsService, RoutePoint } from './gps.service';
-import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { GpsService } from './gps.service';
 
 @ApiTags('GPS')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @Controller('gps')
 export class GpsController {
-  constructor(private readonly gpsService: GpsService) {}
+  constructor(private readonly service: GpsService) {}
 
-  @Post('distance')
-  @ApiOperation({ summary: 'Calculer la distance entre deux points' })
-  calculateDistance(
-    @Body() body: {
-      originLat: number;
-      originLng: number;
-      destLat: number;
-      destLng: number;
-    },
-  ) {
-    return this.gpsService.calculateDistance(
-      body.originLat,
-      body.originLng,
-      body.destLat,
-      body.destLng,
-    );
+  @Get('positions')
+  positions(@Query('includePlanned') includePlanned?: string) {
+    return this.service.positions(includePlanned === 'true');
   }
 
-  @Post('route')
-  @ApiOperation({ summary: 'Planifier un itineraire avec points de passage' })
-  planRoute(@Body() body: { waypoints: RoutePoint[] }) {
-    return this.gpsService.planRoute(body.waypoints);
+  @Post('nearest')
+  nearest(@Body() body: { location: string; limit?: number }) {
+    return this.service.nearest(body?.location ?? '', body?.limit ?? 5);
   }
 }

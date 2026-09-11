@@ -10,7 +10,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - '5432:5432'
+      # Port hote 5435 (5432 souvent deja pris par un autre PostgreSQL local)
+      - '5435:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

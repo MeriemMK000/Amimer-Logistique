@@ -8,4 +8,14 @@ dist/
 *.png
 test-*.js
 test-results/
+scratchpad/
+demo.pid
+demo.log
 package-lock.json
+
+# Exports internes Amimer (donnees d'entreprise reelles - jamais sur un depot public)
+*.xlsx
+*.xls
+backend/uploads/*
+!backend/uploads/.gitkeep
+

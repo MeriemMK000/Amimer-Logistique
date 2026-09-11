@@ -1,18 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AlertsService } from './alerts.service';
-import { AlertsController } from './alerts.controller';
-import { Alert } from './alert.entity';
-import { VehicleDocument } from '../vehicle-documents/vehicle-document.entity';
-import { VehicleLease } from '../vehicle-leases/vehicle-lease.entity';
-import { MaintenancePlan } from '../maintenance/entities/maintenance-plan.entity';
+import { Alert } from './alerts.entity';
+import { AlertService } from './alerts.service';
+import { AlertController } from './alerts.controller';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Alert, VehicleDocument, VehicleLease, MaintenancePlan]),
-  ],
-  controllers: [AlertsController],
-  providers: [AlertsService],
-  exports: [AlertsService],
+  imports: [TypeOrmModule.forFeature([Alert])],
+  controllers: [AlertController],
+  providers: [AlertService],
+  exports: [AlertService],
 })
-export class AlertsModule {}
+export class AlertModule {}

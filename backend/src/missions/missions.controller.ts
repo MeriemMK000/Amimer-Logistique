@@ -1,83 +1,88 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-  UseGuards,
-  ParseUUIDPipe,
-} from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { MissionsService } from './missions.service';
-import { CreateMissionDto } from './dto/create-mission.dto';
-import { UpdateMissionDto } from './dto/update-mission.dto';
-import { PaginationDto } from '../common/dto/pagination.dto';
-import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
-import { RolesGuard } from '../common/guards/roles.guard';
-import { Roles } from '../common/decorators/roles.decorator';
-import { UserRole, MissionStatus } from '../common/enums';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { MissionService } from './missions.service';
+import { Mission } from './missions.entity';
 
-@ApiTags('Missions')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
+@ApiTags('Mission')
 @Controller('missions')
-export class MissionsController {
-  constructor(private readonly missionsService: MissionsService) {}
-
-  @Post()
-  @Roles(UserRole.ADMIN, UserRole.GESTIONNAIRE_FLOTTE, UserRole.DISPATCHEUR)
-  @ApiOperation({ summary: 'Creer une mission' })
-  create(@Body() createMissionDto: CreateMissionDto) {
-    return this.missionsService.create(createMissionDto);
-  }
+export class MissionController {
+  constructor(private readonly service: MissionService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Lister les missions' })
-  @ApiQuery({ name: 'status', enum: MissionStatus, required: false })
-  @ApiQuery({ name: 'vehicleId', required: false })
-  @ApiQuery({ name: 'driverId', required: false })
-  findAll(
-    @Query() paginationDto: PaginationDto,
-    @Query('status') status?: MissionStatus,
-    @Query('vehicleId') vehicleId?: string,
-    @Query('driverId') driverId?: string,
-  ) {
-    return this.missionsService.findAll(paginationDto, { status, vehicleId, driverId });
+  findAll() {
+    return this.service.findAll();
+  }
+
+  @Get('verify/:token')
+  verify(@Param('token') token: string) {
+    return this.service.verify(token);
+  }
+
+  @Get(':id/ordre')
+  ordre(@Param('id') id: string, @Query('base') base?: string) {
+    return this.service.ordreDeMission(id, base);
+  }
+
+  @Put('bulk')
+  replaceAll(@Body() body: Partial<Mission>[]) {
+    return this.service.replaceAll(body);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Obtenir une mission par ID' })
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.missionsService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.service.findOne(id);
+  }
+
+  @Post()
+  create(@Body() body: Partial<Mission>) {
+    return this.service.create(body);
+  }
+
+  /** Aperçu du regroupement de plusieurs demandes de prise en charge (trajet + répartition coûts). */
+  @Post('group-preview')
+  groupPreview(@Body() body: { dpcCodes: string[]; fromLoc?: string; toLoc?: string }) {
+    return this.service.groupPreview(body?.dpcCodes ?? [], { fromLoc: body?.fromLoc, toLoc: body?.toLoc });
+  }
+
+  @Patch(':id/validate')
+  validate(@Param('id') id: string) {
+    return this.service.validateMission(id);
+  }
+
+  @Patch(':id/start')
+  start(@Param('id') id: string) {
+    return this.service.setPhase(id, 'start');
+  }
+
+  @Patch(':id/finish')
+  finish(@Param('id') id: string) {
+    return this.service.setPhase(id, 'finish');
+  }
+
+  /** Clôture d'une mission (fige les frais). */
+  @Patch(':id/cloturer')
+  cloturer(
+    @Param('id') id: string,
+    @Body() body?: { frais?: number; fraisDetail?: unknown; fraisCat?: string; fraisZone?: string },
+  ) {
+    return this.service.cloturer(id, body);
+  }
+
+  /** Clôture en masse de toutes les missions terminées (bouton onglet Frais). */
+  @Post('cloturer-terminees')
+  cloturerTerminees(
+    @Body() body?: { fraisByNum?: Record<string, { frais?: number; fraisDetail?: unknown; fraisCat?: string; fraisZone?: string }> },
+  ) {
+    return this.service.cloturerTerminees(body?.fraisByNum);
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN, UserRole.GESTIONNAIRE_FLOTTE, UserRole.DISPATCHEUR)
-  @ApiOperation({ summary: 'Modifier une mission' })
-  update(
-    @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateMissionDto: UpdateMissionDto,
-  ) {
-    return this.missionsService.update(id, updateMissionDto);
-  }
-
-  @Patch(':id/status')
-  @Roles(UserRole.ADMIN, UserRole.GESTIONNAIRE_FLOTTE, UserRole.DISPATCHEUR, UserRole.CHAUFFEUR)
-  @ApiOperation({ summary: 'Changer le statut de la mission' })
-  updateStatus(
-    @Param('id', ParseUUIDPipe) id: string,
-    @Body('status') status: MissionStatus,
-  ) {
-    return this.missionsService.updateStatus(id, status);
+  update(@Param('id') id: string, @Body() body: Partial<Mission>) {
+    return this.service.update(id, body);
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Supprimer une mission' })
-  remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.missionsService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.service.remove(id);
   }
 }

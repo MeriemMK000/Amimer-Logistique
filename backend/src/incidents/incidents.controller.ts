@@ -1,71 +1,45 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-  UseGuards,
-  ParseUUIDPipe,
-} from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { IncidentsService } from './incidents.service';
-import { CreateIncidentDto } from './dto/create-incident.dto';
-import { UpdateIncidentDto } from './dto/update-incident.dto';
-import { PaginationDto } from '../common/dto/pagination.dto';
-import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
-import { RolesGuard } from '../common/guards/roles.guard';
-import { Roles } from '../common/decorators/roles.decorator';
-import { UserRole, IncidentStatus } from '../common/enums';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { IncidentService, INCIDENT_STATUSES } from './incidents.service';
+import { Incident } from './incidents.entity';
 
-@ApiTags('Incidents')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
+@ApiTags('Incident')
 @Controller('incidents')
-export class IncidentsController {
-  constructor(private readonly incidentsService: IncidentsService) {}
-
-  @Post()
-  @Roles(UserRole.ADMIN, UserRole.GESTIONNAIRE_FLOTTE, UserRole.CHAUFFEUR)
-  @ApiOperation({ summary: 'Declarer un incident' })
-  create(@Body() createDto: CreateIncidentDto) {
-    return this.incidentsService.create(createDto);
-  }
+export class IncidentController {
+  constructor(private readonly service: IncidentService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Lister les incidents' })
-  @ApiQuery({ name: 'vehicleId', required: false })
-  @ApiQuery({ name: 'status', enum: IncidentStatus, required: false })
-  findAll(
-    @Query() paginationDto: PaginationDto,
-    @Query('vehicleId') vehicleId?: string,
-    @Query('status') status?: IncidentStatus,
-  ) {
-    return this.incidentsService.findAll(paginationDto, vehicleId, status);
+  findAll() {
+    return this.service.findAll();
+  }
+
+  @Get('statuses')
+  statuses() {
+    return INCIDENT_STATUSES;
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Obtenir un incident par ID' })
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.incidentsService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.service.findOne(id);
+  }
+
+  @Post()
+  create(@Body() body: Partial<Incident>) {
+    return this.service.create(body);
+  }
+
+  @Patch(':id/status')
+  changeStatus(@Param('id') id: string, @Body() body: { status: string; note?: string }) {
+    return this.service.changeStatus(id, body.status, body.note);
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN, UserRole.GESTIONNAIRE_FLOTTE)
-  @ApiOperation({ summary: 'Modifier un incident' })
-  update(
-    @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateDto: UpdateIncidentDto,
-  ) {
-    return this.incidentsService.update(id, updateDto);
+  update(@Param('id') id: string, @Body() body: Partial<Incident>) {
+    return this.service.update(id, body);
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Supprimer un incident' })
-  remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.incidentsService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.service.remove(id);
   }
 }

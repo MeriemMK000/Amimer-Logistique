@@ -1,93 +1,51 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { DependencyService } from '../common/dependency.service';
+import { requireFields } from '../common/require-fields';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Driver } from './driver.entity';
-import { CreateDriverDto } from './dto/create-driver.dto';
-import { UpdateDriverDto } from './dto/update-driver.dto';
-import { PaginationDto, PaginatedResultDto } from '../common/dto/pagination.dto';
-import { DriverStatus } from '../common/enums';
+import { Driver } from './drivers.entity';
 
 @Injectable()
-export class DriversService {
+export class DriverService {
   constructor(
     @InjectRepository(Driver)
-    private readonly driverRepository: Repository<Driver>,
+    private readonly repo: Repository<Driver>,
+    private readonly dependency: DependencyService,
   ) {}
 
-  async create(createDriverDto: CreateDriverDto): Promise<Driver> {
-    const existing = await this.driverRepository.findOne({
-      where: { employeeNumber: createDriverDto.employeeNumber },
-    });
-    if (existing) {
-      throw new ConflictException(`Un chauffeur avec le matricule ${createDriverDto.employeeNumber} existe deja`);
-    }
-
-    const driver = this.driverRepository.create(createDriverDto);
-    return this.driverRepository.save(driver);
-  }
-
-  async findAll(paginationDto: PaginationDto, status?: DriverStatus): Promise<PaginatedResultDto<Driver>> {
-    const qb = this.driverRepository.createQueryBuilder('driver')
-      .leftJoinAndSelect('driver.user', 'user');
-
-    if (status) {
-      qb.andWhere('driver.status = :status', { status });
-    }
-
-    qb.orderBy('driver.createdAt', 'DESC')
-      .skip(paginationDto.skip)
-      .take(paginationDto.limit);
-
-    const [data, total] = await qb.getManyAndCount();
-    return new PaginatedResultDto(data, total, paginationDto.page, paginationDto.limit);
+  findAll(): Promise<Driver[]> {
+    return this.repo.find();
   }
 
   async findOne(id: string): Promise<Driver> {
-    const driver = await this.driverRepository.findOne({
-      where: { id },
-      relations: { user: true },
-    });
-    if (!driver) {
-      throw new NotFoundException(`Chauffeur #${id} non trouve`);
-    }
-    return driver;
+    const row = await this.repo.findOne({ where: { code: id as never } });
+    if (!row) throw new NotFoundException('Driver ' + id + ' introuvable');
+    return row;
   }
 
-  async update(id: string, updateDriverDto: UpdateDriverDto): Promise<Driver> {
-    const driver = await this.findOne(id);
-
-    if (updateDriverDto.employeeNumber && updateDriverDto.employeeNumber !== driver.employeeNumber) {
-      const existing = await this.driverRepository.findOne({
-        where: { employeeNumber: updateDriverDto.employeeNumber },
-      });
-      if (existing) {
-        throw new ConflictException(`Un chauffeur avec le matricule ${updateDriverDto.employeeNumber} existe deja`);
-      }
-    }
-
-    Object.assign(driver, updateDriverDto);
-    return this.driverRepository.save(driver);
+  create(data: Partial<Driver>): Promise<Driver> {
+    requireFields(data as Record<string, unknown>, [
+      { key: 'code', label: 'N° employé' },
+      { key: 'name', label: 'nom complet' },
+    ]);
+    return this.repo.save(this.repo.create(data));
   }
 
-  async remove(id: string): Promise<void> {
-    const driver = await this.findOne(id);
-    await this.driverRepository.remove(driver);
+  async update(id: string, data: Partial<Driver>): Promise<Driver> {
+    const row = await this.findOne(id);
+    Object.assign(row, data);
+    return this.repo.save(row);
   }
 
-  async findAvailable(): Promise<Driver[]> {
-    return this.driverRepository.find({
-      where: { status: DriverStatus.DISPONIBLE },
-      order: { lastName: 'ASC' },
-    });
+  async remove(id: string): Promise<{ deleted: true }> {
+    await this.findOne(id);
+    await this.dependency.assertRemovable('drivers', id);
+    await this.repo.delete(id);
+    return { deleted: true };
   }
 
-  async updateStatus(id: string, status: DriverStatus): Promise<Driver> {
-    const driver = await this.findOne(id);
-    driver.status = status;
-    return this.driverRepository.save(driver);
+  async replaceAll(rows: Partial<Driver>[]): Promise<Driver[]> {
+    await this.repo.clear();
+    return this.repo.save(rows.map((row) => this.repo.create(row)));
   }
 }
